@@ -286,11 +286,12 @@
             stack = [],
             nowCol = [],
             prevCol = [],
-            imgData = this.imageData,
-            col, row, matchFlag;
+            col, row, matchFlag,
+            w = this.imageData.width,
+            h = this.imageData.height;
 
         // bound reach
-        if (x < 0 || y < 0 || x >= imgData.width || y >= imgData.height) {
+        if (x < 0 || y < 0 || x >= w || y >= h) {
             return;
         }
 
@@ -307,7 +308,7 @@
             for (row = y; row >= 0; row--) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
-                    stack.push((row * imgData.width + col) * 4);
+                    stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
@@ -320,10 +321,10 @@
             }
 
             // top side
-            for (row = y; row < imgData.height; row++) {
+            for (row = y; row < h; row++) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
-                    stack.push((row * imgData.width + col) * 4);
+                    stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
@@ -372,13 +373,13 @@
         nowCol = [];
 
         // right side flood fill
-        for (col = x; col < imgData.width; col++) {
+        for (col = x; col < w; col++) {
 
             // top side
             for (row = y; row >= 0; row--) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
-                    stack.push((row * imgData.width + col) * 4);
+                    stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
@@ -391,10 +392,10 @@
             }
 
             // top side
-            for (row = y; row < imgData.height; row++) {
+            for (row = y; row < h; row++) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
-                    stack.push((row * imgData.width + col) * 4);
+                    stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
