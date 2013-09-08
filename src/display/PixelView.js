@@ -19,6 +19,12 @@
         if (!canvas) {
             throw new Error("Canvas is not defined");
         }
+        try {
+            if (canvas instanceof jQuery) {
+                canvas = canvas.get(0);
+            }
+        } catch (e) {
+        }
 
         this.context = canvas.getContext('2d');
         this.point = point || new obelisk.Point(0, 0);
