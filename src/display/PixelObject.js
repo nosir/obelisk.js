@@ -31,6 +31,9 @@
     };
 
     // public methods
+
+    // todo: add canvas remove method
+
     p.toString = function () {
         return "[PixelObject]";
     };

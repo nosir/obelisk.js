@@ -98,6 +98,53 @@
 }(obelisk));
 
 /*
+ * CubeColor
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var CubeColor = function (_border, _borderHighlight, _left, _right, __horizontal) {
+        this.initialize(_border, _borderHighlight, _left, _right, __horizontal);
+    };
+    var p = CubeColor.prototype = new obelisk.AbstractColor();
+
+    // public properties
+    p.BRIGHTNESS_GAIN = -20;
+
+    // constructor
+    p.initialize = function (_border, _borderHighlight, _left, _right, _horizontal) {
+        this.border = obelisk.ColorGeom.get32(_border || 0x878787);
+        this.borderHighlight = obelisk.ColorGeom.get32(_borderHighlight || 0xFFFFFF);
+        this.left = obelisk.ColorGeom.get32(_left || 0xC9CFD0);
+        this.right = obelisk.ColorGeom.get32(_right || 0xE3E3E3);
+        this.horizontal = obelisk.ColorGeom.get32(_horizontal || 0xEEEFF0);
+        return this;
+    };
+
+    // public methods
+    p.getByHorizontalColor = function (_horizontal) {
+        return new CubeColor
+        (
+            obelisk.ColorGeom.applyBrightness(_horizontal, this.BRIGHTNESS_GAIN * 4),
+            //apply hightlight
+            obelisk.ColorGeom.applyBrightness(_horizontal, 0, true),
+            obelisk.ColorGeom.applyBrightness(_horizontal, this.BRIGHTNESS_GAIN * 2),
+            obelisk.ColorGeom.applyBrightness(_horizontal, this.BRIGHTNESS_GAIN),
+            _horizontal
+        );
+    };
+
+    p.toString = function () {
+        return "[CubeColor]";
+    };
+
+    // private methods
+
+    obelisk.CubeColor = CubeColor;
+}(obelisk));
+
+/*
  * SideColor
  */
 
@@ -217,6 +264,112 @@
     };
 
     obelisk.BrickDimension = BrickDimension;
+}(obelisk));
+
+/*
+ * CubeDimension
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var CubeDimension = function (_xAxis, _yAxis, _zAxis) {
+        this.initialize(_xAxis, _yAxis, _zAxis);
+    };
+    var p = CubeDimension.prototype = new obelisk.AbstractDimension();
+
+    // constructor
+    p.initialize = function (_xAxis, _yAxis, _zAxis) {
+        this.xAxis = _xAxis || 30;
+        this.yAxis = _yAxis || 30;
+        this.zAxis = _zAxis || 30;
+
+        if (this.xAxis % 2 == 1 || this.yAxis % 2 == 1) {
+            throw new Error("x,yAxis must be even number");
+        }
+
+        // xAxis || yAxis = 4 floodFill could not be applied
+        if (this.xAxis <= 4 || this.yAxis <= 4 || this.zAxis <= 2) {
+            throw new Error("dimension is too small");
+        }
+        return this;
+    };
+
+    p.toString = function () {
+        return "[CubeDimension]";
+    };
+
+    obelisk.CubeDimension = CubeDimension;
+}(obelisk));
+
+/*
+ * SideXDimension
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SideXDimension = function (_xAxis, _zAxis) {
+        this.initialize(_xAxis, _zAxis);
+    };
+    var p = SideXDimension.prototype = new obelisk.AbstractDimension();
+
+    // constructor
+    p.initialize = function (_xAxis, _zAxis) {
+        this.xAxis = _xAxis || 30;
+        this.zAxis = _zAxis || 30;
+
+        if (this.xAxis % 2 == 1) {
+            throw new Error("xAxis must be even number");
+        }
+
+        // xAxis || zAxis = 4 floodFill could not be applied
+        if (this.xAxis <= 4 || this.zAxis <= 2) {
+            throw new Error("dimension is too small");
+        }
+        return this;
+    };
+
+    p.toString = function () {
+        return "[SideXDimension]";
+    };
+
+    obelisk.SideXDimension = SideXDimension;
+}(obelisk));
+
+/*
+ * SideYDimension
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SideYDimension = function (_yAxis, _zAxis) {
+        this.initialize(_yAxis, _zAxis);
+    };
+    var p = SideYDimension.prototype = new obelisk.AbstractDimension();
+
+    // constructor
+    p.initialize = function (_yAxis, _zAxis) {
+        this.yAxis = _yAxis || 30;
+        this.zAxis = _zAxis || 30;
+
+        if (this.yAxis % 2 == 1) {
+            throw new Error("yAxis must be even number");
+        }
+
+        // yAxis || zAxis = 4 floodFill could not be applied
+        if (this.yAxis <= 4 || this.zAxis <= 2) {
+            throw new Error("dimension is too small");
+        }
+        return this;
+    };
+
+    p.toString = function () {
+        return "[SideYDimension]";
+    };
+
+    obelisk.SideYDimension = SideYDimension;
 }(obelisk));
 
 /*
@@ -486,6 +639,9 @@
     };
 
     // public methods
+
+    // todo: add canvas remove method
+
     p.toString = function () {
         return "[PixelObject]";
     };
@@ -847,6 +1003,301 @@
     };
 
     obelisk.Brick = Brick;
+}(obelisk));
+
+/*
+ * Cube
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var Cube = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    };
+    var p = Cube.prototype = new obelisk.AbstractPrimitive();
+
+    // public properties
+
+    // constructor
+    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.useDefaultCanvas = _useDefaultCanvas || false;
+        this.border = _border || _border == null;
+        this.dimension = _dimension == null ? new obelisk.CubeDimension() : _dimension;
+        this.color = _color == null ? new obelisk.CubeColor() : _color;
+
+        if (!this.border) {
+            this.color.border = this.color.inner;
+        }
+    };
+
+    p.initRectangle = function () {
+        this.w = this.dimension.xAxis + this.dimension.yAxis;
+        this.h = this.dimension.zAxis + (this.dimension.xAxis + this.dimension.yAxis) / 2;
+
+        // 22.6 degrees implementation
+        this.w -= 2;
+        this.h -= 1;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = -this.dimension.yAxis + 2;
+        this.matrix.ty = -this.dimension.zAxis;
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        // horizontal layer
+        var brick = new obelisk.Brick
+            (
+                new obelisk.BrickDimension(this.dimension.xAxis, this.dimension.yAxis),
+                new obelisk.SideColor(this.color.border, this.color.horizontal),
+                this.border
+            );
+
+        // left side
+        var sideX = new obelisk.SideX
+            (
+                new obelisk.SideXDimension(this.dimension.xAxis, this.dimension.zAxis),
+                new obelisk.SideColor(this.color.border, this.color.left),
+                this.border
+            );
+
+        // right side
+        var sideY = new obelisk.SideY
+            (
+                new obelisk.SideYDimension(this.dimension.yAxis, this.dimension.zAxis),
+                new obelisk.SideColor(this.color.border, this.color.right),
+                this.border
+            );
+
+        var po_brick = new obelisk.PixelObject(brick);
+        var po_x = new obelisk.PixelObject(sideX);
+        var po_y = new obelisk.PixelObject(sideY);
+
+        var ctx = this.bitmapData.context;
+        ctx.drawImage(po_brick.canvas, po_brick.x + this.dimension.yAxis - 2, po_brick.y);
+        ctx.drawImage(po_x.canvas, po_x.x, po_x.y + this.dimension.zAxis + this.dimension.yAxis / 2 - 1);
+        ctx.drawImage(po_y.canvas, po_y.x + this.w - 2, po_x.y + this.dimension.zAxis + this.dimension.xAxis / 2 - 1);
+
+        // highlight & highlight fix
+        var bmd = new obelisk.BitmapData(this.w, this.h);
+        if (this.border) {
+            var offsetX = this.dimension.xAxis - 2;
+            var offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
+
+            //the 2px in bounding without hightlight
+            for (var i = 0; i < this.dimension.xAxis - 2; i++) {
+                bmd.setPixel(offsetX + 1 - i, offsetY - Math.floor(i / 2), this.color.borderHighlight);
+            }
+
+            //the 2px in bounding without hightlight
+            for (var j = 0; j < this.dimension.yAxis - 2; j++) {
+                bmd.setPixel(offsetX + j, offsetY - Math.floor(j / 2), this.color.borderHighlight);
+            }
+
+            for (var k = 0; k < this.dimension.zAxis; k++) {
+                bmd.setPixel(offsetX, offsetY + k, this.color.borderHighlight);
+            }
+        } else {
+            for (var i = 0; i < this.dimension.zAxis; i++) {
+                bmd.setPixel(this.dimension.xAxis - 2, (this.dimension.xAxis + this.dimension.yAxis) / 2 - 1 + i, this.color.left);
+            }
+        }
+        bmd.context.putImageData(bmd.imageData, 0, 0);
+        ctx.drawImage(bmd.canvas, 0, 0);
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[Cube]";
+    };
+
+    obelisk.Cube = Cube;
+}(obelisk));
+
+/*
+ * SideX
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SideX = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    };
+    var p = SideX.prototype = new obelisk.AbstractPrimitive();
+
+    // public properties
+
+    // constructor
+    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.useDefaultCanvas = _useDefaultCanvas || false;
+        this.border = _border || _border == null;
+        this.dimension = _dimension == null ? new obelisk.SideXDimension() : _dimension;
+        this.color = _color == null ? new obelisk.SideColor() : _color;
+
+        if (!this.border) {
+            this.color.border = this.color.inner;
+        }
+    };
+
+    p.initRectangle = function () {
+        this.w = this.dimension.xAxis;
+        this.h = this.dimension.zAxis + this.dimension.xAxis / 2;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = 0;
+        this.matrix.ty = -this.dimension.zAxis;
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.bitmapData.context.putImageData(this.bitmapData.imageData, 0, 0);
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        var xOffsetInner = 0;
+        var yOffsetInner = this.dimension.zAxis;
+        var xOffsetOut = this.dimension.xAxis - 1;
+        var yOffsetOut = this.h - this.dimension.zAxis - 1;
+
+        //x axis
+        for (var i = 0; i < this.dimension.xAxis; i++) {
+            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), this.color.border);
+            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), this.color.border);
+        }
+
+        //z axis
+        for (var j = 0; j < this.dimension.zAxis; j++) {
+            this.bitmapData.setPixel(xOffsetInner, yOffsetInner - j, this.color.border);
+            this.bitmapData.setPixel(xOffsetOut, yOffsetOut + j, this.color.border);
+        }
+
+        //fill an pixel graphic enclosed
+        this.bitmapData.floodFill(Math.floor(this.w / 2), Math.floor(this.h / 2), this.color.inner);
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[SideX]";
+    };
+
+    obelisk.SideX = SideX;
+}(obelisk));
+
+/*
+ * SideY
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SideY = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    };
+    var p = SideY.prototype = new obelisk.AbstractPrimitive();
+
+    // public properties
+
+    // constructor
+    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
+        this.useDefaultCanvas = _useDefaultCanvas || false;
+        this.border = _border || _border == null;
+        this.dimension = _dimension == null ? new obelisk.SideYDimension() : _dimension;
+        this.color = _color == null ? new obelisk.SideColor() : _color;
+
+        if (!this.border) {
+            this.color.border = this.color.inner;
+        }
+    };
+
+    p.initRectangle = function () {
+        this.w = this.dimension.yAxis;
+        this.h = this.dimension.zAxis + this.dimension.yAxis / 2;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = -this.dimension.yAxis + 2;
+        this.matrix.ty = -this.dimension.zAxis;
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.bitmapData.context.putImageData(this.bitmapData.imageData, 0, 0);
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        var xOffsetInner = 0;
+        var yOffsetInner = this.h - this.dimension.zAxis - 1
+        var xOffsetOut = this.dimension.yAxis - 1;
+        var yOffsetOut = this.dimension.zAxis;
+
+        //y axis
+        for (var i = 0; i < this.dimension.yAxis; i++) {
+            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner - Math.floor(i / 2), this.color.border);
+            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut + Math.floor(i / 2), this.color.border);
+        }
+
+        //z axis
+        for (var j = 0; j < this.dimension.zAxis; j++) {
+            this.bitmapData.setPixel(xOffsetInner, yOffsetInner + j, this.color.border);
+            this.bitmapData.setPixel(xOffsetOut, yOffsetOut - j, this.color.border);
+        }
+
+        //fill an pixel graphic enclosed
+        this.bitmapData.floodFill(Math.floor(this.w / 2), Math.floor(this.h / 2), this.color.inner);
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[SideY]";
+    };
+
+    obelisk.SideY = SideY;
 }(obelisk));
 
 /*
