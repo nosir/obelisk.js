@@ -6,7 +6,11 @@ With this engine, you can easily add isometric pixel element like brick, cube, p
 
 It is isometric graphic based, but not designed as an game engine. Just dive into it and try to pixelate something.
 
-## Demo
+## Showcase
+
+Cube Generator: http://codepen.io/rison/details/ganrh
+
+## Getting started
 
 Cube: http://jsfiddle.net/rison/ygWEW/
 
@@ -18,7 +22,7 @@ SideX & SideY: http://jsfiddle.net/rison/bLsew/
 
 It is migrated from the ActionScript engine [Pixas](https://github.com/rison/pixas)
 
-(Primitive migration is still ongoing...)
+(All kinds of other primitive migration is still ongoing...)
 
 ## References
 
