@@ -1,3 +1,5 @@
+/*global window:true*/
+
 /*
  * obelisk
  */
@@ -17,7 +19,7 @@
      * @type String
      * @static
      **/
-    obelisk.version = '0.2.0';
+    obelisk.version = '0.4.1';
 
     /**
      * @property author
@@ -27,7 +29,9 @@
     obelisk.author = 'max huang';
 
     window.obelisk = obelisk;
-})(window);
+}(window));
+
+/*global obelisk:true*/
 
 /*
  * AbstractColor
@@ -36,10 +40,12 @@
 (function (obelisk) {
     "use strict";
 
-    var AbstractColor = function () {
+    var AbstractColor, p;
+
+    AbstractColor = function () {
         this.initialize();
     };
-    var p = AbstractColor.prototype;
+    p = AbstractColor.prototype;
 
     // public properties
     /**
@@ -97,6 +103,8 @@
     obelisk.AbstractColor = AbstractColor;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * CubeColor
  */
@@ -104,34 +112,34 @@
 (function (obelisk) {
     "use strict";
 
-    var CubeColor = function (_border, _borderHighlight, _left, _right, __horizontal) {
-        this.initialize(_border, _borderHighlight, _left, _right, __horizontal);
+    var CubeColor, p;
+    CubeColor = function (border, borderHighlight, left, right, horizontal) {
+        this.initialize(border, borderHighlight, left, right, horizontal);
     };
-    var p = CubeColor.prototype = new obelisk.AbstractColor();
+    p = CubeColor.prototype = new obelisk.AbstractColor();
 
     // public properties
     p.BRIGHTNESS_GAIN = -20;
 
     // constructor
-    p.initialize = function (_border, _borderHighlight, _left, _right, _horizontal) {
-        this.border = obelisk.ColorGeom.get32(_border || 0x878787);
-        this.borderHighlight = obelisk.ColorGeom.get32(_borderHighlight || 0xFFFFFF);
-        this.left = obelisk.ColorGeom.get32(_left || 0xC9CFD0);
-        this.right = obelisk.ColorGeom.get32(_right || 0xE3E3E3);
-        this.horizontal = obelisk.ColorGeom.get32(_horizontal || 0xEEEFF0);
+    p.initialize = function (border, borderHighlight, left, right, horizontal) {
+        this.border = obelisk.ColorGeom.get32(border || 0x878787);
+        this.borderHighlight = obelisk.ColorGeom.get32(borderHighlight || 0xFFFFFF);
+        this.left = obelisk.ColorGeom.get32(left || 0xC9CFD0);
+        this.right = obelisk.ColorGeom.get32(right || 0xE3E3E3);
+        this.horizontal = obelisk.ColorGeom.get32(horizontal || 0xEEEFF0);
         return this;
     };
 
     // public methods
-    p.getByHorizontalColor = function (_horizontal) {
-        return new CubeColor
-        (
-            obelisk.ColorGeom.applyBrightness(_horizontal, this.BRIGHTNESS_GAIN * 4),
+    p.getByHorizontalColor = function (horizontal) {
+        return new CubeColor(
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN * 4),
             //apply hightlight
-            obelisk.ColorGeom.applyBrightness(_horizontal, 0, true),
-            obelisk.ColorGeom.applyBrightness(_horizontal, this.BRIGHTNESS_GAIN * 2),
-            obelisk.ColorGeom.applyBrightness(_horizontal, this.BRIGHTNESS_GAIN),
-            _horizontal
+            obelisk.ColorGeom.applyBrightness(horizontal, 0, true),
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN * 2),
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN),
+            horizontal
         );
     };
 
@@ -144,6 +152,8 @@
     obelisk.CubeColor = CubeColor;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * PyramidColor
  */
@@ -151,32 +161,32 @@
 (function (obelisk) {
     "use strict";
 
-    var PyramidColor = function (_border, _borderHighlight, _left, _right) {
-        this.initialize(_border, _borderHighlight, _left, _right);
+    var PyramidColor, p;
+    PyramidColor = function (border, borderHighlight, left, right) {
+        this.initialize(border, borderHighlight, left, right);
     };
-    var p = PyramidColor.prototype = new obelisk.AbstractColor();
+    p = PyramidColor.prototype = new obelisk.AbstractColor();
 
     // public properties
     p.BRIGHTNESS_GAIN = -20;
 
     // constructor
-    p.initialize = function (_border, _borderHighlight, _left, _right, _horizontal) {
-        this.border = obelisk.ColorGeom.get32(_border || 0x949698);
-        this.borderHighlight = obelisk.ColorGeom.get32(_borderHighlight || 0xFFFFFF);
-        this.left = obelisk.ColorGeom.get32(_left || 0xE6E8E9);
-        this.right = obelisk.ColorGeom.get32(_right || 0xEEEFF0);
+    p.initialize = function (border, borderHighlight, left, right) {
+        this.border = obelisk.ColorGeom.get32(border || 0x949698);
+        this.borderHighlight = obelisk.ColorGeom.get32(borderHighlight || 0xFFFFFF);
+        this.left = obelisk.ColorGeom.get32(left || 0xE6E8E9);
+        this.right = obelisk.ColorGeom.get32(right || 0xEEEFF0);
         return this;
     };
 
     // public methods
-    p.getByRightColor = function (_right) {
-        return new PyramidColor
-        (
-            obelisk.ColorGeom.applyBrightness(_right, this.BRIGHTNESS_GAIN * 4),
+    p.getByRightColor = function (right) {
+        return new PyramidColor(
+            obelisk.ColorGeom.applyBrightness(right, this.BRIGHTNESS_GAIN * 4),
             //apply hightlight
-            obelisk.ColorGeom.applyBrightness(_right, 0, true),
-            obelisk.ColorGeom.applyBrightness(_right, this.BRIGHTNESS_GAIN),
-            _right
+            obelisk.ColorGeom.applyBrightness(right, 0, true),
+            obelisk.ColorGeom.applyBrightness(right, this.BRIGHTNESS_GAIN),
+            right
         );
     };
 
@@ -189,6 +199,8 @@
     obelisk.PyramidColor = PyramidColor;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * SideColor
  */
@@ -196,26 +208,27 @@
 (function (obelisk) {
     "use strict";
 
-    var SideColor = function (_border, _inner) {
-        this.initialize(_border, _inner);
+    var SideColor, p;
+    SideColor = function (border, inner) {
+        this.initialize(border, inner);
     };
-    var p = SideColor.prototype = new obelisk.AbstractColor();
+    p = SideColor.prototype = new obelisk.AbstractColor();
 
     // public properties
     p.BRIGHTNESS_GAIN = -20;
 
     // constructor
-    p.initialize = function (_border, _inner) {
-        this.border = obelisk.ColorGeom.get32(_border || 0x878787);
-        this.inner = obelisk.ColorGeom.get32(_inner || 0xEEEEEE);
+    p.initialize = function (border, inner) {
+        this.border = obelisk.ColorGeom.get32(border || 0x878787);
+        this.inner = obelisk.ColorGeom.get32(inner || 0xEEEEEE);
         return this;
     };
 
     // public methods
-    p.getByInnerColor = function (_inner) {
+    p.getByInnerColor = function (inner) {
         return new obelisk.SideColor(
-            obelisk.ColorGeom.applyBrightness(_inner, this.BRIGHTNESS_GAIN * 4),
-            _inner
+            obelisk.ColorGeom.applyBrightness(inner, this.BRIGHTNESS_GAIN * 4),
+            inner
         );
     };
 
@@ -228,6 +241,8 @@
     obelisk.SideColor = SideColor;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * AbstractDimension
  */
@@ -235,10 +250,11 @@
 (function (obelisk) {
     "use strict";
 
-    var AbstractDimension = function () {
+    var AbstractDimension, p;
+    AbstractDimension = function () {
         this.initialize();
     };
-    var p = AbstractDimension.prototype;
+    p = AbstractDimension.prototype;
 
     // public properties
     /**
@@ -276,6 +292,8 @@
     obelisk.AbstractDimension = AbstractDimension;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * BrickDimension
  */
@@ -283,17 +301,18 @@
 (function (obelisk) {
     "use strict";
 
-    var BrickDimension = function (_xAxis, _yAxis) {
-        this.initialize(_xAxis, _yAxis);
+    var BrickDimension, p;
+    BrickDimension = function (xAxis, yAxis) {
+        this.initialize(xAxis, yAxis);
     };
-    var p = BrickDimension.prototype = new obelisk.AbstractDimension();
+    p = BrickDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_xAxis, _yAxis) {
-        this.xAxis = _xAxis || 30;
-        this.yAxis = _yAxis || 30;
+    p.initialize = function (xAxis, yAxis) {
+        this.xAxis = xAxis || 30;
+        this.yAxis = yAxis || 30;
 
-        if (this.xAxis % 2 == 1 || this.yAxis % 2 == 1) {
+        if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
             throw new Error("x,yAxis must be even number");
         }
 
@@ -311,6 +330,8 @@
     obelisk.BrickDimension = BrickDimension;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * CubeDimension
  */
@@ -318,18 +339,19 @@
 (function (obelisk) {
     "use strict";
 
-    var CubeDimension = function (_xAxis, _yAxis, _zAxis) {
-        this.initialize(_xAxis, _yAxis, _zAxis);
+    var CubeDimension, p;
+    CubeDimension = function (xAxis, yAxis, zAxis) {
+        this.initialize(xAxis, yAxis, zAxis);
     };
-    var p = CubeDimension.prototype = new obelisk.AbstractDimension();
+    p = CubeDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_xAxis, _yAxis, _zAxis) {
-        this.xAxis = _xAxis || 30;
-        this.yAxis = _yAxis || 30;
-        this.zAxis = _zAxis || 30;
+    p.initialize = function (xAxis, yAxis, zAxis) {
+        this.xAxis = xAxis || 30;
+        this.yAxis = yAxis || 30;
+        this.zAxis = zAxis || 30;
 
-        if (this.xAxis % 2 == 1 || this.yAxis % 2 == 1) {
+        if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
             throw new Error("x,yAxis must be even number");
         }
 
@@ -347,6 +369,8 @@
     obelisk.CubeDimension = CubeDimension;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * PyramidDimension
  */
@@ -354,18 +378,19 @@
 (function (obelisk) {
     "use strict";
 
-    var PyramidDimension = function (_axis, _tall) {
-        this.initialize(_axis, _tall);
+    var PyramidDimension, p;
+    PyramidDimension = function (axis, tall) {
+        this.initialize(axis, tall);
     };
-    var p = PyramidDimension.prototype = new obelisk.AbstractDimension();
+    p = PyramidDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_axis, _tall) {
-        this.xAxis = _axis || 30;
-        this.yAxis = _axis || 30;
-        this.tall = _tall || false;
+    p.initialize = function (axis, tall) {
+        this.xAxis = axis || 30;
+        this.yAxis = axis || 30;
+        this.tall = tall || false;
 
-        if (this.xAxis % 2 == 1) {
+        if (this.xAxis % 2 === 1) {
             throw new Error("axis must be even number");
         }
 
@@ -382,6 +407,8 @@
     obelisk.PyramidDimension = PyramidDimension;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * SideXDimension
  */
@@ -389,17 +416,18 @@
 (function (obelisk) {
     "use strict";
 
-    var SideXDimension = function (_xAxis, _zAxis) {
-        this.initialize(_xAxis, _zAxis);
+    var SideXDimension, p;
+    SideXDimension = function (xAxis, zAxis) {
+        this.initialize(xAxis, zAxis);
     };
-    var p = SideXDimension.prototype = new obelisk.AbstractDimension();
+    p = SideXDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_xAxis, _zAxis) {
-        this.xAxis = _xAxis || 30;
-        this.zAxis = _zAxis || 30;
+    p.initialize = function (xAxis, zAxis) {
+        this.xAxis = xAxis || 30;
+        this.zAxis = zAxis || 30;
 
-        if (this.xAxis % 2 == 1) {
+        if (this.xAxis % 2 === 1) {
             throw new Error("xAxis must be even number");
         }
 
@@ -417,6 +445,8 @@
     obelisk.SideXDimension = SideXDimension;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * SideYDimension
  */
@@ -424,17 +454,19 @@
 (function (obelisk) {
     "use strict";
 
-    var SideYDimension = function (_yAxis, _zAxis) {
-        this.initialize(_yAxis, _zAxis);
+    var SideYDimension, p;
+
+    SideYDimension = function (yAxis, zAxis) {
+        this.initialize(yAxis, zAxis);
     };
-    var p = SideYDimension.prototype = new obelisk.AbstractDimension();
+    p = SideYDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_yAxis, _zAxis) {
-        this.yAxis = _yAxis || 30;
-        this.zAxis = _zAxis || 30;
+    p.initialize = function (yAxis, zAxis) {
+        this.yAxis = yAxis || 30;
+        this.zAxis = zAxis || 30;
 
-        if (this.yAxis % 2 == 1) {
+        if (this.yAxis % 2 === 1) {
             throw new Error("yAxis must be even number");
         }
 
@@ -452,6 +484,8 @@
     obelisk.SideYDimension = SideYDimension;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * BitmapData
  */
@@ -459,10 +493,11 @@
 (function (obelisk) {
     "use strict";
 
-    var BitmapData = function (w, h, useDefaultCanvas) {
+    var BitmapData, p;
+    BitmapData = function (w, h, useDefaultCanvas) {
         this.initialize(w, h, useDefaultCanvas);
     };
-    var p = BitmapData.prototype;
+    p = BitmapData.prototype;
 
     // public property
     p.imageData = null;
@@ -471,7 +506,7 @@
 
     // constructor
     p.initialize = function (w, h, useDefaultCanvas) {
-        if (!w > 0 || !h > 0) {
+        if (w === undefined || h === undefined) {
             throw new Error("BitmapData width or height is missing");
         }
 
@@ -498,7 +533,7 @@
 
     p.setPixelByIndex = function (index, color) {
         var pixels = this.imageData.data;
-        pixels[index + 0] = (color >>> 16) & 0xFF;
+        pixels[index] = (color >>> 16) & 0xFF;
         pixels[index + 1] = (color >>> 8) & 0xFF;
         pixels[index + 2] = (color >>> 0) & 0xFF;
         pixels[index + 3] = (color >>> 24) & 0xFF;
@@ -521,7 +556,8 @@
             prevCol = [],
             col, row, matchFlag,
             w = this.imageData.width,
-            h = this.imageData.height;
+            h = this.imageData.height,
+            i, j;
 
         // bound reach
         if (x < 0 || y < 0 || x >= w || y >= h) {
@@ -531,55 +567,52 @@
         // first point check fail
         if (!this.checkPixelAvailable(x, y)) {
             throw new Error("Start point for flood fill is already filled");
-            return;
         }
 
         // left side flood fill
-        for (col = x; col >= 0; col--) {
+        for (col = x; col >= 0; col -= 1) {
 
             // top side
-            for (row = y; row >= 0; row--) {
+            for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col + 1, row - 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col + 1, row - 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // top side
-            for (row = y; row < h; row++) {
+            for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col + 1, row + 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col + 1, row + 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // compare with previous column
             // for first column
             // the given point should be inside the container
-            if (col == x) {
+            if (col === x) {
                 prevCol = nowCol.concat();
             }
             matchFlag = false;
 
-            for (var i in prevCol) {
-                for (var j in nowCol) {
-                    if (nowCol[j] == prevCol[i]) {
+            for (i = 0; i < prevCol.length; i += 1) {
+                for (j = 0; j < prevCol.length; j += 1) {
+                    if (nowCol[j] === prevCol[i]) {
                         matchFlag = true;
                         y = prevCol[i];
                         break;
@@ -592,8 +625,7 @@
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
-            }
-            else {
+            } else {
                 // bound reach
                 break;
             }
@@ -606,51 +638,49 @@
         nowCol = [];
 
         // right side flood fill
-        for (col = x; col < w; col++) {
+        for (col = x; col < w; col += 1) {
 
             // top side
-            for (row = y; row >= 0; row--) {
+            for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col - 1, row - 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col - 1, row - 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // top side
-            for (row = y; row < h; row++) {
+            for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col - 1, row + 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col - 1, row + 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // compare with previous column
             // for first column
             // the given point should be inside the container
-            if (col == x) {
+            if (col === x) {
                 prevCol = nowCol.concat();
             }
             matchFlag = false;
 
-            for (var i in prevCol) {
-                for (var j in nowCol) {
-                    if (nowCol[j] == prevCol[i]) {
+            for (i = 0; i < prevCol.length; i += 1) {
+                for (j = 0; j < prevCol.length; j += 1) {
+                    if (nowCol[j] === prevCol[i]) {
                         matchFlag = true;
                         y = prevCol[i];
                         break;
@@ -663,28 +693,26 @@
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
-            }
-            else {
+            } else {
                 // bound reach
                 break;
             }
         }
 
         // fill image data
-        for (var i in stack) {
+        for (i = 0; i < stack.length; i += 1) {
             this.setPixelByIndex(stack[i], color);
         }
-    }
-    ;
+    };
 
     p.toString = function () {
         return "[BitmapData]";
     };
 
     obelisk.BitmapData = BitmapData;
-}(obelisk)
-    )
-;
+}(obelisk));
+
+/*global obelisk:true*/
 
 /*
  * PixelObject
@@ -693,10 +721,11 @@
 (function (obelisk) {
     "use strict";
 
-    var PixelObject = function (primitive, point3D) {
+    var PixelObject, p;
+    PixelObject = function (primitive, point3D) {
         this.initialize(primitive, point3D);
     };
-    var p = PixelObject.prototype;
+    p = PixelObject.prototype;
 
     // public properties
     p.x = null;
@@ -731,6 +760,8 @@
     obelisk.PixelObject = PixelObject;
 }(obelisk));
 
+/*global obelisk:true, jQuery:true*/
+
 /*
  * PixelView
  */
@@ -738,13 +769,14 @@
 (function (obelisk) {
     "use strict";
 
-    var PixelView = function (canvas, point) {
+    var PixelView, p;
+    PixelView = function (canvas, point) {
         this.initialize(canvas, point);
     };
-    var p = PixelView.prototype;
+    p = PixelView.prototype;
 
     // public properties
-    p.context = null
+    p.context = null;
     p.point = null;
 
     // constructor
@@ -768,10 +800,7 @@
     // public methods
     p.renderObject = function (primitive, point3D) {
         var po = new obelisk.PixelObject(primitive, point3D);
-        this.context.drawImage(po.canvas,
-            this.point.x + po.x,
-            this.point.y + po.y
-        );
+        this.context.drawImage(po.canvas, this.point.x + po.x, this.point.y + po.y);
     };
 
     p.toString = function () {
@@ -781,6 +810,8 @@
     obelisk.PixelView = PixelView;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * Matrix
  */
@@ -788,10 +819,11 @@
 (function (obelisk) {
     "use strict";
 
-    var Matrix = function(a, b, c, d, tx, ty) {
+    var Matrix, p;
+    Matrix = function (a, b, c, d, tx, ty) {
         this.initialize(a, b, c, d, tx, ty);
     };
-    var p = Matrix.prototype;
+    p = Matrix.prototype;
 
     // public properties:
     /**
@@ -837,11 +869,11 @@
     p.ty = 0;
 
     // constructor
-    p.initialize = function(a, b, c, d, tx, ty) {
-        this.a = (a == null) ? 1 : a;
+    p.initialize = function (a, b, c, d, tx, ty) {
+        this.a = (a === undefined) ? 1 : a;
         this.b = b || 0;
         this.c = c || 0;
-        this.d = (d == null) ? 1 : d;
+        this.d = (d === undefined) ? 1 : d;
         this.tx = tx || 0;
         this.ty = ty || 0;
         return this;
@@ -855,6 +887,8 @@
     obelisk.Matrix = Matrix;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * Point
  */
@@ -862,10 +896,11 @@
 (function (obelisk) {
     "use strict";
 
-    var Point = function (x, y) {
+    var Point, p;
+    Point = function (x, y) {
         this.initialize(x, y);
     };
-    var p = Point.prototype;
+    p = Point.prototype;
 
     // public properties
     p.x = 0;
@@ -873,8 +908,8 @@
 
     // constructor
     p.initialize = function (x, y) {
-        this.x = (x == null ? 0 : x);
-        this.y = (y == null ? 0 : y);
+        this.x = (x === undefined ? 0 : x);
+        this.y = (y === undefined ? 0 : y);
         return this;
     };
 
@@ -888,6 +923,8 @@
     obelisk.Point = Point;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * Point3D
  */
@@ -895,10 +932,11 @@
 (function (obelisk) {
     "use strict";
 
-    var Point3D = function (x, y, z) {
+    var Point3D, p;
+    Point3D = function (x, y, z) {
         this.initialize(x, y, z);
     };
-    var p = Point3D.prototype;
+    p = Point3D.prototype;
 
     // public properties
     p.x = 0;
@@ -907,9 +945,9 @@
 
     // constructor
     p.initialize = function (x, y, z) {
-        this.x = (x == null ? 0 : x);
-        this.y = (y == null ? 0 : y);
-        this.z = (z == null ? 0 : z);
+        this.x = (x === undefined ? 0 : x);
+        this.y = (y === undefined ? 0 : y);
+        this.z = (z === undefined ? 0 : z);
         return this;
     };
 
@@ -923,6 +961,8 @@
     obelisk.Point3D = Point3D;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * AbstractPrimitive
  */
@@ -930,10 +970,11 @@
 (function (obelisk) {
     "use strict";
 
-    var AbstractPrimitive = function () {
+    var AbstractPrimitive, p;
+    AbstractPrimitive = function () {
         this.initialize();
     };
-    var p = AbstractPrimitive.prototype;
+    p = AbstractPrimitive.prototype;
 
     // public properties
     /**
@@ -997,6 +1038,8 @@
     obelisk.AbstractPrimitive = AbstractPrimitive;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * Brick
  */
@@ -1004,16 +1047,17 @@
 (function (obelisk) {
     "use strict";
 
-    var Brick = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var Brick, p;
+    Brick = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = Brick.prototype = new obelisk.AbstractPrimitive();
+    p = Brick.prototype = new obelisk.AbstractPrimitive();
 
     // public properties
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -1022,11 +1066,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.BrickDimension() : _dimension;
-        this.color = _color == null ? new obelisk.SideColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.BrickDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SideColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -1056,19 +1100,20 @@
     };
 
     p.build = function () {
-        var xOffsetInner = this.dimension.yAxis - 2;
-        var yOffsetInner = 0;
-        var xOffsetOut = this.dimension.xAxis - 1;
-        var yOffsetOut = this.h - 1;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+        xOffsetInner = this.dimension.yAxis - 2;
+        yOffsetInner = 0;
+        xOffsetOut = this.dimension.xAxis - 1;
+        yOffsetOut = this.h - 1;
 
         //x axis
-        for (var i = 0; i < this.dimension.xAxis; i++) {
+        for (i = 0; i < this.dimension.xAxis; i += 1) {
             this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), this.color.border);
             this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), this.color.border);
         }
 
         //y axis
-        for (var j = 0; j < this.dimension.yAxis; j++) {
+        for (j = 0; j < this.dimension.yAxis; j += 1) {
             this.bitmapData.setPixel(xOffsetInner + 1 - j, yOffsetInner + Math.floor(j / 2), this.color.border);
             this.bitmapData.setPixel(xOffsetOut - 1 + j, yOffsetOut - Math.floor(j / 2), this.color.border);
         }
@@ -1085,6 +1130,8 @@
     obelisk.Brick = Brick;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * Cube
  */
@@ -1092,16 +1139,17 @@
 (function (obelisk) {
     "use strict";
 
-    var Cube = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var Cube, p;
+    Cube = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = Cube.prototype = new obelisk.AbstractPrimitive();
+    p = Cube.prototype = new obelisk.AbstractPrimitive();
 
     // public properties
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -1110,11 +1158,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.CubeDimension() : _dimension;
-        this.color = _color == null ? new obelisk.CubeColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.CubeDimension() : dimension;
+        this.color = color === undefined ? new obelisk.CubeColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -1143,60 +1191,59 @@
     };
 
     p.build = function () {
+        var brick, sideX, sideY, po_brick, po_x, po_y, ctx, bmd, offsetX, offsetY,
+            i, j, k;
         // horizontal layer
-        var brick = new obelisk.Brick
-            (
-                new obelisk.BrickDimension(this.dimension.xAxis, this.dimension.yAxis),
-                new obelisk.SideColor(this.color.border, this.color.horizontal),
-                this.border
-            );
+        brick = new obelisk.Brick(
+            new obelisk.BrickDimension(this.dimension.xAxis, this.dimension.yAxis),
+            new obelisk.SideColor(this.color.border, this.color.horizontal),
+            this.border
+        );
 
         // left side
-        var sideX = new obelisk.SideX
-            (
-                new obelisk.SideXDimension(this.dimension.xAxis, this.dimension.zAxis),
-                new obelisk.SideColor(this.color.border, this.color.left),
-                this.border
-            );
+        sideX = new obelisk.SideX(
+            new obelisk.SideXDimension(this.dimension.xAxis, this.dimension.zAxis),
+            new obelisk.SideColor(this.color.border, this.color.left),
+            this.border
+        );
 
         // right side
-        var sideY = new obelisk.SideY
-            (
-                new obelisk.SideYDimension(this.dimension.yAxis, this.dimension.zAxis),
-                new obelisk.SideColor(this.color.border, this.color.right),
-                this.border
-            );
+        sideY = new obelisk.SideY(
+            new obelisk.SideYDimension(this.dimension.yAxis, this.dimension.zAxis),
+            new obelisk.SideColor(this.color.border, this.color.right),
+            this.border
+        );
 
-        var po_brick = new obelisk.PixelObject(brick);
-        var po_x = new obelisk.PixelObject(sideX);
-        var po_y = new obelisk.PixelObject(sideY);
+        po_brick = new obelisk.PixelObject(brick);
+        po_x = new obelisk.PixelObject(sideX);
+        po_y = new obelisk.PixelObject(sideY);
 
-        var ctx = this.bitmapData.context;
+        ctx = this.bitmapData.context;
         ctx.drawImage(po_brick.canvas, po_brick.x + this.dimension.yAxis - 2, po_brick.y);
         ctx.drawImage(po_x.canvas, po_x.x, po_x.y + this.dimension.zAxis + this.dimension.yAxis / 2 - 1);
         ctx.drawImage(po_y.canvas, po_y.x + this.w - 2, po_x.y + this.dimension.zAxis + this.dimension.xAxis / 2 - 1);
 
         // highlight & highlight fix
-        var bmd = new obelisk.BitmapData(this.w, this.h);
+        bmd = new obelisk.BitmapData(this.w, this.h);
         if (this.border) {
-            var offsetX = this.dimension.xAxis - 2;
-            var offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
+            offsetX = this.dimension.xAxis - 2;
+            offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
 
             //the 2px in bounding without hightlight
-            for (var i = 0; i < this.dimension.xAxis - 2; i++) {
+            for (i = 0; i < this.dimension.xAxis - 2; i += 1) {
                 bmd.setPixel(offsetX + 1 - i, offsetY - Math.floor(i / 2), this.color.borderHighlight);
             }
 
             //the 2px in bounding without hightlight
-            for (var j = 0; j < this.dimension.yAxis - 2; j++) {
+            for (j = 0; j < this.dimension.yAxis - 2; j += 1) {
                 bmd.setPixel(offsetX + j, offsetY - Math.floor(j / 2), this.color.borderHighlight);
             }
 
-            for (var k = 0; k < this.dimension.zAxis; k++) {
+            for (k = 0; k < this.dimension.zAxis; k += 1) {
                 bmd.setPixel(offsetX, offsetY + k, this.color.borderHighlight);
             }
         } else {
-            for (var i = 0; i < this.dimension.zAxis; i++) {
+            for (i = 0; i < this.dimension.zAxis; i += 1) {
                 bmd.setPixel(this.dimension.xAxis - 2, (this.dimension.xAxis + this.dimension.yAxis) / 2 - 1 + i, this.color.left);
             }
         }
@@ -1212,6 +1259,8 @@
     obelisk.Cube = Cube;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * Pyramid
  */
@@ -1219,18 +1268,19 @@
 (function (obelisk) {
     "use strict";
 
-    var Pyramid = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var Pyramid, p;
+    Pyramid = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = Pyramid.prototype = new obelisk.AbstractPrimitive();
+    p = Pyramid.prototype = new obelisk.AbstractPrimitive();
 
     // private properties
     p.hSize = null;
     p.hOffset = null;
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -1239,11 +1289,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.PyramidDimension() : _dimension;
-        this.color = _color == null ? new obelisk.PyramidColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.PyramidDimension() : dimension;
+        this.color = color === undefined ? new obelisk.PyramidColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -1276,48 +1326,49 @@
     };
 
     p.build = function () {
-        var color_border_left = this.border ? this.color.border : this.color.left;
-        var color_border_right = this.border ? this.color.border : this.color.right;
+        var colorborder_left, colorborder_right, colorborder_highlight,
+            i, j, k, l1, m1, l2, m2;
+        colorborder_left = this.border ? this.color.border : this.color.left;
+        colorborder_right = this.border ? this.color.border : this.color.right;
 
-        var color_border_highlight = this.border ? this.color.borderHighlight : color_border_left;
+        colorborder_highlight = this.border ? this.color.borderHighlight : colorborder_left;
 
         //z axis || hightlight
-        for (var k = 0; k < this.hSize + this.dimension.xAxis / 2 - 4; k++) {
-            this.bitmapData.setPixel(this.dimension.xAxis - 2, k + 3 + this.hOffset, color_border_highlight);
+        for (k = 0; k < this.hSize + this.dimension.xAxis / 2 - 4; k += 1) {
+            this.bitmapData.setPixel(this.dimension.xAxis - 2, k + 3 + this.hOffset, colorborder_highlight);
         }
 
         //x axis
-        for (var i = 0; i < this.dimension.xAxis; i++) {
-            this.bitmapData.setPixel(i, this.hSize + Math.floor(i / 2) + this.hOffset, color_border_left);
+        for (i = 0; i < this.dimension.xAxis; i += 1) {
+            this.bitmapData.setPixel(i, this.hSize + Math.floor(i / 2) + this.hOffset, colorborder_left);
         }
         //y axis
-        for (var j = 0; j < this.dimension.xAxis; j++) {
-            this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - Math.floor(j / 2) - 1 + this.hOffset, color_border_right);
+        for (j = 0; j < this.dimension.xAxis; j += 1) {
+            this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - Math.floor(j / 2) - 1 + this.hOffset, colorborder_right);
         }
 
         if (!this.dimension.tall) {
-            //left edge			
-            for (var l1 = 0; l1 < this.hSize; l1++) {
-                this.bitmapData.setPixel(l1, this.hSize - l1 + this.hOffset, color_border_left);
+            //left edge
+            for (l1 = 0; l1 < this.hSize; l1 += 1) {
+                this.bitmapData.setPixel(l1, this.hSize - l1 + this.hOffset, colorborder_left);
             }
             //right edge
-            for (var m1 = 0; m1 < this.hSize; m1++) {
-                this.bitmapData.setPixel(m1 + this.hSize - 2, m1 + 1 + this.hOffset, color_border_right);
+            for (m1 = 0; m1 < this.hSize; m1 += 1) {
+                this.bitmapData.setPixel(m1 + this.hSize - 2, m1 + 1 + this.hOffset, colorborder_right);
             }
-        }
-        else {
-            //left edge			
-            for (var l2 = 0; l2 < this.hSize - 2; l2++) {
-                this.bitmapData.setPixel(Math.floor(l2 / 2), this.hSize - l2 + this.hOffset, color_border_left);
+        } else {
+            //left edge
+            for (l2 = 0; l2 < this.hSize - 2; l2 += 1) {
+                this.bitmapData.setPixel(Math.floor(l2 / 2), this.hSize - l2 + this.hOffset, colorborder_left);
             }
             //right edge
-            for (var m2 = 2; m2 < this.hSize; m2++) {
-                this.bitmapData.setPixel(Math.floor(m2 / 2) + this.dimension.xAxis - 2, m2 + 1 + this.hOffset, color_border_right);
+            for (m2 = 2; m2 < this.hSize; m2 += 1) {
+                this.bitmapData.setPixel(Math.floor(m2 / 2) + this.dimension.xAxis - 2, m2 + 1 + this.hOffset, colorborder_right);
             }
         }
 
         if (!this.border) {
-            this.bitmapData.setPixel(this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - 1 + this.hOffset, color_border_left);
+            this.bitmapData.setPixel(this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - 1 + this.hOffset, colorborder_left);
         }
 
         //floodfill
@@ -1333,23 +1384,25 @@
     obelisk.Pyramid = Pyramid;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * SideX
  */
 
 (function (obelisk) {
     "use strict";
-
-    var SideX = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var SideX, p;
+    SideX = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = SideX.prototype = new obelisk.AbstractPrimitive();
+    p = SideX.prototype = new obelisk.AbstractPrimitive();
 
     // public properties
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -1358,11 +1411,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.SideXDimension() : _dimension;
-        this.color = _color == null ? new obelisk.SideColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SideXDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SideColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -1388,19 +1441,21 @@
     };
 
     p.build = function () {
-        var xOffsetInner = 0;
-        var yOffsetInner = this.dimension.zAxis;
-        var xOffsetOut = this.dimension.xAxis - 1;
-        var yOffsetOut = this.h - this.dimension.zAxis - 1;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+
+        xOffsetInner = 0;
+        yOffsetInner = this.dimension.zAxis;
+        xOffsetOut = this.dimension.xAxis - 1;
+        yOffsetOut = this.h - this.dimension.zAxis - 1;
 
         //x axis
-        for (var i = 0; i < this.dimension.xAxis; i++) {
+        for (i = 0; i < this.dimension.xAxis; i += 1) {
             this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), this.color.border);
             this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), this.color.border);
         }
 
         //z axis
-        for (var j = 0; j < this.dimension.zAxis; j++) {
+        for (j = 0; j < this.dimension.zAxis; j += 1) {
             this.bitmapData.setPixel(xOffsetInner, yOffsetInner - j, this.color.border);
             this.bitmapData.setPixel(xOffsetOut, yOffsetOut + j, this.color.border);
         }
@@ -1417,6 +1472,8 @@
     obelisk.SideX = SideX;
 }(obelisk));
 
+/*global obelisk:true*/
+
 /*
  * SideY
  */
@@ -1424,16 +1481,17 @@
 (function (obelisk) {
     "use strict";
 
-    var SideY = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var SideY, p;
+    SideY = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = SideY.prototype = new obelisk.AbstractPrimitive();
+    p = SideY.prototype = new obelisk.AbstractPrimitive();
 
     // public properties
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -1442,11 +1500,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.SideYDimension() : _dimension;
-        this.color = _color == null ? new obelisk.SideColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SideYDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SideColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -1472,19 +1530,20 @@
     };
 
     p.build = function () {
-        var xOffsetInner = 0;
-        var yOffsetInner = this.h - this.dimension.zAxis - 1
-        var xOffsetOut = this.dimension.yAxis - 1;
-        var yOffsetOut = this.dimension.zAxis;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+        xOffsetInner = 0;
+        yOffsetInner = this.h - this.dimension.zAxis - 1;
+        xOffsetOut = this.dimension.yAxis - 1;
+        yOffsetOut = this.dimension.zAxis;
 
         //y axis
-        for (var i = 0; i < this.dimension.yAxis; i++) {
+        for (i = 0; i < this.dimension.yAxis; i += 1) {
             this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner - Math.floor(i / 2), this.color.border);
             this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut + Math.floor(i / 2), this.color.border);
         }
 
         //z axis
-        for (var j = 0; j < this.dimension.zAxis; j++) {
+        for (j = 0; j < this.dimension.zAxis; j += 1) {
             this.bitmapData.setPixel(xOffsetInner, yOffsetInner + j, this.color.border);
             this.bitmapData.setPixel(xOffsetOut, yOffsetOut - j, this.color.border);
         }
@@ -1501,6 +1560,8 @@
     obelisk.SideY = SideY;
 }(obelisk));
 
+/*global obelisk:true, document:true*/
+
 /*
  * CanvasManager
  */
@@ -1508,10 +1569,11 @@
 (function (obelisk, document) {
     "use strict";
 
-    var CanvasManager = function () {
+    var CanvasManager, p;
+    CanvasManager = function () {
         throw new Error('ColorGeom is a static Class, cannot be instanced.');
     };
-    var p = CanvasManager;
+    p = CanvasManager;
 
     // public properties
     p.defaultCanvas = null;
@@ -1520,11 +1582,11 @@
     p.getDefaultCanvas = function () {
         p.defaultCanvas = p.defaultCanvas || document.createElement('canvas');
         return p.defaultCanvas;
-    }
+    };
 
     p.getNewCanvas = function () {
         return document.createElement('canvas');
-    }
+    };
 
     p.toString = function () {
         return "[CanvasManager]";
@@ -1533,6 +1595,8 @@
     obelisk.CanvasManager = CanvasManager;
 }(obelisk, document));
 
+/*global obelisk:true*/
+
 /*
  * ColorGeom
  */
@@ -1540,29 +1604,24 @@
 (function (obelisk) {
     "use strict";
 
-    var ColorGeom = function () {
+    var ColorGeom, p;
+
+    ColorGeom = function () {
         throw new Error('ColorGeom is a static Class, cannot be instanced.');
     };
-    var p = ColorGeom;
-
-    // public properties
-
-    // constructor
+    p = ColorGeom;
 
     // public methods
-    p.get32 = function (_color) {
-        return _color < 0xFF000000 ? (_color + 0xFF000000) : _color;
+    p.get32 = function (color) {
+        return color < 0xFF000000 ? (color + 0xFF000000) : color;
     };
 
     p.applyBrightness = function (color, brightness, highlight) {
-        var a = ((color >>> 24) & 0x000000FF);
-        var r = ((color >>> 16) & 0x000000FF);
-        var g = ((color >>> 8) & 0x000000FF);
-        var b = ((color) & 0x000000FF);
-
-        var y;
-        var v;
-        var u;
+        var a, r, g, b, y, v, u;
+        a = ((color >>> 24) & 0x000000FF);
+        r = ((color >>> 16) & 0x000000FF);
+        g = ((color >>> 8) & 0x000000FF);
+        b = (color & 0x000000FF);
 
         y = ((r * 313524) >> 20) + ((g * 615514) >> 20) + ((b * 119538) >> 20);
         u = -((155189 * r) >> 20) - ((303038 * g) >> 20) + ((458227 * b) >> 20);
@@ -1570,8 +1629,7 @@
 
         if (!highlight) {
             y += brightness;
-        }
-        else {
+        } else {
             y = 60 + Math.pow(y, 1.2);
         }
 
@@ -1590,10 +1648,10 @@
         return "[ColorGeom]";
     };
 
-    // private methods
-
     obelisk.ColorGeom = ColorGeom;
 }(obelisk));
+
+/*global obelisk:true*/
 
 /*
  * ColorPattern
@@ -1602,10 +1660,12 @@
 (function (obelisk) {
     "use strict";
 
-    var ColorPattren = function() {
+    var ColorPattren, p;
+
+    ColorPattren = function () {
         throw new Error('ColorGeom is a static Class, cannot be instanced.');
     };
-    var p = ColorPattren;
+    p = ColorPattren;
 
     // public properties
     p.GRASS_GREEN = 0xCCFF00;
@@ -1628,8 +1688,6 @@
             p.BLACK
         ];
 
-    // constructor
-
     // public methods
     p.getRandomComfortableColor = function () {
         return p.FINE_COLORS[Math.floor(Math.random() * p.FINE_COLORS.length)];
@@ -1638,8 +1696,6 @@
     p.toString = function () {
         return "[ColorPattern]";
     };
-
-    // private methods
 
     obelisk.ColorPattern = ColorPattren;
 }(obelisk));

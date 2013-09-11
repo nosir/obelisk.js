@@ -1,3 +1,5 @@
+/*global window:true*/
+
 /*
  * obelisk
  */
@@ -17,7 +19,7 @@
      * @type String
      * @static
      **/
-    obelisk.version = '0.2.0';
+    obelisk.version = '0.4.1';
 
     /**
      * @property author
@@ -27,4 +29,4 @@
     obelisk.author = 'max huang';
 
     window.obelisk = obelisk;
-})(window);
+}(window));

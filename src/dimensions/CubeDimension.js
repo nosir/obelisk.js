@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * CubeDimension
  */
@@ -5,18 +7,19 @@
 (function (obelisk) {
     "use strict";
 
-    var CubeDimension = function (_xAxis, _yAxis, _zAxis) {
-        this.initialize(_xAxis, _yAxis, _zAxis);
+    var CubeDimension, p;
+    CubeDimension = function (xAxis, yAxis, zAxis) {
+        this.initialize(xAxis, yAxis, zAxis);
     };
-    var p = CubeDimension.prototype = new obelisk.AbstractDimension();
+    p = CubeDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_xAxis, _yAxis, _zAxis) {
-        this.xAxis = _xAxis || 30;
-        this.yAxis = _yAxis || 30;
-        this.zAxis = _zAxis || 30;
+    p.initialize = function (xAxis, yAxis, zAxis) {
+        this.xAxis = xAxis || 30;
+        this.yAxis = yAxis || 30;
+        this.zAxis = zAxis || 30;
 
-        if (this.xAxis % 2 == 1 || this.yAxis % 2 == 1) {
+        if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
             throw new Error("x,yAxis must be even number");
         }
 

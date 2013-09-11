@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * PixelObject
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var PixelObject = function (primitive, point3D) {
+    var PixelObject, p;
+    PixelObject = function (primitive, point3D) {
         this.initialize(primitive, point3D);
     };
-    var p = PixelObject.prototype;
+    p = PixelObject.prototype;
 
     // public properties
     p.x = null;

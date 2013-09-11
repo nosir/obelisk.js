@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * PyramidDimension
  */
@@ -5,18 +7,19 @@
 (function (obelisk) {
     "use strict";
 
-    var PyramidDimension = function (_axis, _tall) {
-        this.initialize(_axis, _tall);
+    var PyramidDimension, p;
+    PyramidDimension = function (axis, tall) {
+        this.initialize(axis, tall);
     };
-    var p = PyramidDimension.prototype = new obelisk.AbstractDimension();
+    p = PyramidDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_axis, _tall) {
-        this.xAxis = _axis || 30;
-        this.yAxis = _axis || 30;
-        this.tall = _tall || false;
+    p.initialize = function (axis, tall) {
+        this.xAxis = axis || 30;
+        this.yAxis = axis || 30;
+        this.tall = tall || false;
 
-        if (this.xAxis % 2 == 1) {
+        if (this.xAxis % 2 === 1) {
             throw new Error("axis must be even number");
         }
 

@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * Point
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var Point = function (x, y) {
+    var Point, p;
+    Point = function (x, y) {
         this.initialize(x, y);
     };
-    var p = Point.prototype;
+    p = Point.prototype;
 
     // public properties
     p.x = 0;
@@ -16,8 +19,8 @@
 
     // constructor
     p.initialize = function (x, y) {
-        this.x = (x == null ? 0 : x);
-        this.y = (y == null ? 0 : y);
+        this.x = (x === undefined ? 0 : x);
+        this.y = (y === undefined ? 0 : y);
         return this;
     };
 

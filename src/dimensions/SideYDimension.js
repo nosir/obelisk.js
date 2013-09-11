@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * SideYDimension
  */
@@ -5,17 +7,19 @@
 (function (obelisk) {
     "use strict";
 
-    var SideYDimension = function (_yAxis, _zAxis) {
-        this.initialize(_yAxis, _zAxis);
+    var SideYDimension, p;
+
+    SideYDimension = function (yAxis, zAxis) {
+        this.initialize(yAxis, zAxis);
     };
-    var p = SideYDimension.prototype = new obelisk.AbstractDimension();
+    p = SideYDimension.prototype = new obelisk.AbstractDimension();
 
     // constructor
-    p.initialize = function (_yAxis, _zAxis) {
-        this.yAxis = _yAxis || 30;
-        this.zAxis = _zAxis || 30;
+    p.initialize = function (yAxis, zAxis) {
+        this.yAxis = yAxis || 30;
+        this.zAxis = zAxis || 30;
 
-        if (this.yAxis % 2 == 1) {
+        if (this.yAxis % 2 === 1) {
             throw new Error("yAxis must be even number");
         }
 

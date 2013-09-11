@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * Cube
  */
@@ -5,16 +7,17 @@
 (function (obelisk) {
     "use strict";
 
-    var Cube = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var Cube, p;
+    Cube = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = Cube.prototype = new obelisk.AbstractPrimitive();
+    p = Cube.prototype = new obelisk.AbstractPrimitive();
 
     // public properties
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -23,11 +26,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.CubeDimension() : _dimension;
-        this.color = _color == null ? new obelisk.CubeColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.CubeDimension() : dimension;
+        this.color = color === undefined ? new obelisk.CubeColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -56,60 +59,59 @@
     };
 
     p.build = function () {
+        var brick, sideX, sideY, po_brick, po_x, po_y, ctx, bmd, offsetX, offsetY,
+            i, j, k;
         // horizontal layer
-        var brick = new obelisk.Brick
-            (
-                new obelisk.BrickDimension(this.dimension.xAxis, this.dimension.yAxis),
-                new obelisk.SideColor(this.color.border, this.color.horizontal),
-                this.border
-            );
+        brick = new obelisk.Brick(
+            new obelisk.BrickDimension(this.dimension.xAxis, this.dimension.yAxis),
+            new obelisk.SideColor(this.color.border, this.color.horizontal),
+            this.border
+        );
 
         // left side
-        var sideX = new obelisk.SideX
-            (
-                new obelisk.SideXDimension(this.dimension.xAxis, this.dimension.zAxis),
-                new obelisk.SideColor(this.color.border, this.color.left),
-                this.border
-            );
+        sideX = new obelisk.SideX(
+            new obelisk.SideXDimension(this.dimension.xAxis, this.dimension.zAxis),
+            new obelisk.SideColor(this.color.border, this.color.left),
+            this.border
+        );
 
         // right side
-        var sideY = new obelisk.SideY
-            (
-                new obelisk.SideYDimension(this.dimension.yAxis, this.dimension.zAxis),
-                new obelisk.SideColor(this.color.border, this.color.right),
-                this.border
-            );
+        sideY = new obelisk.SideY(
+            new obelisk.SideYDimension(this.dimension.yAxis, this.dimension.zAxis),
+            new obelisk.SideColor(this.color.border, this.color.right),
+            this.border
+        );
 
-        var po_brick = new obelisk.PixelObject(brick);
-        var po_x = new obelisk.PixelObject(sideX);
-        var po_y = new obelisk.PixelObject(sideY);
+        po_brick = new obelisk.PixelObject(brick);
+        po_x = new obelisk.PixelObject(sideX);
+        po_y = new obelisk.PixelObject(sideY);
 
-        var ctx = this.bitmapData.context;
+        ctx = this.bitmapData.context;
         ctx.drawImage(po_brick.canvas, po_brick.x + this.dimension.yAxis - 2, po_brick.y);
         ctx.drawImage(po_x.canvas, po_x.x, po_x.y + this.dimension.zAxis + this.dimension.yAxis / 2 - 1);
         ctx.drawImage(po_y.canvas, po_y.x + this.w - 2, po_x.y + this.dimension.zAxis + this.dimension.xAxis / 2 - 1);
 
         // highlight & highlight fix
-        var bmd = new obelisk.BitmapData(this.w, this.h);
+        bmd = new obelisk.BitmapData(this.w, this.h);
         if (this.border) {
-            var offsetX = this.dimension.xAxis - 2;
-            var offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
+            offsetX = this.dimension.xAxis - 2;
+            offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
 
             //the 2px in bounding without hightlight
-            for (var i = 0; i < this.dimension.xAxis - 2; i++) {
+            for (i = 0; i < this.dimension.xAxis - 2; i += 1) {
                 bmd.setPixel(offsetX + 1 - i, offsetY - Math.floor(i / 2), this.color.borderHighlight);
             }
 
             //the 2px in bounding without hightlight
-            for (var j = 0; j < this.dimension.yAxis - 2; j++) {
+            for (j = 0; j < this.dimension.yAxis - 2; j += 1) {
                 bmd.setPixel(offsetX + j, offsetY - Math.floor(j / 2), this.color.borderHighlight);
             }
 
-            for (var k = 0; k < this.dimension.zAxis; k++) {
+            for (k = 0; k < this.dimension.zAxis; k += 1) {
                 bmd.setPixel(offsetX, offsetY + k, this.color.borderHighlight);
             }
         } else {
-            for (var i = 0; i < this.dimension.zAxis; i++) {
+            for (i = 0; i < this.dimension.zAxis; i += 1) {
                 bmd.setPixel(this.dimension.xAxis - 2, (this.dimension.xAxis + this.dimension.yAxis) / 2 - 1 + i, this.color.left);
             }
         }

@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * Pyramid
  */
@@ -5,18 +7,19 @@
 (function (obelisk) {
     "use strict";
 
-    var Pyramid = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var Pyramid, p;
+    Pyramid = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = Pyramid.prototype = new obelisk.AbstractPrimitive();
+    p = Pyramid.prototype = new obelisk.AbstractPrimitive();
 
     // private properties
     p.hSize = null;
     p.hOffset = null;
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -25,11 +28,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.PyramidDimension() : _dimension;
-        this.color = _color == null ? new obelisk.PyramidColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.PyramidDimension() : dimension;
+        this.color = color === undefined ? new obelisk.PyramidColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -62,48 +65,49 @@
     };
 
     p.build = function () {
-        var color_border_left = this.border ? this.color.border : this.color.left;
-        var color_border_right = this.border ? this.color.border : this.color.right;
+        var colorborder_left, colorborder_right, colorborder_highlight,
+            i, j, k, l1, m1, l2, m2;
+        colorborder_left = this.border ? this.color.border : this.color.left;
+        colorborder_right = this.border ? this.color.border : this.color.right;
 
-        var color_border_highlight = this.border ? this.color.borderHighlight : color_border_left;
+        colorborder_highlight = this.border ? this.color.borderHighlight : colorborder_left;
 
         //z axis || hightlight
-        for (var k = 0; k < this.hSize + this.dimension.xAxis / 2 - 4; k++) {
-            this.bitmapData.setPixel(this.dimension.xAxis - 2, k + 3 + this.hOffset, color_border_highlight);
+        for (k = 0; k < this.hSize + this.dimension.xAxis / 2 - 4; k += 1) {
+            this.bitmapData.setPixel(this.dimension.xAxis - 2, k + 3 + this.hOffset, colorborder_highlight);
         }
 
         //x axis
-        for (var i = 0; i < this.dimension.xAxis; i++) {
-            this.bitmapData.setPixel(i, this.hSize + Math.floor(i / 2) + this.hOffset, color_border_left);
+        for (i = 0; i < this.dimension.xAxis; i += 1) {
+            this.bitmapData.setPixel(i, this.hSize + Math.floor(i / 2) + this.hOffset, colorborder_left);
         }
         //y axis
-        for (var j = 0; j < this.dimension.xAxis; j++) {
-            this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - Math.floor(j / 2) - 1 + this.hOffset, color_border_right);
+        for (j = 0; j < this.dimension.xAxis; j += 1) {
+            this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - Math.floor(j / 2) - 1 + this.hOffset, colorborder_right);
         }
 
         if (!this.dimension.tall) {
-            //left edge			
-            for (var l1 = 0; l1 < this.hSize; l1++) {
-                this.bitmapData.setPixel(l1, this.hSize - l1 + this.hOffset, color_border_left);
+            //left edge
+            for (l1 = 0; l1 < this.hSize; l1 += 1) {
+                this.bitmapData.setPixel(l1, this.hSize - l1 + this.hOffset, colorborder_left);
             }
             //right edge
-            for (var m1 = 0; m1 < this.hSize; m1++) {
-                this.bitmapData.setPixel(m1 + this.hSize - 2, m1 + 1 + this.hOffset, color_border_right);
+            for (m1 = 0; m1 < this.hSize; m1 += 1) {
+                this.bitmapData.setPixel(m1 + this.hSize - 2, m1 + 1 + this.hOffset, colorborder_right);
             }
-        }
-        else {
-            //left edge			
-            for (var l2 = 0; l2 < this.hSize - 2; l2++) {
-                this.bitmapData.setPixel(Math.floor(l2 / 2), this.hSize - l2 + this.hOffset, color_border_left);
+        } else {
+            //left edge
+            for (l2 = 0; l2 < this.hSize - 2; l2 += 1) {
+                this.bitmapData.setPixel(Math.floor(l2 / 2), this.hSize - l2 + this.hOffset, colorborder_left);
             }
             //right edge
-            for (var m2 = 2; m2 < this.hSize; m2++) {
-                this.bitmapData.setPixel(Math.floor(m2 / 2) + this.dimension.xAxis - 2, m2 + 1 + this.hOffset, color_border_right);
+            for (m2 = 2; m2 < this.hSize; m2 += 1) {
+                this.bitmapData.setPixel(Math.floor(m2 / 2) + this.dimension.xAxis - 2, m2 + 1 + this.hOffset, colorborder_right);
             }
         }
 
         if (!this.border) {
-            this.bitmapData.setPixel(this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - 1 + this.hOffset, color_border_left);
+            this.bitmapData.setPixel(this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - 1 + this.hOffset, colorborder_left);
         }
 
         //floodfill

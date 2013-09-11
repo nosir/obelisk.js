@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * ColorPattern
  */
@@ -5,10 +7,12 @@
 (function (obelisk) {
     "use strict";
 
-    var ColorPattren = function() {
+    var ColorPattren, p;
+
+    ColorPattren = function () {
         throw new Error('ColorGeom is a static Class, cannot be instanced.');
     };
-    var p = ColorPattren;
+    p = ColorPattren;
 
     // public properties
     p.GRASS_GREEN = 0xCCFF00;
@@ -31,8 +35,6 @@
             p.BLACK
         ];
 
-    // constructor
-
     // public methods
     p.getRandomComfortableColor = function () {
         return p.FINE_COLORS[Math.floor(Math.random() * p.FINE_COLORS.length)];
@@ -41,8 +43,6 @@
     p.toString = function () {
         return "[ColorPattern]";
     };
-
-    // private methods
 
     obelisk.ColorPattern = ColorPattren;
 }(obelisk));

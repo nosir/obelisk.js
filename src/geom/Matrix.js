@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * Matrix
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var Matrix = function(a, b, c, d, tx, ty) {
+    var Matrix, p;
+    Matrix = function (a, b, c, d, tx, ty) {
         this.initialize(a, b, c, d, tx, ty);
     };
-    var p = Matrix.prototype;
+    p = Matrix.prototype;
 
     // public properties:
     /**
@@ -54,11 +57,11 @@
     p.ty = 0;
 
     // constructor
-    p.initialize = function(a, b, c, d, tx, ty) {
-        this.a = (a == null) ? 1 : a;
+    p.initialize = function (a, b, c, d, tx, ty) {
+        this.a = (a === undefined) ? 1 : a;
         this.b = b || 0;
         this.c = c || 0;
-        this.d = (d == null) ? 1 : d;
+        this.d = (d === undefined) ? 1 : d;
         this.tx = tx || 0;
         this.ty = ty || 0;
         return this;

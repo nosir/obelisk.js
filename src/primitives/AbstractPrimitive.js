@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * AbstractPrimitive
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var AbstractPrimitive = function () {
+    var AbstractPrimitive, p;
+    AbstractPrimitive = function () {
         this.initialize();
     };
-    var p = AbstractPrimitive.prototype;
+    p = AbstractPrimitive.prototype;
 
     // public properties
     /**

@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * AbstractDimension
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var AbstractDimension = function () {
+    var AbstractDimension, p;
+    AbstractDimension = function () {
         this.initialize();
     };
-    var p = AbstractDimension.prototype;
+    p = AbstractDimension.prototype;
 
     // public properties
     /**

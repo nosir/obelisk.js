@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * BitmapData
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var BitmapData = function (w, h, useDefaultCanvas) {
+    var BitmapData, p;
+    BitmapData = function (w, h, useDefaultCanvas) {
         this.initialize(w, h, useDefaultCanvas);
     };
-    var p = BitmapData.prototype;
+    p = BitmapData.prototype;
 
     // public property
     p.imageData = null;
@@ -17,7 +20,7 @@
 
     // constructor
     p.initialize = function (w, h, useDefaultCanvas) {
-        if (!w > 0 || !h > 0) {
+        if (w === undefined || h === undefined) {
             throw new Error("BitmapData width or height is missing");
         }
 
@@ -44,7 +47,7 @@
 
     p.setPixelByIndex = function (index, color) {
         var pixels = this.imageData.data;
-        pixels[index + 0] = (color >>> 16) & 0xFF;
+        pixels[index] = (color >>> 16) & 0xFF;
         pixels[index + 1] = (color >>> 8) & 0xFF;
         pixels[index + 2] = (color >>> 0) & 0xFF;
         pixels[index + 3] = (color >>> 24) & 0xFF;
@@ -67,7 +70,8 @@
             prevCol = [],
             col, row, matchFlag,
             w = this.imageData.width,
-            h = this.imageData.height;
+            h = this.imageData.height,
+            i, j;
 
         // bound reach
         if (x < 0 || y < 0 || x >= w || y >= h) {
@@ -77,55 +81,52 @@
         // first point check fail
         if (!this.checkPixelAvailable(x, y)) {
             throw new Error("Start point for flood fill is already filled");
-            return;
         }
 
         // left side flood fill
-        for (col = x; col >= 0; col--) {
+        for (col = x; col >= 0; col -= 1) {
 
             // top side
-            for (row = y; row >= 0; row--) {
+            for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col + 1, row - 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col + 1, row - 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // top side
-            for (row = y; row < h; row++) {
+            for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col + 1, row + 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col + 1, row + 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // compare with previous column
             // for first column
             // the given point should be inside the container
-            if (col == x) {
+            if (col === x) {
                 prevCol = nowCol.concat();
             }
             matchFlag = false;
 
-            for (var i in prevCol) {
-                for (var j in nowCol) {
-                    if (nowCol[j] == prevCol[i]) {
+            for (i = 0; i < prevCol.length; i += 1) {
+                for (j = 0; j < prevCol.length; j += 1) {
+                    if (nowCol[j] === prevCol[i]) {
                         matchFlag = true;
                         y = prevCol[i];
                         break;
@@ -138,8 +139,7 @@
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
-            }
-            else {
+            } else {
                 // bound reach
                 break;
             }
@@ -152,51 +152,49 @@
         nowCol = [];
 
         // right side flood fill
-        for (col = x; col < w; col++) {
+        for (col = x; col < w; col += 1) {
 
             // top side
-            for (row = y; row >= 0; row--) {
+            for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col - 1, row - 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col - 1, row - 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // top side
-            for (row = y; row < h; row++) {
+            for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
                     // unavailable pixel
-                    if (row == y && this.checkPixelAvailable(col - 1, row + 1)) {
-                        // let's continue to check more data in this column
-                    } else {
+                    if (!(row === y && this.checkPixelAvailable(col - 1, row + 1))) {
                         break;
                     }
+                    // let's continue to check more data in this column
                 }
             }
 
             // compare with previous column
             // for first column
             // the given point should be inside the container
-            if (col == x) {
+            if (col === x) {
                 prevCol = nowCol.concat();
             }
             matchFlag = false;
 
-            for (var i in prevCol) {
-                for (var j in nowCol) {
-                    if (nowCol[j] == prevCol[i]) {
+            for (i = 0; i < prevCol.length; i += 1) {
+                for (j = 0; j < prevCol.length; j += 1) {
+                    if (nowCol[j] === prevCol[i]) {
                         matchFlag = true;
                         y = prevCol[i];
                         break;
@@ -209,25 +207,21 @@
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
-            }
-            else {
+            } else {
                 // bound reach
                 break;
             }
         }
 
         // fill image data
-        for (var i in stack) {
+        for (i = 0; i < stack.length; i += 1) {
             this.setPixelByIndex(stack[i], color);
         }
-    }
-    ;
+    };
 
     p.toString = function () {
         return "[BitmapData]";
     };
 
     obelisk.BitmapData = BitmapData;
-}(obelisk)
-    )
-;
+}(obelisk));

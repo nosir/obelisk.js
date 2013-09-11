@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * Point3D
  */
@@ -5,10 +7,11 @@
 (function (obelisk) {
     "use strict";
 
-    var Point3D = function (x, y, z) {
+    var Point3D, p;
+    Point3D = function (x, y, z) {
         this.initialize(x, y, z);
     };
-    var p = Point3D.prototype;
+    p = Point3D.prototype;
 
     // public properties
     p.x = 0;
@@ -17,9 +20,9 @@
 
     // constructor
     p.initialize = function (x, y, z) {
-        this.x = (x == null ? 0 : x);
-        this.y = (y == null ? 0 : y);
-        this.z = (z == null ? 0 : z);
+        this.x = (x === undefined ? 0 : x);
+        this.y = (y === undefined ? 0 : y);
+        this.z = (z === undefined ? 0 : z);
         return this;
     };
 

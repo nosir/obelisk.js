@@ -1,3 +1,5 @@
+/*global obelisk:true, jQuery:true*/
+
 /*
  * PixelView
  */
@@ -5,13 +7,14 @@
 (function (obelisk) {
     "use strict";
 
-    var PixelView = function (canvas, point) {
+    var PixelView, p;
+    PixelView = function (canvas, point) {
         this.initialize(canvas, point);
     };
-    var p = PixelView.prototype;
+    p = PixelView.prototype;
 
     // public properties
-    p.context = null
+    p.context = null;
     p.point = null;
 
     // constructor
@@ -35,10 +38,7 @@
     // public methods
     p.renderObject = function (primitive, point3D) {
         var po = new obelisk.PixelObject(primitive, point3D);
-        this.context.drawImage(po.canvas,
-            this.point.x + po.x,
-            this.point.y + po.y
-        );
+        this.context.drawImage(po.canvas, this.point.x + po.x, this.point.y + po.y);
     };
 
     p.toString = function () {

@@ -1,3 +1,5 @@
+/*global obelisk:true*/
+
 /*
  * AbstractColor
  */
@@ -5,10 +7,12 @@
 (function (obelisk) {
     "use strict";
 
-    var AbstractColor = function () {
+    var AbstractColor, p;
+
+    AbstractColor = function () {
         this.initialize();
     };
-    var p = AbstractColor.prototype;
+    p = AbstractColor.prototype;
 
     // public properties
     /**

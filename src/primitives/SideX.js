@@ -1,20 +1,22 @@
+/*global obelisk:true*/
+
 /*
  * SideX
  */
 
 (function (obelisk) {
     "use strict";
-
-    var SideX = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initialize(_dimension, _color, _border, _useDefaultCanvas);
+    var SideX, p;
+    SideX = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
     };
-    var p = SideX.prototype = new obelisk.AbstractPrimitive();
+    p = SideX.prototype = new obelisk.AbstractPrimitive();
 
     // public properties
 
     // constructor
-    p.initialize = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.initRender(_dimension, _color, _border, _useDefaultCanvas);
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
         this.initRectangle();
         this.initBitmapData();
         this.build();
@@ -23,11 +25,11 @@
     };
 
     // private method
-    p.initRender = function (_dimension, _color, _border, _useDefaultCanvas) {
-        this.useDefaultCanvas = _useDefaultCanvas || false;
-        this.border = _border || _border == null;
-        this.dimension = _dimension == null ? new obelisk.SideXDimension() : _dimension;
-        this.color = _color == null ? new obelisk.SideColor() : _color;
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SideXDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SideColor() : color;
 
         if (!this.border) {
             this.color.border = this.color.inner;
@@ -53,19 +55,21 @@
     };
 
     p.build = function () {
-        var xOffsetInner = 0;
-        var yOffsetInner = this.dimension.zAxis;
-        var xOffsetOut = this.dimension.xAxis - 1;
-        var yOffsetOut = this.h - this.dimension.zAxis - 1;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+
+        xOffsetInner = 0;
+        yOffsetInner = this.dimension.zAxis;
+        xOffsetOut = this.dimension.xAxis - 1;
+        yOffsetOut = this.h - this.dimension.zAxis - 1;
 
         //x axis
-        for (var i = 0; i < this.dimension.xAxis; i++) {
+        for (i = 0; i < this.dimension.xAxis; i += 1) {
             this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), this.color.border);
             this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), this.color.border);
         }
 
         //z axis
-        for (var j = 0; j < this.dimension.zAxis; j++) {
+        for (j = 0; j < this.dimension.zAxis; j += 1) {
             this.bitmapData.setPixel(xOffsetInner, yOffsetInner - j, this.color.border);
             this.bitmapData.setPixel(xOffsetOut, yOffsetOut + j, this.color.border);
         }
