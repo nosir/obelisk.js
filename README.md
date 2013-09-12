@@ -8,11 +8,42 @@ It is isometric graphic based, but not designed as an game engine. Just dive int
 
 ## Showcase
 
-Cube Generator: http://codepen.io/rison/details/ganrh
+Cube Generator: http://jsdo.it/rison/ttQD
 
 ## Getting started
 
+1. Include obelisk.js on your page
+
+    ```html
+    <script src="//path/obelisk.min.js"></script>
+    ```
+
+2. Create pixel world
+
+    ```javascript
+    // create zero point for pixel isometric 2.5D axis
+    var point = new obelisk.Point(200, 200);
+
+    // create world instance to nest everything
+    // canvas could be either DOM or jQuery element
+    var pixelView = new obelisk.PixelView(canvas, point);
+
+    // create cube dimension and color instance
+    var dimension = new obelisk.CubeDimension(80, 100, 120);
+    var color = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern.GRAY);
+
+    // build cube with dimension and color instance
+    var cube = new obelisk.Cube(dimension, color, true);
+
+    // render primitive into view
+    pixelView.renderObject(cube);
+    ```
+
+## Demo tutorials
+
 Cube: http://jsfiddle.net/rison/ygWEW/
+
+Pyramid : http://jsfiddle.net/rison/ZVURu/
 
 Brick: http://jsfiddle.net/rison/6MuVr/
 
