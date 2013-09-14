@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Obelisk.js by nosir</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Obelisk.js</h1>
+        <h2>JavaScript Engine to Build Pixel Isometric Element with HTML5 Canvas</h2>
+        <a href="https://github.com/nosir/obelisk.js" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="obeliskjs" class="anchor" href="#obeliskjs"><span class="octicon octicon-link"></span></a>Obelisk.js</h1>
+
+<p>Obelisk.js is an open source JavaScript engine to build pixel isometric objects.</p>
+
+<p>With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto the canvas.</p>
+
+<p>It is isometric graphic based, but not designed as an game engine. Just dive into it and try to pixelate something.</p>
+
+<h2>
+<a name="showcase" class="anchor" href="#showcase"><span class="octicon octicon-link"></span></a>Showcase</h2>
+
+<p>Cube Generator: <a href="http://jsdo.it/rison/ttQD">http://jsdo.it/rison/ttQD</a></p>
+
+<h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
+
+<ol>
+<li>
+<p>Include obelisk.js on your page</p>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//path/obelisk.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre></div>
+</li>
+<li>
+<p>Create pixel world</p>
+
+<div class="highlight highlight-javascript"><pre><span class="c1">// create zero point for pixel isometric 2.5D axis</span>
+<span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+
+<span class="c1">// create world instance to nest everything</span>
+<span class="c1">// canvas could be either DOM or jQuery element</span>
+<span class="kd">var</span> <span class="nx">pixelView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">PixelView</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
+
+<span class="c1">// create cube dimension and color instance</span>
+<span class="kd">var</span> <span class="nx">dimension</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeDimension</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeColor</span><span class="p">().</span><span class="nx">getByHorizontalColor</span><span class="p">(</span><span class="nx">obelisk</span><span class="p">.</span><span class="nx">ColorPattern</span><span class="p">.</span><span class="nx">GRAY</span><span class="p">);</span>
+
+<span class="c1">// build cube with dimension and color instance</span>
+<span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">Cube</span><span class="p">(</span><span class="nx">dimension</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+
+<span class="c1">// render primitive into view</span>
+<span class="nx">pixelView</span><span class="p">.</span><span class="nx">renderObject</span><span class="p">(</span><span class="nx">cube</span><span class="p">);</span>
+</pre></div>
+</li>
+</ol><h2>
+<a name="demo-tutorials" class="anchor" href="#demo-tutorials"><span class="octicon octicon-link"></span></a>Demo tutorials</h2>
+
+<p>Cube: <a href="http://jsfiddle.net/rison/ygWEW/">http://jsfiddle.net/rison/ygWEW/</a></p>
+
+<p>Pyramid : <a href="http://jsfiddle.net/rison/ZVURu/">http://jsfiddle.net/rison/ZVURu/</a></p>
+
+<p>Brick: <a href="http://jsfiddle.net/rison/6MuVr/">http://jsfiddle.net/rison/6MuVr/</a></p>
+
+<p>SideX &amp; SideY: <a href="http://jsfiddle.net/rison/bLsew/">http://jsfiddle.net/rison/bLsew/</a></p>
+
+<h2>
+<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h2>
+
+<p>It is migrated from the ActionScript engine <a href="https://github.com/rison/pixas">Pixas</a></p>
+
+<p>(All kinds of other primitive migration is still ongoing...)</p>
+
+<h2>
+<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
+
+<p><a href="http://en.wikipedia.org/wiki/Isometric_projection">Isometric projection</a></p>
+
+<p><a href="http://en.wikipedia.org/wiki/Isometric_graphics_in_video_games_and_pixel_art">Isometric graphics in video games and pixel art</a></p>
+
+<p><a href="http://en.wikipedia.org/wiki/Flood_fill">Flood fill</a></p>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/nosir/obelisk.js/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/nosir/obelisk.js/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/nosir/obelisk.js"></a> is maintained by <a href="https://github.com/nosir">nosir</a>.</p>
+
+          <p>This page was generated by <a href="pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
