@@ -41,13 +41,13 @@ Cube Generator: http://jsdo.it/rison/ttQD
 
 ## Demo tutorials
 
-Cube: http://jsfiddle.net/rison/ygWEW/
+Cube: http://jsfiddle.net/nosir/ygWEW/
 
-Pyramid : http://jsfiddle.net/rison/ZVURu/
+Pyramid : http://jsfiddle.net/nosir/ZVURu/
 
-Brick: http://jsfiddle.net/rison/6MuVr/
+Brick: http://jsfiddle.net/nosir/6MuVr/
 
-SideX & SideY: http://jsfiddle.net/rison/bLsew/
+SideX & SideY: http://jsfiddle.net/nosir/bLsew/
 
 ## Roadmap
 
