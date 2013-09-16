@@ -30,7 +30,8 @@ Cube Generator: http://jsdo.it/rison/ttQD
 
     // create cube dimension and color instance
     var dimension = new obelisk.CubeDimension(80, 100, 120);
-    var color = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern.GRAY);
+    var gray = obelisk.ColorPattern.GRAY;
+    var color = new obelisk.CubeColor().getByHorizontalColor(gray);
 
     // build cube with dimension and color instance
     var cube = new obelisk.Cube(dimension, color, true);
