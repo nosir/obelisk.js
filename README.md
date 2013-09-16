@@ -21,7 +21,7 @@ Cube Generator: http://jsdo.it/rison/ttQD
 2. Create pixel world
 
     ```javascript
-    // create pixel isometric 2.5D axis zero point
+    // create pixel isometric 3D axis zero point
     var point = new obelisk.Point(200, 200);
 
     // create world instance to nest everything
