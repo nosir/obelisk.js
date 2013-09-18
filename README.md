@@ -15,7 +15,7 @@ Cube Generator: http://jsdo.it/rison/ttQD
 1. Include obelisk.js on your page
 
     ```html
-    <script src="//path/obelisk.min.js"></script>
+    <script src="//your-path/obelisk.min.js"></script>
     ```
 
 2. Create pixel world
