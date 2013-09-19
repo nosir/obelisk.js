@@ -18,10 +18,10 @@
 
     // constructor
     p.initialize = function (border, borderHighlight, left, right) {
-        this.border = obelisk.ColorGeom.get32(border || 0x949698);
-        this.borderHighlight = obelisk.ColorGeom.get32(borderHighlight || 0xFFFFFF);
-        this.left = obelisk.ColorGeom.get32(left || 0xE6E8E9);
-        this.right = obelisk.ColorGeom.get32(right || 0xEEEFF0);
+        this.border = obelisk.ColorGeom.get32(border === undefined ? 0x949698 : border);
+        this.borderHighlight = obelisk.ColorGeom.get32(borderHighlight === undefined ? 0xFFFFFF : borderHighlight);
+        this.left = obelisk.ColorGeom.get32(left === undefined ? 0xE6E8E9 : left);
+        this.right = obelisk.ColorGeom.get32(right === undefined ? 0xEEEFF0 : right);
         return this;
     };
 

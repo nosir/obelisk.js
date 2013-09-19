@@ -18,8 +18,8 @@
 
     // constructor
     p.initialize = function (border, inner) {
-        this.border = obelisk.ColorGeom.get32(border || 0x878787);
-        this.inner = obelisk.ColorGeom.get32(inner || 0xEEEEEE);
+        this.border = obelisk.ColorGeom.get32(border === undefined ? 0x878787 : border);
+        this.inner = obelisk.ColorGeom.get32(inner === undefined ? 0xEEEEEE : inner);
         return this;
     };
 
