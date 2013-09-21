@@ -9,6 +9,7 @@ It is isometric graphic based, but not designed as an game engine. Just dive int
 ## Showcase
 
 Cube Generator: http://jsdo.it/nosir/ttQD
+GIF Animation Render: http://jsdo.it/nosir/meAL
 
 ## Getting started
 
