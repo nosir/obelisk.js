@@ -56,7 +56,7 @@ SideX & SideY: http://jsfiddle.net/nosir/bLsew/
 
 It is migrated from the ActionScript engine [Pixas](https://github.com/rison/pixas)
 
-(All kinds of other primitive migration is still ongoing...)
+(Primitive migration is still ongoing...)
 
 ## References
 
