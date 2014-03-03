@@ -8,7 +8,9 @@ It is isometric graphic based, but not designed as an game engine. Just dive int
 
 ## Showcase
 
-Cube Generator: http://jsdo.it/nosir/ttQD
+Cube Generator: http://codepen.io/nosir/pen/ganrh
+
+Pixel Isometirc Flappy Bird: http://codepen.io/nosir/pen/rzaLA
 
 GIF Animation Render: http://jsdo.it/nosir/meAL
 
