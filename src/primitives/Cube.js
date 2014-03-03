@@ -31,10 +31,6 @@
         this.border = border || border === undefined;
         this.dimension = dimension === undefined ? new obelisk.CubeDimension() : dimension;
         this.color = color === undefined ? new obelisk.CubeColor() : color;
-
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
     };
 
     p.initRectangle = function () {

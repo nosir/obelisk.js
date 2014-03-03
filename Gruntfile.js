@@ -7,10 +7,10 @@ module.exports = function (grunt) {
         meta:{
             banner:'/*!\n' +
                 ' * obelisk.js <%= pkg.version %>\n' +
-                ' * https://github.com/rison/obelisk.js\n' +
+                ' * https://github.com/nosir/obelisk.js\n' +
                 ' * MIT licensed\n' +
                 ' *\n' +
-                ' * Copyright (C) 2012 Max Huang http://risonhuang.com\n' +
+                ' * Copyright (C) 2012 Max Huang https://github.com/nosir/\n' +
                 ' */',
             version:'<%= pkg.version %>'
         },

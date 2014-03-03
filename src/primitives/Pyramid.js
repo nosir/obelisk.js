@@ -34,10 +34,6 @@
         this.dimension = dimension === undefined ? new obelisk.PyramidDimension() : dimension;
         this.color = color === undefined ? new obelisk.PyramidColor() : color;
 
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
-
         this.hSize = this.dimension.tall ? this.dimension.xAxis * 2 : this.dimension.xAxis;
         this.hOffset = this.dimension.tall ? -3 : -2;
     };
