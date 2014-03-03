@@ -1077,10 +1077,6 @@
         this.border = border || border === undefined;
         this.dimension = dimension === undefined ? new obelisk.BrickDimension() : dimension;
         this.color = color === undefined ? new obelisk.SideColor() : color;
-
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
     };
 
     p.initRectangle = function () {
@@ -1106,22 +1102,23 @@
     };
 
     p.build = function () {
-        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j, borderColor;
         xOffsetInner = this.dimension.yAxis - 2;
         yOffsetInner = 0;
         xOffsetOut = this.dimension.xAxis - 1;
         yOffsetOut = this.h - 1;
+        borderColor = this.border ? this.color.border : this.color.inner;
 
         //x axis
         for (i = 0; i < this.dimension.xAxis; i += 1) {
-            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), this.color.border);
-            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), this.color.border);
+            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), borderColor);
+            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), borderColor);
         }
 
         //y axis
         for (j = 0; j < this.dimension.yAxis; j += 1) {
-            this.bitmapData.setPixel(xOffsetInner + 1 - j, yOffsetInner + Math.floor(j / 2), this.color.border);
-            this.bitmapData.setPixel(xOffsetOut - 1 + j, yOffsetOut - Math.floor(j / 2), this.color.border);
+            this.bitmapData.setPixel(xOffsetInner + 1 - j, yOffsetInner + Math.floor(j / 2), borderColor);
+            this.bitmapData.setPixel(xOffsetOut - 1 + j, yOffsetOut - Math.floor(j / 2), borderColor);
         }
 
         //fill an pixel graphic enclosed
@@ -1169,10 +1166,6 @@
         this.border = border || border === undefined;
         this.dimension = dimension === undefined ? new obelisk.CubeDimension() : dimension;
         this.color = color === undefined ? new obelisk.CubeColor() : color;
-
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
     };
 
     p.initRectangle = function () {
@@ -1301,10 +1294,6 @@
         this.dimension = dimension === undefined ? new obelisk.PyramidDimension() : dimension;
         this.color = color === undefined ? new obelisk.PyramidColor() : color;
 
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
-
         this.hSize = this.dimension.tall ? this.dimension.xAxis * 2 : this.dimension.xAxis;
         this.hOffset = this.dimension.tall ? -3 : -2;
     };
@@ -1422,10 +1411,6 @@
         this.border = border || border === undefined;
         this.dimension = dimension === undefined ? new obelisk.SideXDimension() : dimension;
         this.color = color === undefined ? new obelisk.SideColor() : color;
-
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
     };
 
     p.initRectangle = function () {
@@ -1447,23 +1432,24 @@
     };
 
     p.build = function () {
-        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j, borderColor;
 
         xOffsetInner = 0;
         yOffsetInner = this.dimension.zAxis;
         xOffsetOut = this.dimension.xAxis - 1;
         yOffsetOut = this.h - this.dimension.zAxis - 1;
+        borderColor = this.border ? this.color.border : this.color.inner;
 
         //x axis
         for (i = 0; i < this.dimension.xAxis; i += 1) {
-            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), this.color.border);
-            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), this.color.border);
+            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner + Math.floor(i / 2), borderColor);
+            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut - Math.floor(i / 2), borderColor);
         }
 
         //z axis
         for (j = 0; j < this.dimension.zAxis; j += 1) {
-            this.bitmapData.setPixel(xOffsetInner, yOffsetInner - j, this.color.border);
-            this.bitmapData.setPixel(xOffsetOut, yOffsetOut + j, this.color.border);
+            this.bitmapData.setPixel(xOffsetInner, yOffsetInner - j, borderColor);
+            this.bitmapData.setPixel(xOffsetOut, yOffsetOut + j, borderColor);
         }
 
         //fill an pixel graphic enclosed
@@ -1511,10 +1497,6 @@
         this.border = border || border === undefined;
         this.dimension = dimension === undefined ? new obelisk.SideYDimension() : dimension;
         this.color = color === undefined ? new obelisk.SideColor() : color;
-
-        if (!this.border) {
-            this.color.border = this.color.inner;
-        }
     };
 
     p.initRectangle = function () {
@@ -1536,22 +1518,23 @@
     };
 
     p.build = function () {
-        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j;
+        var xOffsetInner, yOffsetInner, xOffsetOut, yOffsetOut, i, j, borderColor;
         xOffsetInner = 0;
         yOffsetInner = this.h - this.dimension.zAxis - 1;
         xOffsetOut = this.dimension.yAxis - 1;
         yOffsetOut = this.dimension.zAxis;
+        borderColor = this.border ? this.color.border : this.color.inner;
 
         //y axis
         for (i = 0; i < this.dimension.yAxis; i += 1) {
-            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner - Math.floor(i / 2), this.color.border);
-            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut + Math.floor(i / 2), this.color.border);
+            this.bitmapData.setPixel(xOffsetInner + i, yOffsetInner - Math.floor(i / 2), borderColor);
+            this.bitmapData.setPixel(xOffsetOut - i, yOffsetOut + Math.floor(i / 2), borderColor);
         }
 
         //z axis
         for (j = 0; j < this.dimension.zAxis; j += 1) {
-            this.bitmapData.setPixel(xOffsetInner, yOffsetInner + j, this.color.border);
-            this.bitmapData.setPixel(xOffsetOut, yOffsetOut - j, this.color.border);
+            this.bitmapData.setPixel(xOffsetInner, yOffsetInner + j, borderColor);
+            this.bitmapData.setPixel(xOffsetOut, yOffsetOut - j, borderColor);
         }
 
         //fill an pixel graphic enclosed
