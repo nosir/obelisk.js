@@ -12,7 +12,7 @@ Cube Generator: http://codepen.io/nosir/pen/ganrh
 
 Pixel Isometirc Flappy Bird: http://codepen.io/nosir/pen/rzaLA
 
-GIF Animation Render: http://jsdo.it/nosir/meAL
+GIF Animation Rendering: http://codepen.io/nosir/pen/mdiHe
 
 ## Getting started
 
