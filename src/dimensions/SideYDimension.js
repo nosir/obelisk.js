@@ -27,6 +27,7 @@
         if (this.yAxis <= 4 || this.zAxis <= 2) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 

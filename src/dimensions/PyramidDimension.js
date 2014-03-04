@@ -26,6 +26,7 @@
         if (this.xAxis <= 4) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 

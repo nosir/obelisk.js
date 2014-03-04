@@ -29,6 +29,7 @@
         } else {
             this.canvas = obelisk.CanvasManager.getNewCanvas();
         }
+
         this.canvas.setAttribute('width', w);
         this.canvas.setAttribute('height', h);
 
@@ -85,7 +86,6 @@
 
         // left side flood fill
         for (col = x; col >= 0; col -= 1) {
-
             // top side
             for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
@@ -122,6 +122,7 @@
             if (col === x) {
                 prevCol = nowCol.concat();
             }
+
             matchFlag = false;
 
             for (i = 0; i < prevCol.length; i += 1) {
@@ -132,10 +133,12 @@
                         break;
                     }
                 }
+
                 if (matchFlag) {
                     break;
                 }
             }
+
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
@@ -153,7 +156,6 @@
 
         // right side flood fill
         for (col = x; col < w; col += 1) {
-
             // top side
             for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
@@ -190,6 +192,7 @@
             if (col === x) {
                 prevCol = nowCol.concat();
             }
+
             matchFlag = false;
 
             for (i = 0; i < prevCol.length; i += 1) {
@@ -200,10 +203,12 @@
                         break;
                     }
                 }
+
                 if (matchFlag) {
                     break;
                 }
             }
+
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];

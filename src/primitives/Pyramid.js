@@ -77,6 +77,7 @@
         for (i = 0; i < this.dimension.xAxis; i += 1) {
             this.bitmapData.setPixel(i, this.hSize + Math.floor(i / 2) + this.hOffset, colorborder_left);
         }
+
         //y axis
         for (j = 0; j < this.dimension.xAxis; j += 1) {
             this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - Math.floor(j / 2) - 1 + this.hOffset, colorborder_right);
@@ -87,6 +88,7 @@
             for (l1 = 0; l1 < this.hSize; l1 += 1) {
                 this.bitmapData.setPixel(l1, this.hSize - l1 + this.hOffset, colorborder_left);
             }
+
             //right edge
             for (m1 = 0; m1 < this.hSize; m1 += 1) {
                 this.bitmapData.setPixel(m1 + this.hSize - 2, m1 + 1 + this.hOffset, colorborder_right);
@@ -96,6 +98,7 @@
             for (l2 = 0; l2 < this.hSize - 2; l2 += 1) {
                 this.bitmapData.setPixel(Math.floor(l2 / 2), this.hSize - l2 + this.hOffset, colorborder_left);
             }
+
             //right edge
             for (m2 = 2; m2 < this.hSize; m2 += 1) {
                 this.bitmapData.setPixel(Math.floor(m2 / 2) + this.dimension.xAxis - 2, m2 + 1 + this.hOffset, colorborder_right);

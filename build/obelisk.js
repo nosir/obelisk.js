@@ -320,6 +320,7 @@
         if (this.xAxis <= 4 || this.yAxis <= 4) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 
@@ -359,6 +360,7 @@
         if (this.xAxis <= 4 || this.yAxis <= 4 || this.zAxis <= 2) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 
@@ -397,6 +399,7 @@
         if (this.xAxis <= 4) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 
@@ -435,6 +438,7 @@
         if (this.xAxis <= 4 || this.zAxis <= 2) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 
@@ -474,6 +478,7 @@
         if (this.yAxis <= 4 || this.zAxis <= 2) {
             throw new Error("dimension is too small");
         }
+
         return this;
     };
 
@@ -515,6 +520,7 @@
         } else {
             this.canvas = obelisk.CanvasManager.getNewCanvas();
         }
+
         this.canvas.setAttribute('width', w);
         this.canvas.setAttribute('height', h);
 
@@ -571,7 +577,6 @@
 
         // left side flood fill
         for (col = x; col >= 0; col -= 1) {
-
             // top side
             for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
@@ -608,6 +613,7 @@
             if (col === x) {
                 prevCol = nowCol.concat();
             }
+
             matchFlag = false;
 
             for (i = 0; i < prevCol.length; i += 1) {
@@ -618,10 +624,12 @@
                         break;
                     }
                 }
+
                 if (matchFlag) {
                     break;
                 }
             }
+
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
@@ -639,7 +647,6 @@
 
         // right side flood fill
         for (col = x; col < w; col += 1) {
-
             // top side
             for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
@@ -676,6 +683,7 @@
             if (col === x) {
                 prevCol = nowCol.concat();
             }
+
             matchFlag = false;
 
             for (i = 0; i < prevCol.length; i += 1) {
@@ -686,10 +694,12 @@
                         break;
                     }
                 }
+
                 if (matchFlag) {
                     break;
                 }
             }
+
             if (matchFlag) {
                 prevCol = nowCol.concat();
                 nowCol = [];
@@ -785,6 +795,7 @@
         if (!canvas) {
             throw new Error("Canvas is not defined");
         }
+
         try {
             if (canvas instanceof jQuery) {
                 canvas = canvas.get(0);
@@ -1224,6 +1235,7 @@
 
         // highlight & highlight fix
         bmd = new obelisk.BitmapData(this.w, this.h);
+
         if (this.border) {
             offsetX = this.dimension.xAxis - 2;
             offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
@@ -1337,6 +1349,7 @@
         for (i = 0; i < this.dimension.xAxis; i += 1) {
             this.bitmapData.setPixel(i, this.hSize + Math.floor(i / 2) + this.hOffset, colorborder_left);
         }
+
         //y axis
         for (j = 0; j < this.dimension.xAxis; j += 1) {
             this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.hSize + this.dimension.xAxis / 2 - Math.floor(j / 2) - 1 + this.hOffset, colorborder_right);
@@ -1347,6 +1360,7 @@
             for (l1 = 0; l1 < this.hSize; l1 += 1) {
                 this.bitmapData.setPixel(l1, this.hSize - l1 + this.hOffset, colorborder_left);
             }
+
             //right edge
             for (m1 = 0; m1 < this.hSize; m1 += 1) {
                 this.bitmapData.setPixel(m1 + this.hSize - 2, m1 + 1 + this.hOffset, colorborder_right);
@@ -1356,6 +1370,7 @@
             for (l2 = 0; l2 < this.hSize - 2; l2 += 1) {
                 this.bitmapData.setPixel(Math.floor(l2 / 2), this.hSize - l2 + this.hOffset, colorborder_left);
             }
+
             //right edge
             for (m2 = 2; m2 < this.hSize; m2 += 1) {
                 this.bitmapData.setPixel(Math.floor(m2 / 2) + this.dimension.xAxis - 2, m2 + 1 + this.hOffset, colorborder_right);

@@ -23,6 +23,7 @@
         if (!canvas) {
             throw new Error("Canvas is not defined");
         }
+
         try {
             if (canvas instanceof jQuery) {
                 canvas = canvas.get(0);

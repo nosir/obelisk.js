@@ -89,6 +89,7 @@
 
         // highlight & highlight fix
         bmd = new obelisk.BitmapData(this.w, this.h);
+
         if (this.border) {
             offsetX = this.dimension.xAxis - 2;
             offsetY = (this.dimension.xAxis + this.dimension.yAxis) / 2 - 2;
