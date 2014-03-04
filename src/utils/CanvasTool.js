@@ -24,7 +24,7 @@
         b = data[index + 2];
 
         return ((r << 16) | (g << 8) | b);
-    }
+    };
 
     p.toString = function () {
         return "[CanvasTool]";
