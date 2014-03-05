@@ -2,17 +2,17 @@
 
 Obelisk.js is an open source JavaScript engine to build pixel isometric objects.
 
-With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto the canvas.
+With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas.
 
-It is isometric graphic based, but not designed as an game engine. Just dive into it and try to pixelate something.
+This is not just for game, step into and try to pixelate something. Have fun.
 
 ## Showcase
 
-Cube Generator: http://codepen.io/nosir/details/ganrh
+GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe
 
 Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 
-GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe
+Cube Generator: http://codepen.io/nosir/details/ganrh
 
 ## Getting started
 
