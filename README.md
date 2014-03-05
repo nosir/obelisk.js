@@ -8,11 +8,11 @@ It is isometric graphic based, but not designed as an game engine. Just dive int
 
 ## Showcase
 
-Cube Generator: http://codepen.io/nosir/pen/ganrh
+Cube Generator: http://codepen.io/nosir/details/ganrh
 
-Pixel Isometirc Flappy Bird: http://codepen.io/nosir/pen/rzaLA
+Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 
-GIF Animation Rendering: http://codepen.io/nosir/pen/mdiHe
+GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe
 
 ## Getting started
 
