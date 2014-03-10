@@ -19,7 +19,7 @@
      * @type String
      * @static
      **/
-    obelisk.version = '0.4.1';
+    obelisk.version = '1.0.2';
 
     /**
      * @property author
