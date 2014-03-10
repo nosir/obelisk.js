@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: 'helvetica', sans-serif;
+        }
+
+        #canvas-txt {
+            visibility: hidden;
+            position: absolute;
+        }
+
+        #ipt {
+            font-family: 'helvetica', sans-serif;
+            border-radius: 4px;
+            border: 2px solid #dadddf;
+            height: 28px;
+            font-size: 14px;
+            margin: 0 0 0 3px;
+            padding: 0 10px;
+            background-color: #fff;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .bar {
+            padding-top: 10px;
+        }
+        #color-box {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0;
+            padding: 4px 0 0 10px;
+        }
+        #color-box li {
+            cursor: pointer;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<script src="../../vendor/dat.gui.min.js" type="text/javascript"></script>
+<script src="../../vendor/jquery-1.9.1.min.js" type="text/javascript"></script>
+
+<script src="../../../build/obelisk.js"></script>
+<div class="bar">
+    <label for="ipt">Enter something here:</label>
+    <input id="ipt" value="codepen.io" type="text" placeholder="" maxlength="25">
+    <ul id="color-box"></ul>
+</div>
+<canvas id="canvas-txt" width="200" height="24"></canvas>
+<canvas id="canvas-demo" width="1200" height="600" style=""></canvas>
+</body>
+</html>
+
+<script src="main.js"></script>
+
+
