@@ -56,9 +56,7 @@ SideX & SideY: http://jsfiddle.net/nosir/bLsew/
 
 ## Roadmap
 
-It is migrated from the ActionScript engine [Pixas](https://github.com/rison/pixas)
-
-(Primitive migration is still ongoing...)
+To add more primitives like slope...
 
 ## References
 
