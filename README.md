@@ -10,7 +10,7 @@ This is not just for game, step into and try to pixelate something. Have fun.
 
 Input Text Rendering: http://codepen.io/nosir/details/IxBJn
 
-GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe
+GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (Webkit Browser Only)
 
 Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 
