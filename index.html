@@ -16,6 +16,8 @@
     <!-- HEADER -->
     <div id="header_wrap" class="outer">
         <header class="inner">
+          <a id="forkme_banner" href="https://github.com/nosir/obelisk.js">View on GitHub</a>
+
           <h1 id="project_title">Obelisk.js</h1>
           <h2 id="project_tagline">JavaScript Engine to Build Pixel Isometric Element with HTML5 Canvas</h2>
 
@@ -34,15 +36,20 @@
 
 <p>Obelisk.js is an open source JavaScript engine to build pixel isometric objects.</p>
 
-<p>With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto the canvas.</p>
+<p>With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas.</p>
 
-<p>It is isometric graphic based, but not designed as an game engine. Just dive into it and try to pixelate something.</p>
+<p>This is not just for game, step into and try to pixelate something. Have fun.</p>
 
 <h2>
 <a name="showcase" class="anchor" href="#showcase"><span class="octicon octicon-link"></span></a>Showcase</h2>
 
-<p>Cube Generator: <a href="http://jsdo.it/nosir/ttQD">http://jsdo.it/nosir/ttQD</a></p>
-<p>GIF Animation Render: <a href="http://jsdo.it/nosir/meAL">http://jsdo.it/nosir/meAL</a></p>
+<p>Input Text Rendering: <a href="http://codepen.io/nosir/details/IxBJn">http://codepen.io/nosir/details/IxBJn</a></p>
+
+<p>GIF Animation Rendering: <a href="http://codepen.io/nosir/details/mdiHe">http://codepen.io/nosir/details/mdiHe</a> (Webkit Browser Only)</p>
+
+<p>Pixel Isometirc Flappy Bird: <a href="http://codepen.io/nosir/details/rzaLA">http://codepen.io/nosir/details/rzaLA</a></p>
+
+<p>Cube Generator: <a href="http://codepen.io/nosir/details/ganrh">http://codepen.io/nosir/details/ganrh</a></p>
 
 <h2>
 <a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
@@ -51,13 +58,13 @@
 <li>
 <p>Include obelisk.js on your page</p>
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//path/obelisk.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
+<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//your-path/obelisk.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
 </pre></div>
 </li>
 <li>
 <p>Create pixel world</p>
 
-<div class="highlight highlight-javascript"><pre><span class="c1">// create zero point for pixel isometric 2.5D axis</span>
+<div class="highlight highlight-javascript"><pre><span class="c1">// create pixel isometric 2.5D axis zero point</span>
 <span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
 
 <span class="c1">// create world instance to nest everything</span>
@@ -66,7 +73,8 @@
 
 <span class="c1">// create cube dimension and color instance</span>
 <span class="kd">var</span> <span class="nx">dimension</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeDimension</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeColor</span><span class="p">().</span><span class="nx">getByHorizontalColor</span><span class="p">(</span><span class="nx">obelisk</span><span class="p">.</span><span class="nx">ColorPattern</span><span class="p">.</span><span class="nx">GRAY</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">gray</span> <span class="o">=</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">ColorPattern</span><span class="p">.</span><span class="nx">GRAY</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeColor</span><span class="p">().</span><span class="nx">getByHorizontalColor</span><span class="p">(</span><span class="nx">gray</span><span class="p">);</span>
 
 <span class="c1">// build cube with dimension and color instance</span>
 <span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">Cube</span><span class="p">(</span><span class="nx">dimension</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
@@ -89,9 +97,7 @@
 <h2>
 <a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h2>
 
-<p>It is migrated from the ActionScript engine <a href="https://github.com/rison/pixas">Pixas</a></p>
-
-<p>(All kinds of other primitive migration is still ongoing...)</p>
+<p>To add more primitives like slope...</p>
 
 <h2>
 <a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
@@ -123,6 +129,6 @@
             } catch(err) {}
           </script>
 
-    <a href="https://github.com/nosir/obelisk.js"><img style="position: absolute; top: 0; left: 0; border: 0;margin: 0;padding: 0;width: 149px;height: 149px;box-shadow: none;-webkit-box-shadow: none;-moz-box-shadow: none;-o-box-shadow: none;-ms-box-shadow: none;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_red_aa0000.png" alt="Fork me on GitHub"></a>
+
   </body>
 </html>
