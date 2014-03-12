@@ -1,134 +1,208 @@
 <!DOCTYPE html>
 <html>
-
-  <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Obelisk.js : JavaScript Engine to Build Pixel Isometric Element with HTML5 Canvas" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
+<head>
+    <meta charset='utf-8'/>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1"/>
     <title>Obelisk.js</title>
-  </head>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'helvetica', sans-serif;
+        }
 
-  <body>
+        #canvas-txt {
+            visibility: hidden;
+            position: absolute;
+        }
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/nosir/obelisk.js">View on GitHub</a>
+        #ipt {
+            font-family: 'helvetica', sans-serif;
+            border-radius: 4px;
+            border: 2px solid #dadddf;
+            height: 28px;
+            font-size: 14px;
+            margin: 0 0 0 3px;
+            padding: 0 10px;
+            background-color: #fff;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            -webkit-box-shadow: none;
+            -moz-box-shadow: none;
+            box-shadow: none;
+            outline: none;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .title {
+            padding: 10px 0 0 10px;
+        }
+        .title, .title a {
+            font-family: "Helvetica", Arial, sans-serif;
+            font-size: 13px;
+            color: #AAAAAA;
+        }
+        .bar {
+            padding-left: 10px;
+            border-top: 1px dotted #BBB;
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+        #color-box {
+            display: inline-block;
+            vertical-align: top;
+            margin: 0;
+            padding: 4px 0 0 10px;
+        }
+        #color-box li {
+            cursor: pointer;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 4px;
+        }
+    </style>
+</head>
 
-          <h1 id="project_title">Obelisk.js</h1>
-          <h2 id="project_tagline">JavaScript Engine to Build Pixel Isometric Element with HTML5 Canvas</h2>
+<body>
 
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/nosir/obelisk.js/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/nosir/obelisk.js/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
+<script src="http://nosir.github.io/obelisk.js/dist/obelisk.min.1.0.2.js" type="text/javascript"></script>
 
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
-<a name="obeliskjs" class="anchor" href="#obeliskjs"><span class="octicon octicon-link"></span></a>Obelisk.js</h1>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js" type="text/javascript"></script>
 
-<p>Obelisk.js is an open source JavaScript engine to build pixel isometric objects.</p>
+<div class="title">■ obelisk.js - star me on Github: <a href="https://github.com/nosir/obelisk.js" target="_blank">https://github.com/nosir/obelisk.js</a></div>
+<div class="bar">
+    <label for="ipt">Enter something here:</label>
+    <input id="ipt" value="codepen.io" type="text" placeholder="" maxlength="25">
+    <ul id="color-box"></ul>
+</div>
+<canvas id="canvas-txt" width="200" height="24"></canvas>
+<canvas id="canvas-demo" width="1200" height="600" style=""></canvas>
 
-<p>With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas.</p>
+<script>
+    // control bar
+    var ControlBar = function () {
+        this.size = 10;
+        this.height = 24;
+    };
+    var con = new ControlBar();
+    var gui = new dat.GUI();
+    var conHeight = gui.add(con, 'height', 4, 100).step(1);
+    var conSize = gui.add(con, 'size', 6, 20).step(2);
+    conSize.onChange(function () {
+        buildPrimitive();
+        draw();
+    });
+    conHeight.onChange(function () {
+        buildPrimitive();
+        draw();
+    });
 
-<p>This is not just for game, step into and try to pixelate something. Have fun.</p>
+    // color patterns
+    var colorData = ['#CCFF00', '#FF0099', '#FF7CBF', '#EEEEEE', '#666666'];
+    var iMax = colorData.length;
+    var colorHtml = '';
 
-<h2>
-<a name="showcase" class="anchor" href="#showcase"><span class="octicon octicon-link"></span></a>Showcase</h2>
+    for (var i = 0; i < iMax; i++) {
+        colorHtml += '<li style="background-color: ' + colorData[i] + '"></li>';
+    }
+    $('#color-box').html(colorHtml);
+    $('#color-box').find('li').on('click', function () {
+        var index = $(this).index();
+        color = parseInt(colorData[index].replace('#', '0x'), 16);
+        buildPrimitive();
+        draw();
+    });
 
-<p>Input Text Rendering: <a href="http://codepen.io/nosir/details/IxBJn">http://codepen.io/nosir/details/IxBJn</a></p>
+    // input field
+    var ipt = $('#ipt');
+    ipt.on('keyup', draw);
+    ipt.on('click', function () {
+        $(this).select();
+    });
 
-<p>GIF Animation Rendering: <a href="http://codepen.io/nosir/details/mdiHe">http://codepen.io/nosir/details/mdiHe</a> (Webkit Browser Only)</p>
+    // input off canvas
+    var offCanvas = $('#canvas-txt').get(0);
+    var ctx = offCanvas.getContext("2d");
+    ctx.font = "20px Helvetica,sans-serif";
 
-<p>Pixel Isometirc Flappy Bird: <a href="http://codepen.io/nosir/details/rzaLA">http://codepen.io/nosir/details/rzaLA</a></p>
+    // pixel view
+    var canvas = $('#canvas-demo');
+    var point = new obelisk.Point(150, 30);
+    var pixelView = new obelisk.PixelView(canvas, point);
+    var brick;
+    var cube;
+    var color = 0xCCFF00;
+    var threshold = 130;
 
-<p>Cube Generator: <a href="http://codepen.io/nosir/details/ganrh">http://codepen.io/nosir/details/ganrh</a></p>
+    // build method
+    function buildPrimitive() {
+        // floor
+        var colorBrick = new obelisk.SideColor(0xAAAAAA, 0xEEEEEE);
+        var dimensionBrick = new obelisk.BrickDimension(con.size, con.size);
+        brick = new obelisk.Brick(dimensionBrick, colorBrick);
 
-<h2>
-<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
+        // cube
+        var colorCube = new obelisk.CubeColor().getByHorizontalColor(color);
+        var dimensionCube = new obelisk.CubeDimension(con.size, con.size, con.height);
+        cube = new obelisk.Cube(dimensionCube, colorCube, false);
+    }
 
-<ol>
-<li>
-<p>Include obelisk.js on your page</p>
+    function draw() {
+        var size = con.size;
+        var txtWidth = offCanvas.width;
+        var txtHeight = offCanvas.height;
 
-<div class="highlight highlight-html"><pre><span class="nt">&lt;script </span><span class="na">src=</span><span class="s">"//your-path/obelisk.min.js"</span><span class="nt">&gt;&lt;/script&gt;</span>
-</pre></div>
-</li>
-<li>
-<p>Create pixel world</p>
+        // clear everything
+        pixelView.clear();
+        ctx.clearRect(0, 0, txtWidth, txtHeight);
 
-<div class="highlight highlight-javascript"><pre><span class="c1">// create pixel isometric 2.5D axis zero point</span>
-<span class="kd">var</span> <span class="nx">point</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">Point</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">);</span>
+        ctx.fillText(ipt.val(), 2, 18);
+        var textData = ctx.getImageData(0, 0, txtWidth, txtHeight);
 
-<span class="c1">// create world instance to nest everything</span>
-<span class="c1">// canvas could be either DOM or jQuery element</span>
-<span class="kd">var</span> <span class="nx">pixelView</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">PixelView</span><span class="p">(</span><span class="nx">canvas</span><span class="p">,</span> <span class="nx">point</span><span class="p">);</span>
+        for (var y = 0; y <= txtHeight; y++) {
+            for (var x = 0; x <= txtWidth; x++) {
+                var p3d = new obelisk.Point3D(x * (size - 2), y * (size - 2), 0);
+                pixelView.renderObject(brick, p3d);
+            }
+        }
 
-<span class="c1">// create cube dimension and color instance</span>
-<span class="kd">var</span> <span class="nx">dimension</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeDimension</span><span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">120</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">gray</span> <span class="o">=</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">ColorPattern</span><span class="p">.</span><span class="nx">GRAY</span><span class="p">;</span>
-<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">CubeColor</span><span class="p">().</span><span class="nx">getByHorizontalColor</span><span class="p">(</span><span class="nx">gray</span><span class="p">);</span>
+        for (var y = 0; y < txtHeight; y++) {
+            for (var x = 0; x < txtWidth; x++) {
+                // check pixel
+                var index = (y * textData.width + x) * 4;
 
-<span class="c1">// build cube with dimension and color instance</span>
-<span class="kd">var</span> <span class="nx">cube</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">obelisk</span><span class="p">.</span><span class="nx">Cube</span><span class="p">(</span><span class="nx">dimension</span><span class="p">,</span> <span class="nx">color</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+                if (textData.data[index + 3] > threshold) {
+                    var p3d = new obelisk.Point3D(x * (size - 2), y * (size - 2), 0);
+                    pixelView.renderObject(cube, p3d);
+                }
+            }
+        }
+    }
 
-<span class="c1">// render primitive into view</span>
-<span class="nx">pixelView</span><span class="p">.</span><span class="nx">renderObject</span><span class="p">(</span><span class="nx">cube</span><span class="p">);</span>
-</pre></div>
-</li>
-</ol><h2>
-<a name="demo-tutorials" class="anchor" href="#demo-tutorials"><span class="octicon octicon-link"></span></a>Demo tutorials</h2>
+    // main
+    buildPrimitive();
+    draw();
+</script>
 
-<p>Cube: <a href="http://jsfiddle.net/nosir/ygWEW/">http://jsfiddle.net/nosir/ygWEW/</a></p>
+<script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+    try {
+        var pageTracker = _gat._getTracker("UA-44036545-1");
+        pageTracker._trackPageview();
+    } catch (err) {
+    }
+</script>
 
-<p>Pyramid : <a href="http://jsfiddle.net/nosir/ZVURu/">http://jsfiddle.net/nosir/ZVURu/</a></p>
-
-<p>Brick: <a href="http://jsfiddle.net/nosir/6MuVr/">http://jsfiddle.net/nosir/6MuVr/</a></p>
-
-<p>SideX &amp; SideY: <a href="http://jsfiddle.net/nosir/bLsew/">http://jsfiddle.net/nosir/bLsew/</a></p>
-
-<h2>
-<a name="roadmap" class="anchor" href="#roadmap"><span class="octicon octicon-link"></span></a>Roadmap</h2>
-
-<p>To add more primitives like slope...</p>
-
-<h2>
-<a name="references" class="anchor" href="#references"><span class="octicon octicon-link"></span></a>References</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Isometric_projection">Isometric projection</a></p>
-
-<p><a href="http://en.wikipedia.org/wiki/Isometric_graphics_in_video_games_and_pixel_art">Isometric graphics in video games and pixel art</a></p>
-
-<p><a href="http://en.wikipedia.org/wiki/Flood_fill">Flood fill</a></p>
-      </section>
-    </div>
-
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Obelisk.js maintained by <a href="https://github.com/nosir">nosir</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-              <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-44036545-1");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-
-  </body>
+</body>
 </html>
