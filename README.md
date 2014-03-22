@@ -56,7 +56,7 @@ To add more primitives - 4 directions slopes will be the first
 - Twitter: [@obeliskjs](https://twitter.com/obeliskjs)
 
 ## References
-Wikipedia : Pixel art is a form of digital art, where images are edited and displayed on the pixel level. The isometric projection is commonly seen in games to provide a 3D view without using any real 3D processing.
+Pixel art is a form of digital art, where images are edited and displayed on the pixel level. The isometric projection is commonly seen in games to provide a 3D view without using any real 3D processing.
 
 - Isometric projection http://en.wikipedia.org/wiki/Isometric_projection
 - Flood fill implementation http://en.wikipedia.org/wiki/Flood_fill
