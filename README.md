@@ -50,7 +50,7 @@ Step by step:
 - Part 4: [Color](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-4%3A-Color)
 - Part 5: [Dimension](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-5%3A-Dimension)
 
-Example code for building all primitives:
+Sample code for building all primitives:
 - Cube: http://jsfiddle.net/nosir/ygWEW/
 - Pyramid : http://jsfiddle.net/nosir/ZVURu/
 - Brick: http://jsfiddle.net/nosir/6MuVr/
@@ -58,7 +58,7 @@ Example code for building all primitives:
 
 ## Roadmap
 
-To add more primitives - 4 directions slopes will be the first
+To add more pixel primitives - 4 directions slopes will be the first
 
 ## Get in Touch
 
