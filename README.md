@@ -8,7 +8,7 @@ With the simple and flexible API provided by this engine, you can easily add iso
 
 ## Showcase
 
-- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit based browser only)
+- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit based browser only - Chrome, Safari...)
 - Input Text Rendering: http://codepen.io/nosir/details/IxBJn
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 - Cube Generator: http://codepen.io/nosir/details/ganrh
@@ -40,14 +40,21 @@ var cube = new obelisk.Cube(dimension, color, true);
 // render cube primitive into view
 pixelView.renderObject(cube);
 ```
-You can find out more details in tutorial part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
+You can find out more details in tutorial part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube) or [try the code yourself](http://jsfiddle.net/nosir/ygWEW/)
 
 ## Tutorials
+Step by step:
 - Part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
 - Part 2: [Coordinate system](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-2%3A-Coordinate-system)
 - Part 3: [Primitives](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-3%3A-Primitives)
 - Part 4: [Color](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-4%3A-Color)
 - Part 5: [Dimension](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-5%3A-Dimension)
+
+Example code for building all primitives:
+- Cube: http://jsfiddle.net/nosir/ygWEW/
+- Pyramid : http://jsfiddle.net/nosir/ZVURu/
+- Brick: http://jsfiddle.net/nosir/6MuVr/
+- SideX & SideY: http://jsfiddle.net/nosir/bLsew/
 
 ## Roadmap
 
