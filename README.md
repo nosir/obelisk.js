@@ -8,7 +8,7 @@ With the simple and flexible API provided by this engine, you can easily add iso
 
 ## Showcase
 
-- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit based browser only - Chrome, Safari...)
+- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit browser only - Chrome, Safari)
 - Input Text Rendering: http://codepen.io/nosir/details/IxBJn
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 - Cube Generator: http://codepen.io/nosir/details/ganrh
