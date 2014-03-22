@@ -1,19 +1,14 @@
 # Obelisk.js
 
-Obelisk.js is an open source JavaScript engine to build pixel isometric objects.
+Obelisk.js is a JavaScript engine for building isometric pixel objects.
 
-With this engine, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas.
-
-This is not just for game, step into and try to pixelate something. Have fun.
+With the simple and flexible API provided by this engine, you can easily add crispy isometric pixel element like brick, cube, pyramid... onto HTML5 canvas. This is not only for game, just try it out and pixelate something. Have fun.
 
 ## Showcase
 
+- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit based browser only)
 - Input Text Rendering: http://codepen.io/nosir/details/IxBJn
-
-- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (Webkit Browser Only)
-
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
-
 - Cube Generator: http://codepen.io/nosir/details/ganrh
 
 ## Getting started
@@ -44,12 +39,12 @@ var cube = new obelisk.Cube(dimension, color, true);
 pixelView.renderObject(cube);
 ```
 
-## Tutorials - to build basic elements one by one
-
-- Cube: http://jsfiddle.net/nosir/ygWEW/
-- Pyramid : http://jsfiddle.net/nosir/ZVURu/
-- Brick: http://jsfiddle.net/nosir/6MuVr/
-- SideX & SideY: http://jsfiddle.net/nosir/bLsew/
+## Tutorials
+- Part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
+- Part 2: [Coordinate system](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-2%3A-Coordinate-system)
+- Part 3: [Primitives](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-3%3A-Primitives)
+- Part 4: [Color](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-4%3A-Color)
+- Part 5: [Dimension](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-5%3A-Dimension)
 
 ## Roadmap
 
