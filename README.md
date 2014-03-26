@@ -74,4 +74,4 @@ Pixel art is a form of digital art, where images are edited and displayed on the
 
 ## License
 
-[MIT](http://opensource.org/licenses/MIT)
+Obelisk.js is released under the [MIT License](http://opensource.org/licenses/MIT)
