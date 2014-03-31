@@ -62,6 +62,7 @@ To add more pixel primitives - 4 directions [slopes](http://nosir.github.io/obel
 
 ## Get in Touch
 
+- Build any cool stuff with obelisk.js? Please feel free to add it here: [User Contributed Showcase](https://github.com/nosir/obelisk.js/wiki/User-Contributed-Showcase)
 - Bugs & Suggestions: [open an issue](https://github.com/nosir/obelisk.js/issues)
 - Twitter: [@rison](https://twitter.com/rison)
 
