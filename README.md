@@ -8,16 +8,20 @@ With the simple and flexible API provided by this engine, you can easily add iso
 
 ## Showcase
 
+Experiments:
 - GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit browser only - Chrome, Safari)
 - Input Text Rendering: http://codepen.io/nosir/details/IxBJn
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 - Cube Generator: http://codepen.io/nosir/details/ganrh
 
+Chrome Extension:
+- Github Contribution Chart Isometric View: [Check it out on Github](https://github.com/jasonlong/isometric-contributions) by  [@jasonlong](https://twitter.com/jasonlong)
+
 ## Getting started
 
 Simply include obelisk.js in your project
 ```html
-<script src="//your-path/obelisk.min.js"></script>
+<script src="//path/to/obelisk.min.js"></script>
 ```
 
 Create pixel world
