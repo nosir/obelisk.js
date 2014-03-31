@@ -65,6 +65,10 @@ To add more pixel primitives - 4 directions [slopes](http://nosir.github.io/obel
 - Bugs & Suggestions: [open an issue](https://github.com/nosir/obelisk.js/issues)
 - Twitter: [@rison](https://twitter.com/rison)
 
+## Changelog
+
+See details in the [release notes](https://github.com/nosir/obelisk.js/releases).
+
 ## References
 Pixel art is a form of digital art, where images are edited and displayed on the pixel level. The isometric projection is commonly seen in games to provide a 3D view without using any real 3D processing.
 
