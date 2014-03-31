@@ -14,8 +14,9 @@ Experiments:
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 - Cube Generator: http://codepen.io/nosir/details/ganrh
 
-Chrome Extension:
-- Github Contribution Chart Isometric View: [Check it out on Github](https://github.com/jasonlong/isometric-contributions) by  [@jasonlong](https://twitter.com/jasonlong)
+User Contributed:
+- Github Contribution Chart Isometric View Chrome Extension: [Github URL](https://github.com/jasonlong/isometric-contributions) by  [@jasonlong](https://twitter.com/jasonlong)
+- Mario 3D: http://jsdo.it/cx20/bQtQ by [@cx20](https://twitter.com/cx20)
 
 ## Getting started
 
