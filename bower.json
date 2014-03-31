@@ -1,26 +1,28 @@
 {
-  "name": "obelisk.js",
-  "version": "1.0.2",
-  "homepage": "https://github.com/nosir/obelisk.js",
-  "authors": [
-    "max huang risonhuang@gmail.com"
-  ],
-  "description": "JavaScript Engine to Build Pixel Isometric Element with HTML5 Canvas",
-  "main": "build/obelisk.min.js",
-  "keywords": [
-    "pixel",
-    "isometric",
-    "game",
-    "graphic",
-    "art",
-    "2.5D"
-  ],
-  "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
-  ]
+    "name":"obelisk.js",
+    "version":"1.0.2",
+    "homepage":"https://github.com/nosir/obelisk.js",
+    "authors":[
+        "max huang risonhuang@gmail.com"
+    ],
+    "description":"JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
+    "main":"build/obelisk.min.js",
+    "keywords":[
+        "javascript",
+        "canvas",
+        "pixel",
+        "isometric",
+        "game",
+        "graphic",
+        "art",
+        "2.5D"
+    ],
+    "license":"MIT",
+    "ignore":[
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ]
 }
