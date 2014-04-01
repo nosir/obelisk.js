@@ -16,6 +16,7 @@ Experiments:
 
 User Contributed:
 - Github Contribution Chart Isometric View Chrome Extension: [Github URL](https://github.com/jasonlong/isometric-contributions) by  [@jasonlong](https://twitter.com/jasonlong)
+- Snake Game: http://codepen.io/sfaedo/details/AwGjg (Use &larr; &rarr; Key) by [@Sebastian Faedo](http://codepen.io/sfaedo)
 - Mario 3D: http://jsdo.it/cx20/bQtQ by [@cx20](https://twitter.com/cx20)
 
 ## Getting started
