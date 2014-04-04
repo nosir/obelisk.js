@@ -15,11 +15,11 @@ Experiments:
 - Cube Generator: http://codepen.io/nosir/details/ganrh
 
 User Contributed:
-- Github Contribution Chart Isometric View Chrome Extension: [Github URL](https://github.com/jasonlong/isometric-contributions) by  [@jasonlong](https://twitter.com/jasonlong)
+- Github Contribution Chart Isometric View Chrome Extension: [Github Project URL](https://github.com/jasonlong/isometric-contributions) by  [@jasonlong](https://twitter.com/jasonlong)
 - Snake Game: http://codepen.io/sfaedo/full/AwGjg (Use &larr; &rarr; Key) by [@Sebastian Faedo](http://codepen.io/sfaedo)
 - Mario 3D Model: http://jsdo.it/cx20/bQtQ by [@cx20](https://twitter.com/cx20)
 - Conway's Game of Life: http://codepen.io/safx/full/Ewcym by [@safxdev](https://twitter.com/safxdev)
-- Rendering server-side images using [node-canvas](https://github.com/learnboost/node-canvas): https://github.com/pose/node-obelisk-example by [@pose](http://github.com/pose)
+- Node Server-side Image Rendering with [node-canvas](https://github.com/learnboost/node-canvas): [Github Project URL](https://github.com/pose/node-obelisk-example) by [@pose](http://github.com/pose)
 
 ## Getting started
 
@@ -70,7 +70,7 @@ To add more pixel primitives - 4 directions [slopes](http://nosir.github.io/obel
 
 ## Get in Touch
 
-- Build any cool stuff with obelisk.js? Please feel free to add it here: [User Contributed Showcase](https://github.com/nosir/obelisk.js/wiki/User-Contributed-Showcase)
+- Build any cool stuff? Please feel free to add it here: [User Contributed Showcase](https://github.com/nosir/obelisk.js/wiki/User-Contributed-Showcase) I prefer you not to send PR to update README.md, someone will update it at some point:)
 - Bugs & Suggestions: [open an issue](https://github.com/nosir/obelisk.js/issues)
 - Twitter: [@rison](https://twitter.com/rison)
 
