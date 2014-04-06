@@ -1,6 +1,6 @@
 {
     "name":"obelisk.js",
-    "version":"1.0.2",
+    "version":"1.0.3",
     "description":"JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
     "main":"Gruntfile.js",
     "dependencies":{
@@ -20,6 +20,7 @@
         "url":"https://github.com/rison/obelisk.js.git"
     },
     "keywords":[
+        "obelisk",
         "javascript",
         "canvas",
         "pixel",
