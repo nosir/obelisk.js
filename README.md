@@ -2,7 +2,9 @@
 
 Obelisk.js is a JavaScript Engine for building isometric pixel objects.
 
-With the simple and flexible API provided by this engine, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas. Obelisk.js strictly follows the pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees. Also you should know this is not only for game, just try it out and pixelate something. Have fun.
+With the simple and flexible API provided by it, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas. Obelisk.js strictly follows the pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees. 
+
+You should know this is not for vector isometric graphics drawing. In fact it is not using any canvas graphic drawing API at all, instead, it manipulates all the things in pixel level to obtain typical pixel arrangement. Just try it out to pixelate something. Have fun.
 
 <img width="112" height="109" src="http://nosir.github.io/obelisk.js/images/logo.png"/>
 
