@@ -55,6 +55,38 @@ pixelView.renderObject(cube);
 ```
 You can find out more details in tutorial part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube) or [try the code yourself](http://jsfiddle.net/nosir/ygWEW/)
 
+### Node.js
+
+> As node.js `canvas` dependency can be tricky to install (binary dependency on Cairo) we are not adding it as a project dependency. You will need to add the `canvas` dependency explicitly on your project:
+
+```sh
+npm install canvas obelisk.js
+```
+
+Send the `Canvas` constructor as `obelisk.js` module parameter:
+
+```js
+var Canvas = require('canvas');
+var obelisk = require('obelisk.js')(Canvas);
+
+var canvas = new Canvas(600,450);
+
+// create a canvas 2D point for pixel view world
+var point = new obelisk.Point(200, 200);
+
+// create view instance to nest everything
+// canvas could be either DOM or jQuery element
+var pixelView = new obelisk.PixelView(canvas, point);
+
+// Use obelisk the same way you will use it in the browser:
+// ...
+
+// Save canvas to a file
+canvas.createPNGStream().pipe(fs.createWriteStream('./figure.png'));
+```
+
+For more details, check the [Canvas Node.js example](https://github.com/pose/node-obelisk-example).
+
 ## Tutorials
 Step by step:
 - Part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
