@@ -32,8 +32,7 @@ Simply include obelisk.js in your project
 ```html
 <script src="//path/to/obelisk.min.js"></script>
 ```
-
-Create pixel world
+In JavaScript
 ```javascript
 // create a canvas 2D point for pixel view world
 var point = new obelisk.Point(200, 200);
@@ -53,39 +52,42 @@ var cube = new obelisk.Cube(dimension, color, true);
 // render cube primitive into view
 pixelView.renderObject(cube);
 ```
-You can find out more details in tutorial part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube) or [try the code yourself](http://jsfiddle.net/nosir/ygWEW/)
+For more details, check the tutorial part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube) or [try the code yourself](http://jsfiddle.net/nosir/ygWEW/)
 
 ### Node.js
+
+Also you can use it in your Node.js canvas project
 
 > As node.js `canvas` dependency can be tricky to install (binary dependency on Cairo) we are not adding it as a project dependency. You will need to add the `canvas` dependency explicitly on your project:
 
 ```sh
-npm install canvas obelisk.js
+$ npm install canvas
 ```
 
-Send the `Canvas` constructor as `obelisk.js` module parameter:
+```sh
+$ npm install obelisk.js
+```
+
+In your JavaScript
 
 ```js
+// load Node Canvas dependency
 var Canvas = require('canvas');
+
+// load obelisk.js module
+// here we need the Canvas as a module parameter
 var obelisk = require('obelisk.js')(Canvas);
 
+// create a Node Canvas instance
 var canvas = new Canvas(600,450);
 
-// create a canvas 2D point for pixel view world
-var point = new obelisk.Point(200, 200);
-
-// create view instance to nest everything
-// canvas could be either DOM or jQuery element
-var pixelView = new obelisk.PixelView(canvas, point);
-
-// Use obelisk the same way you will use it in the browser:
-// ...
+// Use obelisk the same way you will use it in the browser ...
 
 // Save canvas to a file
 canvas.createPNGStream().pipe(fs.createWriteStream('./figure.png'));
 ```
 
-For more details, check the [Canvas Node.js example](https://github.com/pose/node-obelisk-example).
+For more details, check the [Node.js Canvas example](https://github.com/pose/node-obelisk-example).
 
 ## Tutorials
 Step by step:
