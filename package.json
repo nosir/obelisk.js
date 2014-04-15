@@ -1,37 +1,47 @@
 {
-    "name":"obelisk.js",
-    "version":"1.0.4",
-    "description":"JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
-    "main":"./nodeshiv/obelisk-nodeshiv.js",
-    "dependencies":{
-        "grunt":"~0.4.1"
-    },
-    "devDependencies":{
-        "grunt-contrib-watch":"*",
-        "grunt-contrib-concat":"*",
-        "grunt-contrib-uglify":"*"
-    },
-    "scripts":{
-        "test":"grunt test",
-        "start":""
-    },
-    "repository":{
-        "type":"git",
-        "url":"https://github.com/rison/obelisk.js.git"
-    },
-    "keywords":[
-        "obelisk",
-        "javascript",
-        "canvas",
-        "pixel",
-        "isometric",
-        "game",
-        "graphic",
-        "art",
-        "2.5D"
-    ],
-    "author":"max huang risonhuang@gmail.com",
-    "license":"MIT",
-    "readmeFilename":"README.md",
-    "gitHead":"23cba75da3465a1d207a9ffdfb20050bf9de2fdc"
+  "name": "obelisk.js",
+  "version": "1.0.4",
+  "description": "JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
+  "main": "./nodeshiv/obelisk-nodeshiv.js",
+  "browser": "./build/obelisk.js",
+  "dependencies": {
+    "grunt": "~0.4.1",
+    "browserify-shim": "^3.4.1"
+  },
+  "devDependencies": {
+    "grunt-contrib-watch": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-uglify": "*",
+    "browserify": "^3.41.0"
+  },
+  "scripts": {
+    "test": "grunt test",
+    "browserify-test": "browserify . -r ./build/obelisk.js:obelisk.js > build/obelisk.brfy.js",
+    "start": ""
+  },
+  "browserify": {
+    "transform": [ "browserify-shim" ]
+  },
+  "browserify-shim": {
+    "./build/obelisk.js": "obelisk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rison/obelisk.js.git"
+  },
+  "keywords": [
+    "obelisk",
+    "javascript",
+    "canvas",
+    "pixel",
+    "isometric",
+    "game",
+    "graphic",
+    "art",
+    "2.5D"
+  ],
+  "author": "max huang risonhuang@gmail.com",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "gitHead": "23cba75da3465a1d207a9ffdfb20050bf9de2fdc"
 }
