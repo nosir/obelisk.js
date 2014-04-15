@@ -89,6 +89,16 @@ canvas.createPNGStream().pipe(fs.createWriteStream('./figure.png'));
 
 For more details, check the [Node.js Canvas example](https://github.com/pose/node-obelisk-example).
 
+### Browserify
+
+obelisk.js can also be used from a [browserify](https://github.com/substack/node-browserify) project. Simply:
+
+```js
+var obelisk = require('obelisk.js');
+console.log(obelisk.Point)
+// > function Point() { }
+```
+
 ## Tutorials
 Step by step:
 - Part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
