@@ -2,3 +2,4 @@
 /node_modules
 /.idea
 /local
+build/obelisk.brfy.js
