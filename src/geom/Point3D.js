@@ -27,6 +27,20 @@
     };
 
     // public methods
+    p.toGlobalCoordinates = function(offset) {
+        var p2D = new obelisk.Point(
+            this.x - this.y,
+            Math.floor(this.x/2 + this.y/2) - this.z
+        );
+
+        if (offset != undefined) {
+            p2D.x = p2D.x + offset.x;
+            p2D.y = p2D.y + offset.y;
+        }
+
+        return p2D;
+    };
+
     p.toString = function () {
         return "[Point3D x : " + this.x + ", y : " + this.y + ", z: " + this.z + "]";
     };
