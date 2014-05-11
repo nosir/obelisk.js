@@ -19,7 +19,7 @@
      * @type String
      * @static
      **/
-    obelisk.version = '1.0.4';
+    obelisk.version = '1.1.0';
 
     /**
      * @property author
@@ -239,6 +239,63 @@
     // private methods
 
     obelisk.SideColor = SideColor;
+}(obelisk));
+
+/*global obelisk:true*/
+
+/*
+ * SlopeColor
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SlopeColor, p;
+    SlopeColor = function (border, borderHighlight, left, right, leftSlope, rightSlope) {
+        this.initialize(border, borderHighlight, left, right, leftSlope, rightSlope);
+    };
+    p = SlopeColor.prototype = new obelisk.AbstractColor();
+
+    // public properties
+    p.BRIGHTNESS_GAIN = -20;
+
+    // constructor
+    p.initialize = function (border, borderHighlight, left, right, leftSlope, rightSlope) {
+        this.border = obelisk.ColorGeom.get32(border === undefined ? 0x949698 : border);
+        this.borderHighlight = obelisk.ColorGeom.get32(borderHighlight === undefined ? 0xFFFFFF : borderHighlight);
+        this.left = obelisk.ColorGeom.get32(left === undefined ? 0xC9CFD0 : left);
+        this.right = obelisk.ColorGeom.get32(right === undefined ? 0xE6E8E9 : right);
+        this.leftSlope = obelisk.ColorGeom.get32(leftSlope === undefined ? 0xDBDBDB : leftSlope);
+        this.rightSlope = obelisk.ColorGeom.get32(rightSlope === undefined ? 0xDBDBDB : rightSlope);
+        return this;
+    };
+
+    // public methods
+
+    /*
+     * horizontal side doesn't actually exist in the Slope primitive
+     * you can assign the same horizontal color as cube
+     * so that you will be able to arrange the slope with cube
+     */
+    p.getByHorizontalColor = function (horizontal) {
+        return new obelisk.SlopeColor(
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN * 4),
+            //apply hightlight
+            obelisk.ColorGeom.applyBrightness(horizontal, 0, true),
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN * 2),
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN),
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN * 1.5),
+            obelisk.ColorGeom.applyBrightness(horizontal, this.BRIGHTNESS_GAIN * 0.5)
+        );
+    };
+
+    p.toString = function () {
+        return "[SlopeColor]";
+    };
+
+    // private methods
+
+    obelisk.SlopeColor = SlopeColor;
 }(obelisk));
 
 /*global obelisk:true*/
@@ -492,6 +549,44 @@
 /*global obelisk:true*/
 
 /*
+ * SlopeDimension
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SlopeDimension, p;
+    SlopeDimension = function (xAxis, yAxis) {
+        this.initialize(xAxis, yAxis);
+    };
+    p = SlopeDimension.prototype = new obelisk.AbstractDimension();
+
+    // constructor
+    p.initialize = function (xAxis, yAxis) {
+        this.xAxis = xAxis || 30;
+        this.yAxis = yAxis || 30;
+
+        if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
+            throw new Error("xAxis and yAxis must be even number");
+        }
+
+        if (this.xAxis <= 4 || this.yAxis <= 4) {
+            throw new Error("dimension is too small");
+        }
+
+        return this;
+    };
+
+    p.toString = function () {
+        return "[SlopeDimension]";
+    };
+
+    obelisk.SlopeDimension = SlopeDimension;
+}(obelisk));
+
+/*global obelisk:true*/
+
+/*
  * BitmapData
  */
 
@@ -560,7 +655,7 @@
             stack = [],
             nowCol = [],
             prevCol = [],
-            col, row, matchFlag,
+            col, row, matchFlag, newStart,
             w = this.imageData.width,
             h = this.imageData.height,
             i, j;
@@ -584,26 +679,71 @@
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col + 1, row - 1))) {
-                        break;
+                    // first one is invalid pixel && not at col top
+                    if (row === y && this.checkPixelAvailable(col + 1, row - 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row - 1)) {
+                            newStart = row - 1;
+                        } else {
+                            if (this.checkPixelAvailable(col + 1, row - 2)) {
+                                newStart = row - 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = -1;
+                            }
+                        }
+
+                        for (row = newStart; row >= 0; row -= 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
-            // top side
+
+            // bottom side
             for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col + 1, row + 1))) {
-                        break;
+                    // first one is invalid pixel && not at col bottom
+                    if (row === y && this.checkPixelAvailable(col + 1, row + 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row + 1)) {
+                            newStart = row + 1;
+                        } else {
+                            if (this.checkPixelAvailable(col + 1, row + 2)) {
+                                newStart = row + 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = h;
+                            }
+                        }
+
+                        for (row = newStart; row < h; row += 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
@@ -647,6 +787,7 @@
 
         // right side flood fill
         for (col = x; col < w; col += 1) {
+
             // top side
             for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
@@ -654,26 +795,70 @@
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col - 1, row - 1))) {
-                        break;
+                    // first one is invalid pixel && not at col top
+                    if (row === y && this.checkPixelAvailable(col - 1, row - 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row - 1)) {
+                            newStart = row - 1;
+                        } else {
+                            if (this.checkPixelAvailable(col - 1, row - 2)) {
+                                newStart = row - 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = -1;
+                            }
+                        }
+
+                        for (row = newStart; row >= 0; row -= 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
-            // top side
+            // bottom side
             for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col - 1, row + 1))) {
-                        break;
+                    // first one is invalid pixel && not at col bottom
+                    if (row === y && this.checkPixelAvailable(col - 1, row + 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row + 1)) {
+                            newStart = row + 1;
+                        } else {
+                            if (this.checkPixelAvailable(col - 1, row + 2)) {
+                                newStart = row + 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = h;
+                            }
+                        }
+
+                        for (row = newStart; row < h; row += 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
@@ -1576,6 +1761,435 @@
     };
 
     obelisk.SideY = SideY;
+}(obelisk));
+
+/*global obelisk:true*/
+
+/*
+ * Slope East
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SlopeEast, p;
+    SlopeEast = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
+    };
+    p = SlopeEast.prototype = new obelisk.AbstractPrimitive();
+
+    // constructor
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SlopeDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SlopeColor() : color;
+    };
+
+    p.initRectangle = function () {
+
+        this.w = this.dimension.xAxis + this.dimension.yAxis;
+        this.h = this.dimension.xAxis * 2 + this.dimension.yAxis / 2;
+
+        // 22.6 degrees implementation
+        this.w -= 2;
+        this.h -= 3;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = -(this.dimension.yAxis - 2);
+        this.matrix.ty = -(this.dimension.xAxis * 3 / 2 - 2);
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.bitmapData.context.putImageData(this.bitmapData.imageData, 0, 0);
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        var colorBorderLeft, colorBorderRight,
+            i, j, k, m, n;
+
+        colorBorderLeft = this.border ? this.color.border : this.color.left;
+        colorBorderRight = this.border ? this.color.border : this.color.rightSlope;
+
+        // y axis
+        for (j = 0; j < this.dimension.yAxis; j += 1) {
+            this.bitmapData.setPixel(j, this.dimension.yAxis / 2 - Math.floor(j / 2) - 1, colorBorderRight);
+            this.bitmapData.setPixel(j + this.dimension.xAxis - 2, this.h - Math.floor(j / 2) - 1, colorBorderRight);
+        }
+
+        // x axis
+        for (i = 0; i < this.dimension.xAxis; i += 1) {
+            this.bitmapData.setPixel(i, this.h - this.dimension.xAxis / 2 + Math.floor(i / 2), colorBorderLeft);
+        }
+
+        // z axis
+        for (k = this.dimension.yAxis / 2 - 1; k < this.h - this.dimension.xAxis / 2; k += 1) {
+            this.bitmapData.setPixel(0, k, colorBorderLeft);
+        }
+
+        // slot
+        for (m = 0; m < this.dimension.xAxis * 2 - 2; m += 1) {
+            this.bitmapData.setPixel(this.dimension.yAxis - 1 + Math.floor(m / 2), m, colorBorderRight);
+            this.bitmapData.setPixel(1 + Math.floor(m / 2), this.dimension.yAxis / 2 + m - 1, colorBorderRight);
+        }
+
+        // flood fill
+        this.bitmapData.floodFill(this.dimension.yAxis - 2, 1, this.color.rightSlope);
+        this.bitmapData.floodFill(this.dimension.xAxis - 3, this.h - 3, this.color.left);
+        // hack single pixel
+        this.bitmapData.setPixel(this.dimension.xAxis - 2, this.h - 2, this.color.left);
+
+        // highlight
+        if (this.border) {
+            for (n = 1; n < this.dimension.xAxis * 2 - 3; n += 1) {
+                this.bitmapData.setPixel(1 + Math.floor(n / 2), this.dimension.yAxis / 2 + n - 1, this.color.borderHighlight);
+            }
+        }
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[SlopeEast]";
+    };
+
+    obelisk.SlopeEast = SlopeEast;
+}(obelisk));
+
+/*global obelisk:true*/
+
+/*
+ * Slope North
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SlopeNorth, p;
+    SlopeNorth = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
+    };
+    p = SlopeNorth.prototype = new obelisk.AbstractPrimitive();
+
+    // constructor
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SlopeDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SlopeColor() : color;
+    };
+
+    p.initRectangle = function () {
+
+        this.w = this.dimension.xAxis + this.dimension.yAxis;
+        this.h = this.dimension.yAxis * 3 / 2 + this.dimension.xAxis / 2;
+
+        // 22.6 degrees implementation
+        this.w -= 2;
+        this.h -= 3;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = -(this.dimension.yAxis - 2);
+        this.matrix.ty = -(this.dimension.yAxis - 2);
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        var colorBorderLeft, colorBorderRight, colorBorderHighlight,
+            sideX, poX, ctx, bmd,
+            i, j, n;
+
+        colorBorderLeft = this.border ? this.color.border : this.color.left;
+        colorBorderRight = this.border ? this.color.border : this.color.right;
+        colorBorderHighlight = this.border ? this.color.borderHighlight : this.color.left;
+
+        sideX = new obelisk.SideX(
+            new obelisk.SideXDimension(this.dimension.xAxis, this.h - this.dimension.xAxis / 2),
+            new obelisk.SideColor(colorBorderLeft, this.color.left)
+        );
+
+        poX = new obelisk.PixelObject(sideX);
+
+        ctx = this.bitmapData.context;
+        ctx.drawImage(poX.canvas, poX.x, poX.y + this.h - this.dimension.xAxis / 2);
+
+        bmd = new obelisk.BitmapData(this.w, this.h);
+
+        // close the path for floodfill
+        for (i = this.h - this.dimension.yAxis * 3 / 2 + 2; i < this.h; i += 1) {
+            bmd.setPixel(this.dimension.xAxis - 1, i, colorBorderRight);
+        }
+
+        // y axis
+        for (j = 1; j < this.dimension.yAxis; j += 1) {
+            bmd.setPixel(this.dimension.xAxis + j - 2, this.h - Math.floor(j / 2) - 1, colorBorderRight);
+            bmd.setPixel(this.dimension.xAxis + j - 2, this.dimension.xAxis / 2 - 2 + j, colorBorderRight);
+        }
+
+        // flood fill
+        bmd.floodFill(this.dimension.xAxis + 1, this.h - 3, this.color.right);
+
+        //highlight
+        for (n = this.dimension.xAxis / 2; n < this.h - 1; n += 1) {
+            bmd.setPixel(this.dimension.xAxis - 1, n, this.color.right);
+            bmd.setPixel(this.dimension.xAxis - 2, n, colorBorderHighlight);
+        }
+
+        bmd.context.putImageData(bmd.imageData, 0, 0);
+        ctx.drawImage(bmd.canvas, 0, 0);
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[SlopeNorth]";
+    };
+
+    obelisk.SlopeNorth = SlopeNorth;
+}(obelisk));
+
+/*global obelisk:true*/
+
+/*
+ * Slope South
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SlopeSouth, p;
+    SlopeSouth = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
+    };
+    p = SlopeSouth.prototype = new obelisk.AbstractPrimitive();
+
+    // constructor
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SlopeDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SlopeColor() : color;
+    };
+
+    p.initRectangle = function () {
+
+        this.w = this.dimension.xAxis + this.dimension.yAxis;
+        this.h = this.dimension.xAxis / 2 + this.dimension.yAxis * 2;
+
+        // 22.6 degrees implementation
+        this.w -= 2;
+        this.h -= 3;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = -(this.dimension.yAxis - 2);
+        this.matrix.ty = -(this.dimension.yAxis * 3 / 2 - 2);
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.bitmapData.context.putImageData(this.bitmapData.imageData, 0, 0);
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        var colorBorderLeft, colorBorderRight,
+            i, j, k, m, n;
+
+        colorBorderLeft = this.border ? this.color.border : this.color.leftSlope;
+        colorBorderRight = this.border ? this.color.border : this.color.right;
+
+        // x axis
+        for (j = 0; j < this.dimension.xAxis; j += 1) {
+            this.bitmapData.setPixel(j, this.dimension.yAxis * 2 + Math.floor(j / 2) - 3, colorBorderLeft);
+            this.bitmapData.setPixel(j + this.dimension.yAxis - 2, Math.floor(j / 2), colorBorderLeft);
+        }
+
+        // y axis
+        for (i = 0; i < this.dimension.yAxis; i += 1) {
+            this.bitmapData.setPixel(this.dimension.xAxis - 2 + i, this.h - Math.floor(i / 2) - 1, colorBorderRight);
+        }
+
+        // z axis
+        for (k = this.dimension.xAxis / 2 - 1; k < this.h - this.dimension.yAxis / 2; k += 1) {
+            this.bitmapData.setPixel(this.w - 1, k, colorBorderRight);
+        }
+
+        // slot
+        for (m = 0; m < this.dimension.yAxis * 2 - 2; m += 1) {
+            this.bitmapData.setPixel(Math.floor(m / 2), this.dimension.yAxis * 2 - m - 3, colorBorderLeft);
+            this.bitmapData.setPixel(this.dimension.xAxis - 2 + Math.floor(m / 2), this.h - m - 1, colorBorderLeft);
+        }
+
+        // flood fill
+        this.bitmapData.floodFill(this.dimension.yAxis - 1, 1, this.color.leftSlope);
+        this.bitmapData.floodFill(this.dimension.xAxis, this.h - 3, this.color.right);
+        // hack single pixel
+        this.bitmapData.setPixel(this.dimension.xAxis - 1, this.h - 2, this.color.right);
+
+        // highlight
+        if (this.border) {
+            for (n = 1; n < this.dimension.yAxis * 2 - 3; n += 1) {
+                this.bitmapData.setPixel(this.dimension.xAxis - 2 + Math.floor(n / 2), this.h - n - 1, this.color.borderHighlight);
+            }
+        }
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[SlopeSouth]";
+    };
+
+    obelisk.SlopeSouth = SlopeSouth;
+}(obelisk));
+
+/*global obelisk:true*/
+
+/*
+ * Slope West
+ */
+
+(function (obelisk) {
+    "use strict";
+
+    var SlopeWest, p;
+    SlopeWest = function (dimension, color, border, useDefaultCanvas) {
+        this.initialize(dimension, color, border, useDefaultCanvas);
+    };
+    p = SlopeWest.prototype = new obelisk.AbstractPrimitive();
+
+    // constructor
+    p.initialize = function (dimension, color, border, useDefaultCanvas) {
+        this.initRender(dimension, color, border, useDefaultCanvas);
+        this.initRectangle();
+        this.initBitmapData();
+        this.build();
+        this.renderBitmapDataForCanvas();
+        return this;
+    };
+
+    // private method
+    p.initRender = function (dimension, color, border, useDefaultCanvas) {
+        this.useDefaultCanvas = useDefaultCanvas || false;
+        this.border = border || border === undefined;
+        this.dimension = dimension === undefined ? new obelisk.SlopeDimension() : dimension;
+        this.color = color === undefined ? new obelisk.SlopeColor() : color;
+    };
+
+    p.initRectangle = function () {
+
+        this.w = this.dimension.xAxis + this.dimension.yAxis;
+        this.h = this.dimension.xAxis * 3 / 2 + this.dimension.yAxis / 2;
+
+        // 22.6 degrees implementation
+        this.w -= 2;
+        this.h -= 3;
+
+        // the matrix offset between the bitmap and the 3d pixel coordinate ZERO point
+        this.matrix = new obelisk.Matrix();
+        this.matrix.tx = -(this.dimension.yAxis - 2);
+        this.matrix.ty = -(this.dimension.xAxis - 2);
+    };
+
+    p.initBitmapData = function () {
+        this.bitmapData = new obelisk.BitmapData(this.w, this.h, this.useDefaultCanvas);
+    };
+    p.renderBitmapDataForCanvas = function () {
+        this.canvas = this.bitmapData.canvas;
+    };
+
+    p.build = function () {
+        var colorBorderLeft, colorBorderRight, colorBorderHighlight,
+            sideY, poY, ctx, bmd,
+            i, j, n;
+
+        colorBorderLeft = this.border ? this.color.border : this.color.left;
+        colorBorderRight = this.border ? this.color.border : this.color.right;
+        colorBorderHighlight = this.border ? this.color.borderHighlight : this.color.left;
+
+        sideY = new obelisk.SideY(
+            new obelisk.SideYDimension(this.dimension.yAxis, this.h - this.dimension.yAxis / 2),
+            new obelisk.SideColor(colorBorderRight, this.color.right)
+        );
+
+        poY = new obelisk.PixelObject(sideY);
+
+        ctx = this.bitmapData.context;
+        ctx.drawImage(poY.canvas, poY.x + this.w - 2, poY.y + this.h - this.dimension.yAxis / 2);
+
+        bmd = new obelisk.BitmapData(this.w, this.h);
+
+        // close the path for floodfill
+        for (i = this.h - this.dimension.xAxis * 3 / 2 + 2; i < this.h; i += 1) {
+            bmd.setPixel(this.dimension.xAxis - 2, i, colorBorderLeft);
+        }
+
+        //x axis
+        for (j = 0; j < this.dimension.xAxis - 1; j += 1) {
+            bmd.setPixel(j, this.dimension.xAxis + this.dimension.yAxis / 2 - 3 + Math.floor(j / 2), colorBorderLeft);
+            bmd.setPixel(j, this.dimension.xAxis + this.dimension.yAxis / 2 - 3 - j, colorBorderLeft);
+        }
+
+        // flood fill
+        bmd.floodFill(this.dimension.xAxis - 3, this.h - 3, this.color.left);
+
+        //highlight
+        for (n = this.dimension.yAxis / 2; n < this.h - 1; n += 1) {
+            bmd.setPixel(this.dimension.xAxis - 2, n, colorBorderHighlight);
+        }
+
+        bmd.context.putImageData(bmd.imageData, 0, 0);
+        ctx.drawImage(bmd.canvas, 0, 0);
+    };
+
+    // public methods
+    p.toString = function () {
+        return "[SlopeWest]";
+    };
+
+    obelisk.SlopeWest = SlopeWest;
 }(obelisk));
 
 /*global obelisk:true, document:true*/

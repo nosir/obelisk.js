@@ -2,9 +2,9 @@
 
 Obelisk.js is a JavaScript Engine for building isometric pixel objects.
 
-With the simple and flexible API provided by it, you can easily add isometric pixel element like brick, cube, pyramid onto HTML5 canvas. Obelisk.js strictly follows the pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees. 
+With the simple and flexible API provided by it, you can easily add isometric pixel element like brick, cube, pyramid, slope onto HTML5 canvas. Obelisk.js strictly follows the pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees.
 
-You should know this is not for vector isometric graphics drawing. In fact it is not using any canvas graphic drawing API at all, instead, it manipulates all the things in pixel level to obtain typical pixel arrangement. Just try it out to pixelate something. Have fun.
+Also you should know obelisk.js is not built for vector isometric graphics drawing. In fact it doesn't use any canvas graphic drawing API at all, instead, it manipulates all the things in pixel level to obtain typical pixel arrangement. Just try it out to pixelate something. Have fun.
 
 <img width="112" height="109" src="http://nosir.github.io/obelisk.js/images/logo.png"/>
 
@@ -111,11 +111,8 @@ Sample code for building all primitives:
 - Cube: http://jsfiddle.net/nosir/ygWEW/
 - Pyramid : http://jsfiddle.net/nosir/ZVURu/
 - Brick: http://jsfiddle.net/nosir/6MuVr/
-- SideX & SideY: http://jsfiddle.net/nosir/bLsew/
-
-## Roadmap
-
-To add more pixel primitives - 4 directions [slopes](http://nosir.github.io/obelisk.js/images/slope.gif) will be the first
+- SideX, SideY: http://jsfiddle.net/nosir/bLsew/
+- SlopeNorth, SlopeEast, SlopeSouth, SlopeEast: http://jsfiddle.net/nosir/28B9G/
 
 ## Get in Touch
 

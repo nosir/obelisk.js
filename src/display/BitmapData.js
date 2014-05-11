@@ -69,7 +69,7 @@
             stack = [],
             nowCol = [],
             prevCol = [],
-            col, row, matchFlag,
+            col, row, matchFlag, newStart,
             w = this.imageData.width,
             h = this.imageData.height,
             i, j;
@@ -93,26 +93,71 @@
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col + 1, row - 1))) {
-                        break;
+                    // first one is invalid pixel && not at col top
+                    if (row === y && this.checkPixelAvailable(col + 1, row - 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row - 1)) {
+                            newStart = row - 1;
+                        } else {
+                            if (this.checkPixelAvailable(col + 1, row - 2)) {
+                                newStart = row - 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = -1;
+                            }
+                        }
+
+                        for (row = newStart; row >= 0; row -= 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
-            // top side
+
+            // bottom side
             for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col + 1, row + 1))) {
-                        break;
+                    // first one is invalid pixel && not at col bottom
+                    if (row === y && this.checkPixelAvailable(col + 1, row + 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row + 1)) {
+                            newStart = row + 1;
+                        } else {
+                            if (this.checkPixelAvailable(col + 1, row + 2)) {
+                                newStart = row + 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = h;
+                            }
+                        }
+
+                        for (row = newStart; row < h; row += 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
@@ -156,6 +201,7 @@
 
         // right side flood fill
         for (col = x; col < w; col += 1) {
+
             // top side
             for (row = y; row >= 0; row -= 1) {
                 if (this.checkPixelAvailable(col, row)) {
@@ -163,26 +209,70 @@
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col - 1, row - 1))) {
-                        break;
+                    // first one is invalid pixel && not at col top
+                    if (row === y && this.checkPixelAvailable(col - 1, row - 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row - 1)) {
+                            newStart = row - 1;
+                        } else {
+                            if (this.checkPixelAvailable(col - 1, row - 2)) {
+                                newStart = row - 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = -1;
+                            }
+                        }
+
+                        for (row = newStart; row >= 0; row -= 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
-            // top side
+            // bottom side
             for (row = y; row < h; row += 1) {
                 if (this.checkPixelAvailable(col, row)) {
                     // available pixel
                     stack.push((row * w + col) * 4);
                     nowCol.push(row);
                 } else {
-                    // unavailable pixel
-                    if (!(row === y && this.checkPixelAvailable(col - 1, row + 1))) {
-                        break;
+                    // first one is invalid pixel && not at col bottom
+                    if (row === y && this.checkPixelAvailable(col - 1, row + 1)) {
+
+                        // next one is valid
+                        if (this.checkPixelAvailable(col, row + 1)) {
+                            newStart = row + 1;
+                        } else {
+                            if (this.checkPixelAvailable(col - 1, row + 2)) {
+                                newStart = row + 2;
+                            } else {
+                                // fail, assign max value to avoid loop below
+                                newStart = h;
+                            }
+                        }
+
+                        for (row = newStart; row < h; row += 1) {
+                            if (this.checkPixelAvailable(col, row)) {
+                                // available pixel
+                                stack.push((row * w + col) * 4);
+                                nowCol.push(row);
+                            } else {
+                                break;
+                            }
+                        }
                     }
-                    // let's continue to check more data in this column
+
+                    break;
                 }
             }
 
