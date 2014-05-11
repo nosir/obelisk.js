@@ -27,13 +27,13 @@
     };
 
     // public methods
-    p.toGlobalCoordinates = function(offset) {
+    p.toGlobalCoordinates = function (offset) {
         var p2D = new obelisk.Point(
             this.x - this.y,
-            Math.floor(this.x/2 + this.y/2) - this.z
+            Math.floor(this.x / 2 + this.y / 2) - this.z
         );
 
-        if (offset != undefined) {
+        if (offset !== undefined) {
             p2D.x = p2D.x + offset.x;
             p2D.y = p2D.y + offset.y;
         }
