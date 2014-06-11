@@ -9,7 +9,7 @@
 
     var CanvasManager, p;
     CanvasManager = function () {
-        throw new Error('ColorGeom is a static Class, cannot be instanced.');
+        throw new Error('CanvasManager is a static Class, cannot be instanced.');
     };
     p = CanvasManager;
 
