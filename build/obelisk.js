@@ -2203,7 +2203,7 @@
 
     var CanvasManager, p;
     CanvasManager = function () {
-        throw new Error('ColorGeom is a static Class, cannot be instanced.');
+        throw new Error('CanvasManager is a static Class, cannot be instanced.');
     };
     p = CanvasManager;
 
@@ -2327,12 +2327,12 @@
 (function (obelisk) {
     "use strict";
 
-    var ColorPattren, p;
+    var ColorPattern, p;
 
-    ColorPattren = function () {
-        throw new Error('ColorGeom is a static Class, cannot be instanced.');
+    ColorPattern = function () {
+        throw new Error('ColorPattern is a static Class, cannot be instanced.');
     };
-    p = ColorPattren;
+    p = ColorPattern;
 
     // public properties
     p.GRASS_GREEN = 0xCCFF00;
@@ -2364,5 +2364,5 @@
         return "[ColorPattern]";
     };
 
-    obelisk.ColorPattern = ColorPattren;
+    obelisk.ColorPattern = ColorPattern;
 }(obelisk));
