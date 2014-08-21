@@ -52,8 +52,24 @@ var cube = new obelisk.Cube(dimension, color, true);
 // render cube primitive into view
 pixelView.renderObject(cube);
 ```
-For more details, check the tutorial part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube) or [try the code yourself](http://jsfiddle.net/nosir/ygWEW/)
+For more details, check the tutorial [part 1](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube): To build the first cube, or [try the code yourself](http://jsfiddle.net/nosir/ygWEW/)
 
+## Tutorials
+Step by step:
+- Part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
+- Part 2: [Coordinate system](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-2%3A-Coordinate-system)
+- Part 3: [Primitives](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-3%3A-Primitives)
+- Part 4: [Color](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-4%3A-Color)
+- Part 5: [Dimension](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-5%3A-Dimension)
+
+Sample code for building all primitives:
+- Cube: http://jsfiddle.net/nosir/ygWEW/
+- Pyramid : http://jsfiddle.net/nosir/ZVURu/
+- Brick: http://jsfiddle.net/nosir/6MuVr/
+- SideX, SideY: http://jsfiddle.net/nosir/bLsew/
+- SlopeNorth, SlopeEast, SlopeSouth, SlopeEast: http://jsfiddle.net/nosir/28B9G/
+
+## Advanced Usage
 ### Node.js
 
 Also you can use it in your Node.js canvas project
@@ -98,21 +114,6 @@ var obelisk = require('obelisk.js');
 console.log(obelisk.Point)
 // > function Point() { }
 ```
-
-## Tutorials
-Step by step:
-- Part 1: [To build the first cube](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-1%3A-To-build-the-first-cube)
-- Part 2: [Coordinate system](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-2%3A-Coordinate-system)
-- Part 3: [Primitives](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-3%3A-Primitives)
-- Part 4: [Color](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-4%3A-Color)
-- Part 5: [Dimension](https://github.com/nosir/obelisk.js/wiki/Tutorial-Part-5%3A-Dimension)
-
-Sample code for building all primitives:
-- Cube: http://jsfiddle.net/nosir/ygWEW/
-- Pyramid : http://jsfiddle.net/nosir/ZVURu/
-- Brick: http://jsfiddle.net/nosir/6MuVr/
-- SideX, SideY: http://jsfiddle.net/nosir/bLsew/
-- SlopeNorth, SlopeEast, SlopeSouth, SlopeEast: http://jsfiddle.net/nosir/28B9G/
 
 ## Get in Touch
 
