@@ -2,7 +2,7 @@
   "name": "obelisk.js",
   "version": "1.1.0",
   "description": "JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
-  "main": "./nodeshiv/obelisk-nodeshiv.js",
+  "main": "./nodeshim/obelisk-nodeshim.js",
   "browser": "./build/obelisk.js",
   "dependencies": {
     "grunt": "~0.4.1",
