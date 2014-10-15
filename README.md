@@ -24,6 +24,7 @@ User Contributed:
 - Conway's Game of Life: http://codepen.io/safx/full/Ewcym by [@safxdev](https://twitter.com/safxdev)
 - Node Server-side Image Rendering with [node-canvas](https://github.com/learnboost/node-canvas): [Github Project URL](https://github.com/pose/node-obelisk-example) by [@pose](https://github.com/pose)
 - Animations with Angular.js: [Github Project URL](https://github.com/Wildhoney/ngObelisk) by [@Wildhoney](https://github.com/Wildhoney)
+- Perlin Noise Map: http://codepen.io/slobaum/pen/zhmFL by [@slobaum](https://twitter.com/slobaum)
 
 
 ## Getting started
