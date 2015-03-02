@@ -11,7 +11,7 @@ Also you should know obelisk.js is not for vector isometric graphics drawing. In
 ## Showcase
 
 Origin:
-- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (WebKit browser only - Chrome, Safari)
+- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (Safari only)
 - Input Text Rendering: http://codepen.io/nosir/details/IxBJn
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 - Cube Generator: http://codepen.io/nosir/details/ganrh

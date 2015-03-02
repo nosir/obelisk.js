@@ -985,7 +985,7 @@
             if (canvas instanceof jQuery) {
                 canvas = canvas.get(0);
             }
-        } catch (e) {
+        } catch (ignore) {
         }
 
         this.canvas = canvas;
