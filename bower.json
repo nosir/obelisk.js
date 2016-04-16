@@ -2,10 +2,10 @@
     "name":"obelisk.js",
     "homepage":"https://github.com/nosir/obelisk.js",
     "authors":[
-        "max huang risonhuang@gmail.com"
+        "Max Huang risonhuang@gmail.com"
     ],
-    "description":"JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
-    "main":"build/obelisk.min.js",
+    "description":"JavaScript Library for Building Pixel Isometric Element with HTML5 Canvas",
+    "main":"build/obelisk.js",
     "keywords":[
         "javascript",
         "canvas",
@@ -14,7 +14,8 @@
         "game",
         "graphic",
         "art",
-        "2.5D"
+        "2.5D",
+        "3D"
     ],
     "license":"MIT",
     "ignore":[

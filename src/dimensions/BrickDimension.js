@@ -1,38 +1,34 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * BrickDimension
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var AbstractDimension = require('./AbstractDimension');
 
-    var BrickDimension, p;
-    BrickDimension = function (xAxis, yAxis) {
-        this.initialize(xAxis, yAxis);
-    };
-    p = BrickDimension.prototype = new obelisk.AbstractDimension();
+var BrickDimension, p;
+BrickDimension = function (xAxis, yAxis) {
+    this.initialize(xAxis, yAxis);
+};
+p = BrickDimension.prototype = new AbstractDimension();
 
-    // constructor
-    p.initialize = function (xAxis, yAxis) {
-        this.xAxis = xAxis || 30;
-        this.yAxis = yAxis || 30;
+// constructor
+p.initialize = function (xAxis, yAxis) {
+    this.xAxis = xAxis || 30;
+    this.yAxis = yAxis || 30;
 
-        if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
-            throw new Error("x,yAxis must be even number");
-        }
+    if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
+        throw new Error("x,yAxis must be even number");
+    }
 
-        // xAxis || yAxis = 4 floodFill could not be applied
-        if (this.xAxis <= 4 || this.yAxis <= 4) {
-            throw new Error("dimension is too small");
-        }
+    // xAxis || yAxis = 4 floodFill could not be applied
+    if (this.xAxis <= 4 || this.yAxis <= 4) {
+        throw new Error("dimension is too small");
+    }
 
-        return this;
-    };
+    return this;
+};
 
-    p.toString = function () {
-        return "[BrickDimension]";
-    };
+p.toString = function () {
+    return "[BrickDimension]";
+};
 
-    obelisk.BrickDimension = BrickDimension;
-}(obelisk));
+module.exports = BrickDimension;

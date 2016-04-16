@@ -1,50 +1,42 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * AbstractDimension
+'use strict';
+
+var AbstractDimension, p;
+AbstractDimension = function () {
+    this.initialize();
+};
+p = AbstractDimension.prototype;
+
+// public properties
+/**
+ * The x Axis dimensions in 22.6 degrees coordinate
  */
+p.xAxis = null;
 
-(function (obelisk) {
-    "use strict";
+/**
+ * The y Axis dimensions in 22.6 degrees coordinate
+ */
+p.yAxis = null;
 
-    var AbstractDimension, p;
-    AbstractDimension = function () {
-        this.initialize();
-    };
-    p = AbstractDimension.prototype;
+/**
+ * The z Axis dimensions in 22.6 degrees coordinate
+ */
+p.zAxis = null;
 
-    // public properties
-    /**
-     * The x Axis dimensions in 22.6 degrees coordinate
-     */
-    p.xAxis = null;
+/**
+ * Pyramid tall mode
+ */
+p.tall = false;
 
-    /**
-     * The y Axis dimensions in 22.6 degrees coordinate
-     */
-    p.yAxis = null;
+// constructor
+p.initialize = function () {
+    return this;
+};
 
-    /**
-     * The z Axis dimensions in 22.6 degrees coordinate
-     */
-    p.zAxis = null;
+// public methods
+p.toString = function () {
+    return "[AbstractDimension]";
+};
 
-    /**
-     * Pyramid tall mode
-     */
-    p.tall = false;
-
-    // constructor
-    p.initialize = function () {
-        return this;
-    };
-
-    // public methods
-    p.toString = function () {
-        return "[AbstractDimension]";
-    };
-
-    // private methods
-
-    obelisk.AbstractDimension = AbstractDimension;
-}(obelisk));
+module.exports = AbstractDimension;

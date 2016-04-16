@@ -1,46 +1,42 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * PyramidColor
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var AbstractColor = require('./AbstractColor');
+var ColorGeom = require('../utils/ColorGeom');
 
-    var PyramidColor, p;
-    PyramidColor = function (border, borderHighlight, left, right) {
-        this.initialize(border, borderHighlight, left, right);
-    };
-    p = PyramidColor.prototype = new obelisk.AbstractColor();
+var PyramidColor, p;
+PyramidColor = function (border, borderHighlight, left, right) {
+    this.initialize(border, borderHighlight, left, right);
+};
+p = PyramidColor.prototype = new AbstractColor();
 
-    // public properties
-    p.BRIGHTNESS_GAIN = -20;
+// public properties
+p.BRIGHTNESS_GAIN = -20;
 
-    // constructor
-    p.initialize = function (border, borderHighlight, left, right) {
-        this.border = obelisk.ColorGeom.get32(border === undefined ? 0x949698 : border);
-        this.borderHighlight = obelisk.ColorGeom.get32(borderHighlight === undefined ? 0xFFFFFF : borderHighlight);
-        this.left = obelisk.ColorGeom.get32(left === undefined ? 0xE6E8E9 : left);
-        this.right = obelisk.ColorGeom.get32(right === undefined ? 0xEEEFF0 : right);
-        return this;
-    };
+// constructor
+p.initialize = function (border, borderHighlight, left, right) {
+    this.border = ColorGeom.get32(border === undefined ? 0x949698 : border);
+    this.borderHighlight = ColorGeom.get32(borderHighlight === undefined ? 0xFFFFFF : borderHighlight);
+    this.left = ColorGeom.get32(left === undefined ? 0xE6E8E9 : left);
+    this.right = ColorGeom.get32(right === undefined ? 0xEEEFF0 : right);
 
-    // public methods
-    p.getByRightColor = function (right) {
-        return new PyramidColor(
-            obelisk.ColorGeom.applyBrightness(right, this.BRIGHTNESS_GAIN * 4),
-            //apply hightlight
-            obelisk.ColorGeom.applyBrightness(right, 0, true),
-            obelisk.ColorGeom.applyBrightness(right, this.BRIGHTNESS_GAIN),
-            right
-        );
-    };
+    return this;
+};
 
-    p.toString = function () {
-        return "[PyramidColor]";
-    };
+// public methods
+p.getByRightColor = function (right) {
+    return new PyramidColor(
+        ColorGeom.applyBrightness(right, this.BRIGHTNESS_GAIN * 4),
+        //apply hightlight
+        ColorGeom.applyBrightness(right, 0, true),
+        ColorGeom.applyBrightness(right, this.BRIGHTNESS_GAIN),
+        right
+    );
+};
 
-    // private methods
+p.toString = function () {
+    return "[PyramidColor]";
+};
 
-    obelisk.PyramidColor = PyramidColor;
-}(obelisk));
+module.exports = PyramidColor;

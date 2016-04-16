@@ -1,38 +1,34 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * SideXDimension
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var AbstractDimension = require('./AbstractDimension');
 
-    var SideXDimension, p;
-    SideXDimension = function (xAxis, zAxis) {
-        this.initialize(xAxis, zAxis);
-    };
-    p = SideXDimension.prototype = new obelisk.AbstractDimension();
+var SideXDimension, p;
+SideXDimension = function (xAxis, zAxis) {
+    this.initialize(xAxis, zAxis);
+};
+p = SideXDimension.prototype = new AbstractDimension();
 
-    // constructor
-    p.initialize = function (xAxis, zAxis) {
-        this.xAxis = xAxis || 30;
-        this.zAxis = zAxis || 30;
+// constructor
+p.initialize = function (xAxis, zAxis) {
+    this.xAxis = xAxis || 30;
+    this.zAxis = zAxis || 30;
 
-        if (this.xAxis % 2 === 1) {
-            throw new Error("xAxis must be even number");
-        }
+    if (this.xAxis % 2 === 1) {
+        throw new Error("xAxis must be even number");
+    }
 
-        // xAxis || zAxis = 4 floodFill could not be applied
-        if (this.xAxis <= 4 || this.zAxis <= 2) {
-            throw new Error("dimension is too small");
-        }
+    // xAxis || zAxis = 4 floodFill could not be applied
+    if (this.xAxis <= 4 || this.zAxis <= 2) {
+        throw new Error("dimension is too small");
+    }
 
-        return this;
-    };
+    return this;
+};
 
-    p.toString = function () {
-        return "[SideXDimension]";
-    };
+p.toString = function () {
+    return "[SideXDimension]";
+};
 
-    obelisk.SideXDimension = SideXDimension;
-}(obelisk));
+module.exports = SideXDimension;

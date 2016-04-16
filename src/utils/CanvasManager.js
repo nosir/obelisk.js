@@ -1,34 +1,29 @@
-/*global obelisk:true, document:true*/
+/*jslint node: true*/
+/*global document:true*/
 
-/*
- * CanvasManager
- */
+'use strict';
 
-(function (obelisk, document) {
-    "use strict";
+var CanvasManager, p;
+CanvasManager = function () {
+    throw new Error('CanvasManager is a static Class, cannot be instanced.');
+};
+p = CanvasManager;
 
-    var CanvasManager, p;
-    CanvasManager = function () {
-        throw new Error('CanvasManager is a static Class, cannot be instanced.');
-    };
-    p = CanvasManager;
+// public properties
+p.defaultCanvas = null;
 
-    // public properties
-    p.defaultCanvas = null;
+// public methods
+p.getDefaultCanvas = function () {
+    p.defaultCanvas = p.defaultCanvas || document.createElement('canvas');
+    return p.defaultCanvas;
+};
 
-    // public methods
-    p.getDefaultCanvas = function () {
-        p.defaultCanvas = p.defaultCanvas || document.createElement('canvas');
-        return p.defaultCanvas;
-    };
+p.getNewCanvas = function () {
+    return document.createElement('canvas');
+};
 
-    p.getNewCanvas = function () {
-        return document.createElement('canvas');
-    };
+p.toString = function () {
+    return "[CanvasManager]";
+};
 
-    p.toString = function () {
-        return "[CanvasManager]";
-    };
-
-    obelisk.CanvasManager = CanvasManager;
-}(obelisk, document));
+module.exports = CanvasManager;

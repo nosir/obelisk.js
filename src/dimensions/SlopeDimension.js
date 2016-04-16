@@ -1,37 +1,33 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * SlopeDimension
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var AbstractDimension = require('./AbstractDimension');
 
-    var SlopeDimension, p;
-    SlopeDimension = function (xAxis, yAxis) {
-        this.initialize(xAxis, yAxis);
-    };
-    p = SlopeDimension.prototype = new obelisk.AbstractDimension();
+var SlopeDimension, p;
+SlopeDimension = function (xAxis, yAxis) {
+    this.initialize(xAxis, yAxis);
+};
+p = SlopeDimension.prototype = new AbstractDimension();
 
-    // constructor
-    p.initialize = function (xAxis, yAxis) {
-        this.xAxis = xAxis || 30;
-        this.yAxis = yAxis || 30;
+// constructor
+p.initialize = function (xAxis, yAxis) {
+    this.xAxis = xAxis || 30;
+    this.yAxis = yAxis || 30;
 
-        if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
-            throw new Error("xAxis and yAxis must be even number");
-        }
+    if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
+        throw new Error("xAxis and yAxis must be even number");
+    }
 
-        if (this.xAxis <= 4 || this.yAxis <= 4) {
-            throw new Error("dimension is too small");
-        }
+    if (this.xAxis <= 4 || this.yAxis <= 4) {
+        throw new Error("dimension is too small");
+    }
 
-        return this;
-    };
+    return this;
+};
 
-    p.toString = function () {
-        return "[SlopeDimension]";
-    };
+p.toString = function () {
+    return "[SlopeDimension]";
+};
 
-    obelisk.SlopeDimension = SlopeDimension;
-}(obelisk));
+module.exports = SlopeDimension;

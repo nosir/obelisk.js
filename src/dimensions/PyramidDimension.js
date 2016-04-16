@@ -1,38 +1,34 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * PyramidDimension
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var AbstractDimension = require('./AbstractDimension');
 
-    var PyramidDimension, p;
-    PyramidDimension = function (axis, tall) {
-        this.initialize(axis, tall);
-    };
-    p = PyramidDimension.prototype = new obelisk.AbstractDimension();
+var PyramidDimension, p;
+PyramidDimension = function (axis, tall) {
+    this.initialize(axis, tall);
+};
+p = PyramidDimension.prototype = new AbstractDimension();
 
-    // constructor
-    p.initialize = function (axis, tall) {
-        this.xAxis = axis || 30;
-        this.yAxis = axis || 30;
-        this.tall = tall || false;
+// constructor
+p.initialize = function (axis, tall) {
+    this.xAxis = axis || 30;
+    this.yAxis = axis || 30;
+    this.tall = tall || false;
 
-        if (this.xAxis % 2 === 1) {
-            throw new Error("axis must be even number");
-        }
+    if (this.xAxis % 2 === 1) {
+        throw new Error("axis must be even number");
+    }
 
-        if (this.xAxis <= 4) {
-            throw new Error("dimension is too small");
-        }
+    if (this.xAxis <= 4) {
+        throw new Error("dimension is too small");
+    }
 
-        return this;
-    };
+    return this;
+};
 
-    p.toString = function () {
-        return "[PyramidDimension]";
-    };
+p.toString = function () {
+    return "[PyramidDimension]";
+};
 
-    obelisk.PyramidDimension = PyramidDimension;
-}(obelisk));
+module.exports = PyramidDimension;

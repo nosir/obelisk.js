@@ -1,34 +1,7 @@
 {
   "name": "obelisk.js",
-  "version": "1.1.0",
-  "description": "JavaScript Engine for Building Pixel Isometric Element with HTML5 Canvas",
-  "main": "./nodeshim/obelisk-nodeshim.js",
-  "browser": "./build/obelisk.js",
-  "dependencies": {
-    "grunt": "~0.4.1",
-    "browserify-shim": "^3.4.1"
-  },
-  "devDependencies": {
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-uglify": "*",
-    "browserify": "^3.41.0"
-  },
-  "scripts": {
-    "test": "grunt test",
-    "browserify-test": "browserify . -r ./build/obelisk.js:obelisk.js > build/obelisk.brfy.js",
-    "start": ""
-  },
-  "browserify": {
-    "transform": [ "browserify-shim" ]
-  },
-  "browserify-shim": {
-    "./build/obelisk.js": "obelisk"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rison/obelisk.js.git"
-  },
+  "title": "obelisk.js",
+  "description": "JavaScript Library for Building Pixel Isometric Element with HTML5 Canvas",
   "keywords": [
     "obelisk",
     "javascript",
@@ -40,8 +13,34 @@
     "art",
     "2.5D"
   ],
-  "author": "max huang risonhuang@gmail.com",
+  "version": "1.2.0",
+  "author": {
+    "name": "Max Huang",
+    "url": "http://github.com/nosir",
+    "email": "risonhuang@gmail.com"
+  },
   "license": "MIT",
-  "readmeFilename": "README.md",
-  "gitHead": "23cba75da3465a1d207a9ffdfb20050bf9de2fdc"
+  "bugs": "https://github.com/nosir/obelisk.js/issues",
+  "homepage": "https://github.com/nosir/obelisk.js",
+  "docs": "https://github.com/nosir/obelisk.js/blob/master/README.md",
+  "dependencies": {},
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "errorify": "^0.3.1",
+    "glob": "^7.0.3",
+    "gulp": "^3.9.1",
+    "gulp-header": "^1.7.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rimraf": "^0.2.0",
+    "gulp-uglify": "^1.5.3",
+    "require-dir": "^0.3.0",
+    "run-sequence": "^1.1.5",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.7.0"
+  },
+  "main":"src/obelisk.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rison/obelisk.js.git"
+  }
 }

@@ -2,17 +2,20 @@
 
 Obelisk.js is a JavaScript library for building isometric pixel objects.
 
-With the simple and flexible API provided by it, you can easily add isometric pixel element like brick, cube, pyramid, slope onto HTML5 canvas. Obelisk.js strictly follows the pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees.
+With the simple and flexible API provided, you can easily add isometric pixel elements like brick, cube, pyramid and slope in HTML5 canvas. Obelisk.js strictly follows pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees.
 
-Also you should know obelisk.js is not for vector isometric graphics drawing. In fact it is not using any canvas graphic drawing API, instead, it manipulates all the things in pixel level to obtain precise pixel arrangement. Just try it out to pixelate something. Have fun.
+Also you should know obelisk.js is not for vector isometric graphics drawing and rendering. Internally it does not use any canvas graphic drawing API, instead, it manipulates all the rendering in pixel level to obtain precise pixel arrangement. Just try it out to pixelate something. Have fun.
 
 <img width="112" height="109" src="http://nosir.github.io/obelisk.js/images/logo.png"/>
+
+## 1.2.0 Release
+The newest version is written by CommonJS style, which means you can easily use it in browserify project. [See details here](#Development)
 
 ## Showcase
 
 Origin:
-- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (Safari only)
 - Input Text Rendering: http://codepen.io/nosir/details/IxBJn
+- GIF Animation Rendering: http://codepen.io/nosir/details/mdiHe (Safari only)
 - Pixel Isometirc Flappy Bird: http://codepen.io/nosir/details/rzaLA
 - Cube Generator: http://codepen.io/nosir/details/ganrh
 
@@ -70,7 +73,37 @@ Sample code for building all primitives:
 - SideX, SideY: http://jsfiddle.net/nosir/bLsew/
 - SlopeNorth, SlopeEast, SlopeSouth, SlopeEast: http://jsfiddle.net/nosir/28B9G/
 
-## Advanced Usage
+## Development (Browser)
+### Browserify
+
+obelisk.js can be used from [browserify](https://github.com/substack/node-browserify) project. Simply:
+
+```sh
+$ npm install obelisk.js
+```
+
+```js
+var obelisk = require('obelisk.js');
+```
+
+### Want to build the project locally?
+
+```
+$ git clone https://github.com/nosir/obelisk.js.git
+$ npm install
+```
+
+Build
+```
+$ gulp build
+```
+
+Develop
+```
+$ gulp browserify:watch
+```
+
+## Advanced Usage (Node.js)
 ### Node.js
 
 Also you can use it in your Node.js canvas project
@@ -106,16 +139,6 @@ canvas.createPNGStream().pipe(fs.createWriteStream('./figure.png'));
 
 For more details, check the [Node.js Canvas example](https://github.com/pose/node-obelisk-example).
 
-### Browserify
-
-obelisk.js can also be used from a [browserify](https://github.com/substack/node-browserify) project. Simply:
-
-```js
-var obelisk = require('obelisk.js');
-console.log(obelisk.Point)
-// > function Point() { }
-```
-
 ## Get in Touch
 
 - Build any cool stuff? Please feel free to add it here: [User Contributed Showcase](https://github.com/nosir/obelisk.js/wiki/User-Contributed-Showcase)
@@ -124,7 +147,7 @@ console.log(obelisk.Point)
 
 ## Changelog
 
-See details in the [release notes](https://github.com/nosir/obelisk.js/releases).
+See details here: [release notes](https://github.com/nosir/obelisk.js/releases).
 
 ## References
 Pixel art is a form of digital art, where images are edited and displayed on the pixel level. The isometric projection is commonly seen in games to provide a 3D view without using any real 3D processing.

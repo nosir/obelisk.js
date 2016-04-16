@@ -1,51 +1,46 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * Point3D
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var Point = require('./Point');
 
-    var Point3D, p;
-    Point3D = function (x, y, z) {
-        this.initialize(x, y, z);
-    };
-    p = Point3D.prototype;
+var Point3D, p;
+Point3D = function (x, y, z) {
+    this.initialize(x, y, z);
+};
+p = Point3D.prototype;
 
-    // public properties
-    p.x = 0;
-    p.y = 0;
-    p.z = 0;
+// public properties
+p.x = 0;
+p.y = 0;
+p.z = 0;
 
-    // constructor
-    p.initialize = function (x, y, z) {
-        this.x = (x === undefined ? 0 : x);
-        this.y = (y === undefined ? 0 : y);
-        this.z = (z === undefined ? 0 : z);
-        return this;
-    };
+// constructor
+p.initialize = function (x, y, z) {
+    this.x = (x === undefined ? 0 : x);
+    this.y = (y === undefined ? 0 : y);
+    this.z = (z === undefined ? 0 : z);
 
-    // public methods
-    p.toGlobalCoordinates = function (offset) {
-        var p2D = new obelisk.Point(
-            this.x - this.y,
-            Math.floor(this.x / 2 + this.y / 2) - this.z
-        );
+    return this;
+};
 
-        if (offset !== undefined) {
-            p2D.x = p2D.x + offset.x;
-            p2D.y = p2D.y + offset.y;
-        }
+// public methods
+p.toGlobalCoordinates = function (offset) {
+    var p2D = new Point(
+        this.x - this.y,
+        Math.floor(this.x / 2 + this.y / 2) - this.z
+    );
 
-        return p2D;
-    };
+    if (offset !== undefined) {
+        p2D.x = p2D.x + offset.x;
+        p2D.y = p2D.y + offset.y;
+    }
 
-    p.toString = function () {
-        return "[Point3D x : " + this.x + ", y : " + this.y + ", z: " + this.z + "]";
-    };
+    return p2D;
+};
 
-    // private methods
+p.toString = function () {
+    return "[Point3D x : " + this.x + ", y : " + this.y + ", z: " + this.z + "]";
+};
 
-    obelisk.Point3D = Point3D;
-}(obelisk));
+module.exports = Point3D;

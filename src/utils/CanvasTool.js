@@ -1,34 +1,29 @@
-/*global obelisk:true*/
+/*jslint node: true*/
 
-/*
- * CanvasTool
- */
+'use strict';
 
-(function (obelisk) {
-    "use strict";
+var CanvasTool, p;
 
-    var CanvasTool, p;
+CanvasTool = function () {
+    throw new Error('CanvasTool is a static Class, cannot be instanced.');
+};
+p = CanvasTool;
 
-    CanvasTool = function () {
-        throw new Error('CanvasTool is a static Class, cannot be instanced.');
-    };
-    p = CanvasTool;
+// public methods
+p.getPixel = function (imageData, x, y) {
+    var data, index, r, g, b;
 
-    // public methods
-    p.getPixel = function (imageData, x, y) {
-        var data, index, r, g, b;
-        data = imageData.data;
-        index = (y * imageData.width + x) * 4;
-        r = data[index];
-        g = data[index + 1];
-        b = data[index + 2];
+    data = imageData.data;
+    index = (y * imageData.width + x) * 4;
+    r = data[index];
+    g = data[index + 1];
+    b = data[index + 2];
 
-        return ((r << 16) | (g << 8) | b);
-    };
+    return ((r << 16) | (g << 8) | b);
+};
 
-    p.toString = function () {
-        return "[CanvasTool]";
-    };
+p.toString = function () {
+    return "[CanvasTool]";
+};
 
-    obelisk.CanvasTool = CanvasTool;
-}(obelisk));
+module.exports = CanvasTool;
