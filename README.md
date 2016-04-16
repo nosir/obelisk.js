@@ -9,7 +9,7 @@ Also you should know obelisk.js is not for vector isometric graphics drawing and
 <img width="112" height="109" src="http://nosir.github.io/obelisk.js/images/logo.png"/>
 
 ## 1.2.0 Release
-The newest version is written by CommonJS style, which means you can easily use it in browserify project. [See details here](#Development)
+The newest version is written by CommonJS style, which means you can easily use it in browserify project. [See details here](#development-browser)
 
 ## Showcase
 
@@ -82,8 +82,12 @@ obelisk.js can be used from [browserify](https://github.com/substack/node-browse
 $ npm install obelisk.js
 ```
 
-```js
+In your JavaScript
+
+```javascript
 var obelisk = require('obelisk.js');
+
+// Now you can do the same as above
 ```
 
 ### Want to build the project locally?
