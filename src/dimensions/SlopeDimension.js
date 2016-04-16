@@ -16,18 +16,18 @@ p.initialize = function (xAxis, yAxis) {
     this.yAxis = yAxis || 30;
 
     if (this.xAxis % 2 === 1 || this.yAxis % 2 === 1) {
-        throw new Error("xAxis and yAxis must be even number");
+        throw new Error('xAxis and yAxis must be even number');
     }
 
     if (this.xAxis <= 4 || this.yAxis <= 4) {
-        throw new Error("dimension is too small");
+        throw new Error('dimension is too small');
     }
 
     return this;
 };
 
 p.toString = function () {
-    return "[SlopeDimension]";
+    return '[SlopeDimension]';
 };
 
 module.exports = SlopeDimension;

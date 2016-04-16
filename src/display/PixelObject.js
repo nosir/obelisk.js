@@ -18,7 +18,7 @@ p.canvas = null;
 // constructor
 p.initialize = function (primitive, point3D) {
     if (!primitive) {
-        throw new Error("Primitive is not defined");
+        throw new Error('Primitive is not defined');
     }
 
     var p3D = point3D || new Point3D();
@@ -33,7 +33,7 @@ p.initialize = function (primitive, point3D) {
 // public methods
 
 p.toString = function () {
-    return "[PixelObject]";
+    return '[PixelObject]';
 };
 
 // private methods

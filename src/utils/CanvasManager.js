@@ -23,7 +23,7 @@ p.getNewCanvas = function () {
 };
 
 p.toString = function () {
-    return "[CanvasManager]";
+    return '[CanvasManager]';
 };
 
 module.exports = CanvasManager;

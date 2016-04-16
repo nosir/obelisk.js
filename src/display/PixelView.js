@@ -20,7 +20,7 @@ p.point = null;
 // constructor
 p.initialize = function (canvas, point) {
     if (!canvas) {
-        throw new Error("Canvas is not defined");
+        throw new Error('Canvas is not defined');
     }
 
     try {
@@ -48,7 +48,7 @@ p.clear = function () {
 };
 
 p.toString = function () {
-    return "[PixelView]";
+    return '[PixelView]';
 };
 
 module.exports = PixelView;

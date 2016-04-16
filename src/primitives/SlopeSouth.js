@@ -100,7 +100,7 @@ p.build = function () {
 
 // public methods
 p.toString = function () {
-    return "[SlopeSouth]";
+    return '[SlopeSouth]';
 };
 
 module.exports = SlopeSouth;

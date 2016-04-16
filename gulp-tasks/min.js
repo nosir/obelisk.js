@@ -4,7 +4,7 @@ var rename = require('gulp-rename');
 var uglify = require('gulp-uglify');
 var header = require('gulp-header');
 var runSequence = require('run-sequence');
-var path = require("path");
+var path = require('path');
 var fs = require('fs');
 
 var paths = {

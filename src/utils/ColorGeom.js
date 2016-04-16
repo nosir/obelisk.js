@@ -44,7 +44,7 @@ p.applyBrightness = function (color, brightness, highlight) {
 };
 
 p.toString = function () {
-    return "[ColorGeom]";
+    return '[ColorGeom]';
 };
 
 module.exports = ColorGeom;

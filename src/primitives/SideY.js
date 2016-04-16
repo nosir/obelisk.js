@@ -80,7 +80,7 @@ p.build = function () {
 
 // public methods
 p.toString = function () {
-    return "[SideY]";
+    return '[SideY]';
 };
 
 module.exports = SideY;

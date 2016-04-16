@@ -36,7 +36,7 @@ p.getByRightColor = function (right) {
 };
 
 p.toString = function () {
-    return "[PyramidColor]";
+    return '[PyramidColor]';
 };
 
 module.exports = PyramidColor;

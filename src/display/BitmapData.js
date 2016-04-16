@@ -18,7 +18,7 @@ p.context = null;
 // constructor
 p.initialize = function (w, h, useDefaultCanvas) {
     if (w === undefined || h === undefined) {
-        throw new Error("BitmapData width or height is missing");
+        throw new Error('BitmapData width or height is missing');
     }
 
     if (useDefaultCanvas) {
@@ -80,7 +80,7 @@ p.floodFill = function (posX, posY, color) {
 
     // first point check fail
     if (!this.checkPixelAvailable(x, y)) {
-        throw new Error("Start point for flood fill is already filled");
+        throw new Error('Start point for flood fill is already filled');
     }
 
     // left side flood fill
@@ -312,7 +312,7 @@ p.floodFill = function (posX, posY, color) {
 };
 
 p.toString = function () {
-    return "[BitmapData]";
+    return '[BitmapData]';
 };
 
 module.exports = BitmapData;

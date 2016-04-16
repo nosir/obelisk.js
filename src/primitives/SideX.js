@@ -1,6 +1,6 @@
 /*jslint node: true*/
 
-"use strict";
+'use strict';
 
 var SideXDimension = require('../dimensions/SideXDimension');
 var SideColor = require('../colors/SideColor');
@@ -80,7 +80,7 @@ p.build = function () {
 
 // public methods
 p.toString = function () {
-    return "[SideX]";
+    return '[SideX]';
 };
 
 module.exports = SideX;

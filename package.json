@@ -42,5 +42,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/rison/obelisk.js.git"
+  },
+  "scripts": {
+    "test": "gulp build"
   }
 }

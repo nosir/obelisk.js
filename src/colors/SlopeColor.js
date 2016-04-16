@@ -46,7 +46,7 @@ p.getByHorizontalColor = function (horizontal) {
 };
 
 p.toString = function () {
-    return "[SlopeColor]";
+    return '[SlopeColor]';
 };
 
 module.exports = SlopeColor;
