@@ -36,7 +36,7 @@ p.initialize = function () {
 
 // public methods
 p.toString = function () {
-    return "[AbstractDimension]";
+    return '[AbstractDimension]';
 };
 
 module.exports = AbstractDimension;

@@ -36,7 +36,7 @@ p.getRandomComfortableColor = function () {
 };
 
 p.toString = function () {
-    return "[ColorPattern]";
+    return '[ColorPattern]';
 };
 
 module.exports = ColorPattern;

@@ -65,7 +65,7 @@ p.renderBitmapDataForCanvas = function () {
 };
 
 p.build = function () {
-    var brick, sideX, sideY, po_brick, po_x, po_y, ctx, bmd, offsetX, offsetY,
+    var brick, sideX, sideY, poBrick, poX, poY, ctx, bmd, offsetX, offsetY,
         i, j, k;
     // horizontal layer
     brick = new Brick(
@@ -88,14 +88,14 @@ p.build = function () {
         this.border
     );
 
-    po_brick = new PixelObject(brick);
-    po_x = new PixelObject(sideX);
-    po_y = new PixelObject(sideY);
+    poBrick = new PixelObject(brick);
+    poX = new PixelObject(sideX);
+    poY = new PixelObject(sideY);
 
     ctx = this.bitmapData.context;
-    ctx.drawImage(po_brick.canvas, po_brick.x + this.dimension.yAxis - 2, po_brick.y);
-    ctx.drawImage(po_x.canvas, po_x.x, po_x.y + this.dimension.zAxis + this.dimension.yAxis / 2 - 1);
-    ctx.drawImage(po_y.canvas, po_y.x + this.w - 2, po_x.y + this.dimension.zAxis + this.dimension.xAxis / 2 - 1);
+    ctx.drawImage(poBrick.canvas, poBrick.x + this.dimension.yAxis - 2, poBrick.y);
+    ctx.drawImage(poX.canvas, poX.x, poX.y + this.dimension.zAxis + this.dimension.yAxis / 2 - 1);
+    ctx.drawImage(poY.canvas, poY.x + this.w - 2, poX.y + this.dimension.zAxis + this.dimension.xAxis / 2 - 1);
 
     // highlight & highlight fix
     bmd = new BitmapData(this.w, this.h);
@@ -128,7 +128,7 @@ p.build = function () {
 
 // public methods
 p.toString = function () {
-    return "[Cube]";
+    return '[Cube]';
 };
 
 module.exports = Cube;

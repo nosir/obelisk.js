@@ -65,7 +65,7 @@ p.initialize = function (a, b, c, d, tx, ty) {
 
 // public methods
 p.toString = function () {
-    return "[Matrix]";
+    return '[Matrix]';
 };
 
 module.exports = Matrix;

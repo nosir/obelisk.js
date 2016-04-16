@@ -62,7 +62,7 @@ p.initialize = function () {
 
 // public methods
 p.toString = function () {
-    return "[AbstractPrimitive]";
+    return '[AbstractPrimitive]';
 };
 
 module.exports = AbstractPrimitive;

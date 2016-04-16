@@ -23,7 +23,7 @@ p.getPixel = function (imageData, x, y) {
 };
 
 p.toString = function () {
-    return "[CanvasTool]";
+    return '[CanvasTool]';
 };
 
 module.exports = CanvasTool;

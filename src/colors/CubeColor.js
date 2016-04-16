@@ -21,6 +21,7 @@ p.initialize = function (border, borderHighlight, left, right, horizontal) {
     this.left = ColorGeom.get32(left === undefined ? 0xC9CFD0 : left);
     this.right = ColorGeom.get32(right === undefined ? 0xE3E3E3 : right);
     this.horizontal = ColorGeom.get32(horizontal === undefined ? 0xEEEFF0 : horizontal);
+
     return this;
 };
 
@@ -37,7 +38,7 @@ p.getByHorizontalColor = function (horizontal) {
 };
 
 p.toString = function () {
-    return "[CubeColor]";
+    return '[CubeColor]';
 };
 
 module.exports = CubeColor;

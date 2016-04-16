@@ -57,7 +57,7 @@ p.initialize = function () {
 
 // public methods
 p.toString = function () {
-    return "[AbstractColor]";
+    return '[AbstractColor]';
 };
 
 module.exports = AbstractColor;

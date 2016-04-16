@@ -40,7 +40,7 @@ p.toGlobalCoordinates = function (offset) {
 };
 
 p.toString = function () {
-    return "[Point3D x : " + this.x + ", y : " + this.y + ", z: " + this.z + "]";
+    return '[Point3D x : ' + this.x + ', y : ' + this.y + ', z: ' + this.z + ']';
 };
 
 module.exports = Point3D;

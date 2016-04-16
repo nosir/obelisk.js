@@ -17,18 +17,18 @@ p.initialize = function (axis, tall) {
     this.tall = tall || false;
 
     if (this.xAxis % 2 === 1) {
-        throw new Error("axis must be even number");
+        throw new Error('axis must be even number');
     }
 
     if (this.xAxis <= 4) {
-        throw new Error("dimension is too small");
+        throw new Error('dimension is too small');
     }
 
     return this;
 };
 
 p.toString = function () {
-    return "[PyramidDimension]";
+    return '[PyramidDimension]';
 };
 
 module.exports = PyramidDimension;

@@ -31,7 +31,7 @@ p.getByInnerColor = function (inner) {
 };
 
 p.toString = function () {
-    return "[SideColor]";
+    return '[SideColor]';
 };
 
 module.exports = SideColor;

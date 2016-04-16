@@ -5,7 +5,7 @@ var watchify = require('watchify');
 var errorify = require('errorify');
 var browserify = require('browserify');
 var gulp = require('gulp');
-var path = require("path");
+var path = require('path');
 var source = require('vinyl-source-stream');
 var runSequence = require('run-sequence');
 

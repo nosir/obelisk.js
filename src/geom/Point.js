@@ -22,7 +22,7 @@ p.initialize = function (x, y) {
 
 // public methods
 p.toString = function () {
-    return "[Point x : " + this.x + ", y : " + this.y + "]";
+    return '[Point x : ' + this.x + ', y : ' + this.y + ']';
 };
 
 module.exports = Point;

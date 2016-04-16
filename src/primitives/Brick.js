@@ -84,7 +84,7 @@ p.build = function () {
 
 // public methods
 p.toString = function () {
-    return "[Brick]";
+    return '[Brick]';
 };
 
 module.exports = Brick;

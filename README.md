@@ -1,5 +1,9 @@
 # Obelisk.js
 
+[![Travis](https://img.shields.io/travis/rust-lang/obelisk.js.svg?maxAge=2592000)](https://travis-ci.org/nosir/obelisk.js)
+[![GitHub release](https://img.shields.io/github/release/nosir/obelisk.js.svg?maxAge=2592000)](https://github.com/nosir/obelisk.js)
+[![Codacy](https://img.shields.io/codacy/dea18e66031141a39d4549b170343aa9.svg?maxAge=2592000)](https://www.codacy.com/app/risonhuang/obelisk-js/dashboard)
+
 Obelisk.js is a JavaScript library for building isometric pixel objects.
 
 With the simple and flexible API provided, you can easily add isometric pixel elements like brick, cube, pyramid and slope in HTML5 canvas. Obelisk.js strictly follows pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees.
