@@ -31,7 +31,12 @@ p.initialize = function (canvas, point) {
     }
 
     this.canvas = canvas;
+
     this.context = this.canvas.getContext('2d');
+    this.context.mozImageSmoothingEnabled = false;
+    this.context.msImageSmoothingEnabled = false;
+    this.context.imageSmoothingEnabled = false;
+
     this.point = point || new Point(0, 0);
 
     return this;

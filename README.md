@@ -2,9 +2,9 @@
 
 [![Travis](https://img.shields.io/travis/nosir/obelisk.js.svg?maxAge=2592000)](https://travis-ci.org/nosir/obelisk.js)
 [![GitHub release](https://img.shields.io/github/release/nosir/obelisk.js.svg?maxAge=2592000)](https://github.com/nosir/obelisk.js)
-[![Codacy](https://img.shields.io/codacy/dea18e66031141a39d4549b170343aa9.svg?maxAge=2592000)](https://www.codacy.com/app/risonhuang/obelisk-js/dashboard)
+[![Codacy](https://img.shields.io/codacy/dea18e66031141a39d4549b170343aa9.svg?maxAge=2592000)](https://www.codacy.com/app/nosir/obelisk-js/dashboard)
 
-Obelisk.js is a JavaScript library for building isometric pixel objects.
+obelisk.js is a JavaScript library for building isometric pixel objects.
 
 With the simple and flexible API provided, you can easily add isometric pixel elements like brick, cube, pyramid and slope in HTML5 canvas. Obelisk.js strictly follows pixel neat pattern: lines with 1:2 pixel dot arrangement, leading to an angle of 22.6 degrees.
 
@@ -73,6 +73,7 @@ Step by step:
 Sample code for building all primitives:
 - Cube: http://jsfiddle.net/nosir/ygWEW/
 - Pyramid : http://jsfiddle.net/nosir/ZVURu/
+- LineX, LineY, LineZ: http://jsfiddle.net/nosir/gnbqwr2L/
 - Brick: http://jsfiddle.net/nosir/6MuVr/
 - SideX, SideY: http://jsfiddle.net/nosir/bLsew/
 - SlopeNorth, SlopeEast, SlopeSouth, SlopeEast: http://jsfiddle.net/nosir/28B9G/
@@ -80,7 +81,7 @@ Sample code for building all primitives:
 ## Development (Browser)
 ### Browserify
 
-obelisk.js can be used from [browserify](https://github.com/substack/node-browserify) project. Simply:
+Obelisk.js can be used from [browserify](https://github.com/substack/node-browserify) project. Simply:
 
 ```sh
 $ npm install obelisk.js

@@ -33,6 +33,10 @@ p.initialize = function (w, h, useDefaultCanvas) {
     this.context = this.canvas.getContext('2d');
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+    this.context.mozImageSmoothingEnabled = false;
+    this.context.msImageSmoothingEnabled = false;
+    this.context.imageSmoothingEnabled = false;
+
     this.imageData = this.context.createImageData(w, h);
 
     return this;
