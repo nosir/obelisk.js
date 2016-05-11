@@ -32,7 +32,7 @@ User Contributed:
 - Node Server-side Image Rendering with [node-canvas](https://github.com/learnboost/node-canvas): [Github Project URL](https://github.com/pose/node-obelisk-example) by [@pose](https://github.com/pose)
 - Animations with Angular.js: [Github Project URL](https://github.com/Wildhoney/ngObelisk) by [@Wildhoney](https://github.com/Wildhoney)
 - Perlin Noise Map: http://codepen.io/slobaum/pen/zhmFL by [@slobaum](https://twitter.com/slobaum)
-
+- [More on CodePen](http://codepen.io/search/pens/?depth=everything&limit=all&order=newest&page=1&q=obelisk.js&show_forks=false)
 
 ## Getting started
 

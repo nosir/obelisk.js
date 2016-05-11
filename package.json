@@ -41,7 +41,7 @@
   "main":"src/obelisk.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/rison/obelisk.js.git"
+    "url": "https://github.com/nosir/obelisk.js.git"
   },
   "scripts": {
     "test": "gulp build"
