@@ -1,5 +1,7 @@
 # Obelisk.js
 
+[![Join the chat at https://gitter.im/nosir/obelisk.js](https://badges.gitter.im/nosir/obelisk.js.svg)](https://gitter.im/nosir/obelisk.js?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Travis](https://img.shields.io/travis/nosir/obelisk.js.svg?maxAge=2592000)](https://travis-ci.org/nosir/obelisk.js)
 [![GitHub release](https://img.shields.io/github/release/nosir/obelisk.js.svg?maxAge=2592000)](https://github.com/nosir/obelisk.js)
 [![Codacy](https://img.shields.io/codacy/dea18e66031141a39d4549b170343aa9.svg?maxAge=2592000)](https://www.codacy.com/app/nosir/obelisk-js/dashboard)
