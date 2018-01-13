@@ -1,6 +1,4 @@
 /*jslint node: true, nomen: true*/
-'use strict';
-
 var watchify = require('watchify');
 var errorify = require('errorify');
 var browserify = require('browserify');
