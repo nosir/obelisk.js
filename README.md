@@ -1,8 +1,6 @@
 # Obelisk.js
 
-[![Travis](https://img.shields.io/travis/nosir/obelisk.js.svg?maxAge=2592000)](https://travis-ci.org/nosir/obelisk.js)
 [![GitHub release](https://img.shields.io/github/release/nosir/obelisk.js.svg?maxAge=2592000)](https://github.com/nosir/obelisk.js)
-[![Codacy](https://img.shields.io/codacy/dea18e66031141a39d4549b170343aa9.svg?maxAge=2592000)](https://www.codacy.com/app/nosir/obelisk-js/dashboard)
 
 obelisk.js is a JavaScript library for building isometric pixel objects.
 
@@ -39,6 +37,11 @@ User Contributed:
 Simply include obelisk.js in your project
 ```html
 <script src="//path/to/obelisk.min.js"></script>
+```
+
+CDN url
+```html
+https://unpkg.com/obelisk.js@1.2.2/
 ```
 In JavaScript
 ```javascript
