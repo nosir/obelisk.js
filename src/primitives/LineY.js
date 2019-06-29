@@ -62,7 +62,6 @@ p.build = function () {
 
     //y axis
     for (i = 0; i < this.dimension.yAxis; i += 1) {
-        console.log(i);
         this.bitmapData.setPixel(xOffsetBorder - i, yOffsetBorder + Math.floor(i / 2), borderColor);
     }
 };
